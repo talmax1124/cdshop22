@@ -27,6 +27,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.30.0",
     "colors": "^1.4.0",
+    "cookies": "^0.8.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
@@ -34,7 +35,7 @@
     "jsonwebtoken": "^8.5.1",
     "mailgun": "^0.5.0",
     "mailgun-js": "^0.22.0",
-    "mongoose": "^5.10.6",
+    "mongoose": "^6.5.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^4.0.0",
@@ -45,7 +46,7 @@
     "react-stripe-checkout": "^2.6.3",
     "ssl-express-www": "^3.0.8",
     "stripe": "^9.14.0",
-    "webpack": "^5.72.0"
+    "webpack": "^5.74.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",

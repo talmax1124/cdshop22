@@ -37,6 +37,7 @@ import {
   USER_RESET_PASSWORD_SUCCESS,
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
+// import Cookies from "cookies";
 
 export const login = (email, password, phone) => async (dispatch) => {
   try {
@@ -73,28 +74,6 @@ export const login = (email, password, phone) => async (dispatch) => {
   }
 };
 
-export const getGoogleUserInfo = () => {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: USER_LOGIN_REQUEST });
-
-      const { data } = await axios.get("/api/auth/currentuser");
-
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-
-      localStorage.setItem("userInfo", JSON.stringify(data));
-    } catch (error) {
-      dispatch({
-        type: USER_LOGIN_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
-};
-
 export const logout = () => {
   return async (dispatch, getState) => {
     try {
@@ -106,6 +85,7 @@ export const logout = () => {
         await axios.get("/api/auth/logout");
       }
 
+      localStorage.clear();
       localStorage.removeItem("userInfo");
       localStorage.removeItem("cartItems");
       localStorage.removeItem("shippingAddress");
@@ -124,6 +104,28 @@ export const logout = () => {
       document.location.href = "/login";
     } catch (err) {
       console.error(err);
+    }
+  };
+};
+
+export const getGoogleUserInfo = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: USER_LOGIN_REQUEST });
+
+      const { data } = await axios.get("/api/auth/currentuser");
+
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error) {
+      dispatch({
+        type: USER_LOGIN_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
   };
 };
@@ -236,24 +238,24 @@ export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch({
       type: USER_FORGOT_PASSWORD_MAIL_REQUEST,
-    })
+    });
 
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
-    }
+    };
 
     const { data } = await axios.put(
-      '/api/users/forgot-password',
+      "/api/users/forgot-password",
       { email },
       config
-    )
+    );
 
     dispatch({
       type: USER_FORGOT_PASSWORD_MAIL_SUCCESS,
       payload: data.message,
-    })
+    });
   } catch (error) {
     dispatch({
       type: USER_FORGOT_PASSWORD_MAIL_FAIL,
@@ -261,32 +263,32 @@ export const forgotPassword = (email) => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
-    })
+    });
   }
-}
+};
 
 export const resetPassword = (password, token) => async (dispatch) => {
   try {
     dispatch({
       type: USER_RESET_PASSWORD_REQUEST,
-    })
+    });
 
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
-    }
+    };
 
     const { data } = await axios.put(
-      '/api/users/reset-password',
+      "/api/users/reset-password",
       { newPass: password, resetLink: token },
       config
-    )
+    );
 
     dispatch({
       type: USER_RESET_PASSWORD_SUCCESS,
       payload: data.message,
-    })
+    });
   } catch (error) {
     dispatch({
       type: USER_RESET_PASSWORD_FAIL,
@@ -294,9 +296,9 @@ export const resetPassword = (password, token) => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
-    })
+    });
   }
-}
+};
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
