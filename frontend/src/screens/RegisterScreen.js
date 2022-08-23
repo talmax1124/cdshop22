@@ -76,7 +76,8 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1 className="font-bold text-3xl">Sign Up</h1>
+      <h1 className="font-medium text-2xl">Hello, {name}!</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
@@ -129,7 +130,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="profileImage">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Profile Picture</Form.Label>
           <Form.Control
             label="Profile Image URL"
             name="profileImage"
@@ -157,10 +158,12 @@ const RegisterScreen = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          Alread Have An Account?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Login
-          </Link>
+          <p className="font-medium">
+            Alread Have An Account?{" "}
+            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+              Login
+            </Link>
+          </p>{" "}
         </Col>
       </Row>
       {loading && (
