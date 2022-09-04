@@ -197,7 +197,7 @@ const OrderScreen = ({ match, history }) => {
               </p>
               <p className="text-red-900 font-medium">
                 NOTE: If your shipping price is higher than what you selected,
-                you will recieve a link to pay the additional amount. If you don't recieve an email, don't worry.
+                you will recieve a link to pay the additional amount. If you don't recieve an email, don't worry. Also, if there is an increased volume of orders, it may take longer than descripted.
               </p>
             </ListGroup.Item>
           </ListGroup>

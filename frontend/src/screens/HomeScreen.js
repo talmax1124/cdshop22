@@ -37,6 +37,7 @@ const HomeScreen = ({ match, history, location }) => {
     <>
       <Meta />
       <Hero />
+      {/* <ShopByCategory /> */}
       <main className="py-3">
         <Container>
           {!keyword && pageNumber === 1 ? (

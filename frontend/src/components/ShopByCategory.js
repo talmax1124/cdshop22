@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
 const ShopByCategory = ({ products }) => {
   //GET CATEGORIES
   var categ = products
@@ -14,6 +13,8 @@ const ShopByCategory = ({ products }) => {
       return a;
     }, {});
   var keys = Object.keys(categ); /* .map((k) => console.log(k)) */
+
+  keys.map((cat, k) => console.log(cat));
 
   return (
     <div>

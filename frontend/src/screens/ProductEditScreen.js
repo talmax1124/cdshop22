@@ -347,33 +347,11 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="...">Select...</option>
-                <option value="Shirts">Shirts</option>
-                <option value="Infused Design">Infused Design</option>
-                <option value="Cups-Tumblers-Mugs">Cups/Tumblers/Mugs</option>
-                <option value="Stickers">Stickers</option>
-                <option value="Car Products">Car Products</option>
-                <option value="Covid-19">Covid 19</option>
-                <option value="Handmade">Handmade</option>
-                <option value="Holidays">Holidays</option>
-                <option value="Adults">Adults</option>
-                <option value="Kitchen">Kitchen</option>
+                <option value="3D Printed">3D Printed</option>
+                <option value="Smart">Smart</option>
                 <option value="Business">Business</option>
-                <option value="Design Assets">Design Assets</option>
                 <option value="Other">Other</option>
-                <option value="Anna Sweet Treats Merch">
-                  Anna Sweet Treats Merch
-                </option>
               </Form.Control>
-              {/* <Form.Control
-                as="select"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="Clothes">Clothes</option>
-                <option value="Cups/Tumblers/Mugs">Cups/Tumblers/Mugs</option>
-                <option value="Stickers">Stickers</option>
-                <option value="Other">Other</option>
-              </Form.Control> */}
             </Form.Group>
 
             <Form.Group controlId="description">
