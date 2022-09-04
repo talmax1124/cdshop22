@@ -30,22 +30,22 @@ connectDB();
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
-	app.use(morgan("dev"));
+  app.use(morgan("dev"));
 }
 
 if (process.env.NODE_ENV === "production") {
-	app.use(secure);
+  app.use(secure);
 }
 
 app.use(express.json());
 
 // Session
 app.use(
-	session({
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		saveUninitialized: false,
-	})
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
 );
 
 // Passport middleware
@@ -64,13 +64,15 @@ const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/build")));
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
 
-	app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
 } else {
-	app.get("/", (req, res) => {
-		res.send("API is running....");
-	});
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
 }
 
 app.use(notFound);
@@ -78,4 +80,9 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 7500;
 
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
+app.listen(
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
+);
