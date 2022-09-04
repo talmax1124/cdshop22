@@ -85,12 +85,12 @@ export const logout = () => {
         await axios.get("/api/auth/logout");
       }
 
+      localStorage.clear();
       localStorage.removeItem("userInfo");
       localStorage.removeItem("cartItems");
       localStorage.removeItem("shippingAddress");
       localStorage.removeItem("paymentMethod");
       localStorage.removeItem("ordernotes");
-      localStorage.clear();
       dispatch({ type: USER_LOGOUT });
       dispatch({
         type: USER_REGISTER_RESET,
