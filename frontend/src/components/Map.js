@@ -17,7 +17,11 @@ const Map = () => {
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <img src="https://i.ibb.co/W2myh5S/map.png" alt="Map" width="80%" />
+        <img
+          src="https://i.ibb.co/txXXd2d/map-orderscreativeduo.png"
+          alt="Map"
+          width="80%"
+        />
       </div>
     </>
   );
