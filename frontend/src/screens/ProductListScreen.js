@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Row, Col } from "react-bootstrap";
+import { Table, Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -72,18 +72,16 @@ const ProductListScreen = ({ history, match }) => {
 
   return (
     <>
-      <Row className="align-items-center">
-        <Col>
-        <h1 className="font-medium mb-3 text-3xl">Products</h1>
-        </Col>
-        <Col className="text-right">
-          <Button
-            className="bg-black w-1/2 hover:bg-slate-700 my-3"
-            onClick={createProductHandler}
-          >
-            <i className="fas fa-plus"></i> Create Product
-          </Button>
-        </Col>
+      <Row className="align-items-center flex justify-between">
+        <h1 className="font-medium my-3 text-[1.9em] sm:text-[2em] md:text-2xl lg:text-3xl xl:text-4xl">
+          Products
+        </h1>
+        <Button
+          className="bg-black hover:bg-slate-700 my-3"
+          onClick={createProductHandler}
+        >
+          <i className="fas fa-plus"></i> Create Product
+        </Button>
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}

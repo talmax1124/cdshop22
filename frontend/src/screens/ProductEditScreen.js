@@ -206,7 +206,12 @@ const ProductEditScreen = ({ match, history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit Product</h1>
+        <h1 className="font-medium mb-2 text-2xl">Edit Product</h1>
+
+        {/* Product Preview */}
+
+        {/*  */}
+
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (

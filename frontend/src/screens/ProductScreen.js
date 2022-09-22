@@ -24,7 +24,7 @@ import ProductImageCarousel from "../components/ProductImageCarousel";
 import {
   listProductDetails,
   createProductReview,
-  deleteProductReview,
+  // deleteProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 // import { HeartOutlined } from "@ant-design/icons/HeartOutlined";
@@ -103,17 +103,17 @@ const ProductScreen = ({ history, match }) => {
     LoadOnce();
   };
 
-  const deleteReviewHandler = (reviewId) => (e) => {
-    e.preventDefault();
-    dispatch(
-      deleteProductReview(match.params.id, {
-        rating,
-        comment,
-        reviewId,
-      })
-    );
-    LoadOnce();
-  };
+  // const deleteReviewHandler = (reviewId) => (e) => {
+  //   e.preventDefault();
+  //   dispatch(
+  //     deleteProductReview(match.params.id, {
+  //       rating,
+  //       comment,
+  //       reviewId,
+  //     })
+  //   );
+  //   LoadOnce();
+  // };
 
   const [show, setShow] = useState(false);
 
@@ -489,7 +489,7 @@ const ProductScreen = ({ history, match }) => {
             <Col md={6}>
               <h2 className="font-medium font-sans text-[2em] mt-2">Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
-              <div class="flex mt-3 reviews">
+              <div className="flex mt-3 reviews">
                 <div className="left-rev">
                   <h2 className="font-semibold mb-3">Write a Product Review</h2>
                   {loadingProductReview && <Loader />}
@@ -571,7 +571,7 @@ const ProductScreen = ({ history, match }) => {
                           <p className="mt-2 mb-1 font-medium text-[1.15em]">
                             {review.comment}
                           </p>
-                          {userInfo.isAdmin && (
+                          {/* {userInfo.isAdmin === true(
                             <Button
                               className="btn w-full bg-red-800 btn-block"
                               onClick={deleteReviewHandler(review._id)}
@@ -579,7 +579,7 @@ const ProductScreen = ({ history, match }) => {
                             >
                               <i className="fas fa-trash"></i> Delete Comment
                             </Button>
-                          )}
+                          )} */}
                         </div>
                       </div>
                     </>

@@ -89,7 +89,7 @@ router.post("/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 450,
+            amount: 650,
             currency: "usd",
           },
           display_name: "Medium Packet (2-4 Small Items / 1-2 Medium Items)",
