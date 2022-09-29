@@ -33,6 +33,15 @@ const HomeScreen = ({ match, history, location }) => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
 
+  // const now = new Date()
+  //   .toLocaleTimeString([], {
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     hour12: true,
+  //   })
+  //   .toLowerCase();
+  // console.log(now);
+
   return (
     <>
       <Meta />

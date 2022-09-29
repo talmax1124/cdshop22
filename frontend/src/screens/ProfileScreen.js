@@ -95,6 +95,19 @@ const ProfileScreen = ({ location, history }) => {
     }
   };
 
+  const date = new Date();
+  const currentTime = date.getHours();
+
+  let greeting;
+
+  if (currentTime >= 0 && currentTime <= 12) {
+    greeting = "Good Morning";
+  } else if (currentTime > 12 && currentTime <= 18) {
+    greeting = "Good Afternoon";
+  } else {
+    greeting = "Good Evening";
+  }
+
   return (
     <>
       <Row className="cta-prof-head">
@@ -120,13 +133,13 @@ const ProfileScreen = ({ location, history }) => {
           <h1 className="text-white font-bold text-2xl text-center">
             Hello, {userInfo.name}
           </h1>
-          <h1 className="text-slate-200 font-bold text-1xl text-center">
-            Have a nice day / night!
+          <h1 className="text-slate-200 font-bold text-1xl text-center mt-2">
+            {greeting}!
           </h1>
         </Col>
 
         <Col>
-          <h2 className="font-light text-[1.2em] mb-1 prf-tit">
+          <h2 className="font-medium text-[1.2em] mb-1 prf-tit">
             Update your information
           </h2>
           {message && <Message variant="danger">{message}</Message>}
@@ -222,7 +235,7 @@ const ProfileScreen = ({ location, history }) => {
         <Message variant="danger">{errorOrders}</Message>
       ) : (
         <>
-          <h1 className="font-light text-[1.2em] mb-1">Your Orders</h1>
+          <h1 className="font-medium text-[1.2em] mb-1">Your Orders</h1>
           <Table striped bordered hover responsive className="table-sm mt-3">
             <thead>
               <tr>
