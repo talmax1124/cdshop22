@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
-import OrderNotesJoditOrder from "../components/OrderNotesJoditOrder";
+// import OrderNotesJoditOrder from "../components/OrderNotesJoditOrder";
 
 import { Widget } from "@uploadcare/react-widget";
 
@@ -196,8 +196,10 @@ const OrderScreen = ({ match, history }) => {
                 to us! Below, you can find your order information.
               </p>
               <p className="text-red-900 font-medium">
-                NOTE: If your shipping price is higher than what you selected,
-                you will recieve a link to pay the additional amount. If you don't recieve an email, don't worry. Also, if there is an increased volume of orders, it may take longer than descripted.
+                NOTE: Due to an increase of pricing from our shipping partners,
+                we will soon be increasing our shipping rates. We will be
+                notifying you of this change before it goes into effect. Thank
+                you for your patience and understanding.
               </p>
             </ListGroup.Item>
           </ListGroup>
@@ -262,7 +264,7 @@ const OrderScreen = ({ match, history }) => {
 
               {order.isPacked ? (
                 <Message variant="success" className="mt-2 mb-2">
-                  Packed On {order.packedAt}
+                  Packed On {order.packedAt.substring(0, 10)}
                 </Message>
               ) : (
                 !order.isCancelled && (
@@ -274,72 +276,107 @@ const OrderScreen = ({ match, history }) => {
 
               {order.isDispatched ? (
                 <Message variant="success" className="mt-2 mb-2">
-                  Order Has Been Dispatched
+                  Order Has Been Dispatched To The Courier
                 </Message>
               ) : (
                 !order.isCancelled && (
                   <Message variant="danger" className="mt-2 mb-2">
-                    Order is Not Dispatched Yet
+                    Order Has Not Dispatched Yet
                   </Message>
                 )
               )}
 
               {order.isDelivered ? (
                 <Message variant="success" className="mt-2 mb-2">
-                  Delivered/Shipped on {order.deliveredAt}
+                  Delivered/Shipped on {order.deliveredAt.substring(0, 10)}
                 </Message>
               ) : (
                 !order.isCancelled && (
                   <Message variant="danger" className="mt-2 mb-2">
-                    Order is Not Delivered Yet
+                    Order Has Not Been Delivered Yet
                   </Message>
                 )
                 // <Message variant="danger">Not Delivered/Shipped </Message>
               )}
             </ListGroup.Item>
 
-            <ListGroup.Item>
+            {/* <ListGroup.Item>
               <h2 className="font-medium mb-2 text-[1.1em]">Order Notes:</h2>
               <p>
                 <OrderNotesJoditOrder order={order} />
               </p>
-            </ListGroup.Item>
+            </ListGroup.Item> */}
 
             <ListGroup.Item>
               <h2 className="font-medium mb-2 text-[1.1em]">Order Items</h2>
               {order.orderItems.length === 0 ? (
                 <Message>Order is empty</Message>
               ) : (
-                <ListGroup variant="flush">
-                  {order.orderItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
-                      <Row>
-                        <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
-                        </Col>
-                        <Col>
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
-                        </Col>
-                        <Col md={4}>
-                          {/*  Small: {item.qty1} Medium: {item.qty2}{" "}
+                <>
+                  <ListGroup variant="flush" className="order-item-lg">
+                    {order.orderItems.map((item, index) => (
+                      <ListGroup.Item key={index}>
+                        <Row className="bg-slate-200 p-2 rounded-md">
+                          <div className="mb-2 mt-2 p-2 flex align-middle  items-center">
+                            <div className="flex align-middle items-center">
+                              {" "}
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                fluid
+                                rounded
+                                width="15%"
+                              />
+                              <Link to={`/product/${item.product}`}>
+                                <span className="font-medium text-[1.1em] ml-3 align-middle  items-center">
+                                  {item.name}
+                                </span>
+                              </Link>
+                            </div>
+                            {/*  Small: {item.qty1} Medium: {item.qty2}{" "}
                           Large: {item.qty3} X-Large {item.qty4} XX-Large
                           {item.qty5}
                            */}
-                          {item.qty} x {item.price > 0 && <>${item.price}</>}{" "}
-                          {""}
-                          {""} = ${item.qty * item.price}
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
+                            <Col md={5} className="font-medium">
+                              {item.qty} (qty) x{" "}
+                              {item.price > 0 && <>${item.price} (each)</>} {""}
+                              {""} = ${item.qty * item.price} (total)
+                            </Col>
+                          </div>
+                        </Row>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                  <ListGroup variant="flush" className="order-item-sm">
+                    {order.orderItems.map((item, index) => (
+                      <ListGroup.Item key={index}>
+                        <Row className="bg-slate-200 p-2 rounded-md">
+                          <div className="mb-2 mt-2 flex-col align-middle items-center">
+                            <div className="flex-col align-middle items-center">
+                              {" "}
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                rounded
+                                width="100%"
+                              />
+                              <div className="mt-2">
+                                <Link to={`/product/${item.product}`}>
+                                  <span className="font-medium text-[1.3em] ">
+                                    {item.name}
+                                  </span>
+                                </Link>
+                              </div>
+                              {item.qty} (qty) x{" "}
+                              {item.price > 0 && <>${item.price} (each)</>} {""}
+                              {""} = ${item.qty * item.price} (total)
+                            </div>
+                          </div>
+                        </Row>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </>
               )}
             </ListGroup.Item>
           </ListGroup>
@@ -348,19 +385,19 @@ const OrderScreen = ({ match, history }) => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h2 className="font-bold">Order Summary</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Order ID:</Col>
+                  <Col className="font-medium">Order ID:</Col>
                   <Col>{order._id}</Col>
                 </Row>
                 <Row>
-                  <Col>Items Total:</Col>
+                  <Col className="font-medium">Items Total:</Col>
                   <Col>${order.itemsPrice}</Col>
                 </Row>
                 <Row>
-                  <Col>Order Total:</Col>
+                  <Col className="font-medium">Order Total:</Col>
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
