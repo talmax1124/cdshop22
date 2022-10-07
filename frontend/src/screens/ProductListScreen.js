@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -107,7 +108,9 @@ const ProductListScreen = ({ history, match }) => {
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td>{product._id}</td>
+                  <Link to={`/product/${product._id}`}>
+                    <td>{product._id}</td>
+                  </Link>
                   <td>{product.name}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
