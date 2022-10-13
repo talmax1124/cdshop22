@@ -92,12 +92,14 @@ const HomeScreen = ({ match, history, location }) => {
               />
               {/* <ShopByBrand products={products} /> */}
             </>
+
           )}
         </Container>
         {!keyword && pageNumber === 1 ? (
           <>
             <Map />
             <Testimonials />
+            
           </>
         ) : (
           <></>
