@@ -68,6 +68,17 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    productWeightLbs: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    productWeightOz: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    
     price: {
       type: Number,
       required: true,

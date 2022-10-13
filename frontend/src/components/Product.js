@@ -22,18 +22,6 @@ const Product = ({ product }) => {
           </p>
         </div>
         <p className="font-bold text-2xl mt-3">${product.price}</p>
-        {/* <div className="colors">{product.colors.map((color,index)=>{
-          return(
-            <button
-            key={index}
-            style={{ background: color }}
-            className="color-btn "
-          >{color.name}</button>
-
-          
-
-          )
-        })}</div> */}
       </div>
     </div>
 

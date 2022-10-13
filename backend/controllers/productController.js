@@ -118,6 +118,8 @@ const createProduct = asyncHandler(async (req, res) => {
     description: "Sample description",
     shortdescription: "Sample description",
     type: "Physical",
+    productWeightLbs: 0,
+    productWeightOz: 0,
     // colors: ["Sample color"],
   });
 
@@ -134,6 +136,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     price,
     description,
     shortdescription,
+    productWeightLbs,
+    productWeightOz,
     type,
     image,
     brand,
@@ -155,6 +159,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.price = price;
     product.description = description;
     product.shortdescription = shortdescription;
+    product.productWeightLbs = productWeightLbs;
+    product.productWeightOz = productWeightOz;
     product.type = type;
     product.image = image;
     product.brand = brand;

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import {
   createProduct,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import { LinkContainer } from "react-router-bootstrap";
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -108,19 +108,21 @@ const ProductListScreen = ({ history, match }) => {
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <Link to={`/product/${product._id}`}>
-                    <td>{product._id}</td>
-                  </Link>
+                  <LinkContainer to={`/product/${product._id}`}>
+                    <td className="hover:underline hover:cursor-pointer">
+                      {product._id}
+                    </td>
+                  </LinkContainer>
                   <td>{product.name}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <Link to={`/admin/product/${product._id}/edit`}>
                       <Button className="btn-sm bg-black text-white hover:bg-gray-700">
                         <i className="fas fa-edit"></i>
                       </Button>
-                    </LinkContainer>
+                    </Link>
                     <Button
                       variant="danger"
                       className="btn-sm bg-red-400"
