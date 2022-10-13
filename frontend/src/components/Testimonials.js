@@ -5,8 +5,8 @@ import React from "react";
 const Testimonials = () => {
   return (
     <>
-      <div id="ndrsl-63478bd3fa9cdd4fd6e82fa2" class="ndrsl-widget "></div>
-      {/* <div className="rounded-lg bg-slate-50 m-4">
+      {/* <div id="ndrsl-63478bd3fa9cdd4fd6e82fa2" className="ndrsl-widget"></div> */}
+      <div className="rounded-lg bg-slate-50 m-4">
         <div className="p-5">
           <h1 className=" text-black text-4xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-6xl ">
             Reviews
@@ -154,7 +154,7 @@ const Testimonials = () => {
             </div>
           </div>
         </section>
-      </div> */}
+      </div>
     </>
   );
 };
