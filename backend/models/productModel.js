@@ -70,15 +70,15 @@ const productSchema = mongoose.Schema(
     },
     productWeightLbs: {
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
     productWeightOz: {
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
-    
+
     price: {
       type: Number,
       required: true,

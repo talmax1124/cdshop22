@@ -13,6 +13,7 @@ import {
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import PayButton from "../components/pay";
+import { ToastContainer } from "react-toastify";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -49,54 +50,57 @@ const CartScreen = ({ match, location, history }) => {
             Your cart is empty <Link to="/">Go Back</Link>
           </Message>
         ) : (
-          <ListGroup variant="flush">
-            {cartItems.map((item) => (
-              <ListGroup.Item key={item.product}>
-                <Row className="bg-gray-100 p-2 rounded flex items-center justify-between">
-                  <Col md={2}>
-                    <Image src={item.image} alt={item.name} fluid rounded />
-                  </Col>
-                  <Col md={3}>
-                    <Link
-                      to={`/product/${item.product}`}
-                      className="font-light"
-                    >
-                      {item.name}
-                    </Link>
-                  </Col>
-                  <Col md={2} className="font-light">
-                    ${item.price}
-                  </Col>
-                  <Col md={2}>
-                    <Form.Control
-                      as="select"
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(
-                          addToCart(item.product, Number(e.target.value))
-                        )
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Col>
-                  <Col md={2}>
-                    <Button
-                      type="button"
-                      variant="light"
-                      onClick={() => removeFromCartHandler(item.product)}
-                    >
-                      <i className="fas fa-trash"></i>
-                    </Button>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+          <>
+            <ToastContainer pauseOnHover={false} />
+            <ListGroup variant="flush">
+              {cartItems.map((item) => (
+                <ListGroup.Item key={item.product}>
+                  <Row className="bg-gray-100 p-2 rounded flex items-center justify-between">
+                    <Col md={2}>
+                      <Image src={item.image} alt={item.name} fluid rounded />
+                    </Col>
+                    <Col md={3}>
+                      <Link
+                        to={`/product/${item.product}`}
+                        className="font-light"
+                      >
+                        {item.name}
+                      </Link>
+                    </Col>
+                    <Col md={2} className="font-light">
+                      ${item.price}
+                    </Col>
+                    <Col md={2}>
+                      <Form.Control
+                        as="select"
+                        value={item.qty}
+                        onChange={(e) =>
+                          dispatch(
+                            addToCart(item.product, Number(e.target.value))
+                          )
+                        }
+                      >
+                        {[...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Col>
+                    <Col md={2}>
+                      <Button
+                        type="button"
+                        variant="light"
+                        onClick={() => removeFromCartHandler(item.product)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </>
         )}
       </Col>
       <Col md={4}>

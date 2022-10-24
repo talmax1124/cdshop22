@@ -45,6 +45,7 @@ const StripeSuccess = ({ match, history }) => {
         data.session.amount_total,
         data.session.customer_details.address
       );
+      // console.log(data.session)
       // placeOrderHandler(
       //   data.session.amount_total
       //   // data.session.customer_details.address.line1,

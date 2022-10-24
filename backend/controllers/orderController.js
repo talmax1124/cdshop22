@@ -1,17 +1,13 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
+import Product from "../models/productModel.js";
 
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
-  const {
-    orderItems,
-    orderNotes,
-    itemsPrice,
-    totalPrice,
-    shippingAddress,
-  } = req.body;
+  const { orderItems, orderNotes, itemsPrice, totalPrice, shippingAddress } =
+    req.body;
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
@@ -33,14 +29,31 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     //UPDATE COUNT IN STOCK
     // ==========================================================
-
-    for (const index in order.orderItems) {
-      const item = order.orderItems[index];
-      const product = await Product.findById(item.product);
-      product.countInStock -= item.qty;
-      await product.save();
-    }
+    // for (const index in order.orderItems) {
+    //   const item = order.orderItems[index];
+    //   const product = await Product.findById(item.product);
+    //   product.countInStock -= item.qty;
+    //   await product.save();
+    // }
     // ========================================================
+
+    order.forEach(async (orderItems) => {
+      const product = await Product.findById(orderItems.productId);
+
+      if (product.countInStock >= orderItems.qty) {
+        product.countInStock -= orderItems.qty;
+        await product.save();
+      } else if (product.countInStock < orderItems.qty) {
+        orderItems.qty = product.countInStock;
+        orderItems.message =
+          "One or more items unavailable, your order has been updated";
+        product.countInStock = 0;
+        await product.save();
+      } else if (!product.countInStock) {
+        orderItems.qty = 0;
+        orderItems.message = "Item out of stock, your order has been updated";
+      }
+    });
   }
 });
 
