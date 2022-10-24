@@ -188,6 +188,29 @@ main {
   }
 }
 
+svg#NDRSL-reviewhq_logo {
+  fill: yellow;
+  stroke: none;
+  .cls-1 {
+    fill: yellow;
+    stroke: none;
+  }
+  .cls-2 {
+    opacity: 0.9;
+    fill: yellow;
+    stroke: transparent;
+  }
+}
+
+svg#NDRSL-reviewhq_arrow {
+  .st0 {
+    opacity: 1;
+  }
+  .st1 {
+    z-index: 3;
+  }
+}
+
 @media all and (max-width: 900px) {
   .services-grid {
     display: -webkit-box;

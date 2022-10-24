@@ -199,6 +199,30 @@ main {
   width: 70%;
 }
 
+svg#NDRSL-reviewhq_logo {
+  fill: yellow;
+  stroke: none;
+}
+
+svg#NDRSL-reviewhq_logo .cls-1 {
+  fill: yellow;
+  stroke: none;
+}
+
+svg#NDRSL-reviewhq_logo .cls-2 {
+  opacity: 0.9;
+  fill: yellow;
+  stroke: transparent;
+}
+
+svg#NDRSL-reviewhq_arrow .st0 {
+  opacity: 1;
+}
+
+svg#NDRSL-reviewhq_arrow .st1 {
+  z-index: 3;
+}
+
 @media all and (max-width: 900px) {
   .services-grid {
     display: -webkit-box;
