@@ -73,7 +73,7 @@ const ProductListScreen = ({ history, match }) => {
 
   return (
     <>
-      <Row className="align-items-center flex justify-between">
+      <Row className="align-items-center flex justify-between product-list-screen-row">
         <h1 className="font-medium my-3 text-[1.9em] sm:text-[2em] md:text-2xl lg:text-3xl xl:text-4xl">
           Products
         </h1>

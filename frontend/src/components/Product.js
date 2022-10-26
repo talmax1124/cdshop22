@@ -15,38 +15,33 @@ const Product = ({ product }) => {
             {product.name}
           </p>
         </Link>
+        {product.onSalePrice > 0 ? (
+          <p className="bg-emerald-100 text-emerald-800 text-md font-semibold px-2.5 py-0.5 mb-2 rounded  w-fit ">
+            On-Sale
+          </p>
+        ) : (
+          <></>
+        )}
         <div className="flex">
           <Rating value={product.rating} />
           <p className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ">
             {product.numReviews}
           </p>
         </div>
-        <p className="font-bold text-2xl mt-3">${product.price}</p>
+        {product.onSalePrice > 0.25 ? (
+          <>
+            <div className="flex">
+              <p className="font-bold text-[2em] mt-3 mr-3">${product.onSalePrice}</p>
+              <p className="font-bold text-[1.9em] mt-3 line-through text-red-500 opacity-[50%]">
+                ${product.price}
+              </p>
+            </div>
+          </>
+        ) : (
+          <p className="font-bold text-[2em] mt-3">${product.price}</p>
+        )}
       </div>
     </div>
-
-    // <Card className='my-3 p-3 rounded'>
-    //   <Link to={`/product/${product._id}`}>
-    //     <Card.Img src={product.image} variant='top' />
-    //   </Link>
-
-    //   <Card.Body>
-    //     <Link to={`/product/${product._id}`}>
-    //       <Card.Title as='div'>
-    //         <strong>{product.name}</strong>
-    //       </Card.Title>
-    //     </Link>
-
-    //     <Card.Text as='div'>
-    //       <Rating
-    //         value={product.rating}
-    //         text={`${product.numReviews} reviews`}
-    //       />
-    //     </Card.Text>
-
-    //     <Card.Text as='h3'>${product.price}</Card.Text>
-    //   </Card.Body>
-    // </Card>
   );
 };
 

@@ -110,6 +110,8 @@ const createProduct = asyncHandler(async (req, res) => {
     additionalimagethree: "",
     productVideo: "",
     productTutorial: "",
+    onSalePrice: 0,
+    onSaleBadge: false,
     productImportantInformation: "",
     brand: "Creative Duo LLC",
     category: "Handmade",
@@ -148,6 +150,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     additionalimagethree,
     productVideo,
     productTutorial,
+    onSaleBadge,
+    onSalePrice,
     specialPriceDiscountText,
     productImportantInformation,
   } = req.body;
@@ -171,6 +175,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.additionalimagethree = additionalimagethree;
     product.productVideo = productVideo;
     product.productTutorial = productTutorial;
+    product.onSaleBadge = onSaleBadge;
+    product.onSalePrice = onSalePrice;
     product.specialPriceDiscountText = specialPriceDiscountText;
     product.productImportantInformation = productImportantInformation;
 
@@ -250,9 +256,7 @@ const deleteProductReview = asyncHandler(async (req, res) => {
 
 const getTopProducts = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
-  const products = await Product.find({})
-    .sort({ rating: -1 })
-    .limit(8);
+  const products = await Product.find({}).sort({ rating: -1 }).limit(8);
   res.json(products);
 });
 

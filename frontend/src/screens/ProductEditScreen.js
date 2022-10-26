@@ -28,10 +28,10 @@ const ProductEditScreen = ({ match, history }) => {
   const [additionalimagethree, setAdditionalimagethree] = useState("");
   const [productVideo, setProductVideo] = useState("");
   const [productTutorial, setProductTutorial] = useState("");
-  const [
-    productImportantInformation,
-    setProductImportantInformation,
-  ] = useState("");
+  const [onSalePrice, setOnSalePrice] = useState(0);
+  const [onSaleBadge, setOnSaleBadge] = useState(false);
+  const [productImportantInformation, setProductImportantInformation] =
+    useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -82,6 +82,8 @@ const ProductEditScreen = ({ match, history }) => {
         setProductImportantInformation(product.productImportantInformation);
         setProductVideo(product.productVideo);
         setProductTutorial(product.productTutorial);
+        setOnSalePrice(product.onSalePrice);
+        setOnSaleBadge(product.onSaleBadge);
       }
     }
   }, [dispatch, history, productId, product, successUpdate]);
@@ -200,6 +202,8 @@ const ProductEditScreen = ({ match, history }) => {
           additionalimagethree,
           productVideo,
           productTutorial,
+          onSalePrice,
+          onSaleBadge,
           productImportantInformation,
         })
       );
@@ -261,6 +265,33 @@ const ProductEditScreen = ({ match, history }) => {
                     onChange={(e) => setPrice(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
+
+                <Form.Group controlId="onSaleBadge">
+                  <Form.Label>On Sale Badge</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={onSaleBadge}
+                    onChange={(e) => setOnSaleBadge(e.target.value)}
+                  >
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </Form.Control>
+                </Form.Group>
+
+                {onSaleBadge === "true" && (
+                  <Form.Group controlId="onSalePrice">
+                    <Form.Label>
+                      Previous Price Before Sale. *Set Sale Price On Price Label
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      step="any"
+                      placeholder="Enter sale price"
+                      value={onSalePrice}
+                      onChange={(e) => setOnSalePrice(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                )}
 
                 <Form.Group controlId="image">
                   <Form.Label>Image</Form.Label>

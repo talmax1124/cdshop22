@@ -98,6 +98,16 @@ const productSchema = mongoose.Schema(
     productImportantInformation: {
       type: String,
     },
+    onSalePrice: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    onSaleBadge: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   {
     timestamps: true,

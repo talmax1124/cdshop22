@@ -9,6 +9,14 @@ main {
   min-height: 80vh;
 }
 
+.order-item-lg {
+  display: block;
+}
+
+.order-item-sm {
+  display: none;
+}
+
 .accordion-content {
   -webkit-transition: max-height 0.3s ease-out, padding 0.3s ease;
   transition: max-height 0.3s ease-out, padding 0.3s ease;
@@ -235,6 +243,10 @@ svg#NDRSL-reviewhq_arrow .st1 {
   }
 }
 
+.product-list-screen-row {
+  padding: 0 1em 10px 1em;
+}
+
 .rev-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -257,6 +269,12 @@ svg#NDRSL-reviewhq_arrow .st1 {
 }
 
 @media (max-width: 999px) {
+  .order-item-lg {
+    display: none;
+  }
+  .order-item-sm {
+    display: block;
+  }
   .rev-item {
     display: -webkit-box;
     display: -ms-flexbox;
