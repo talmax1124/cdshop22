@@ -13,6 +13,7 @@ import { listProducts } from "../actions/productActions";
 import Testimonials from "../components/Testimonials";
 import Hero from "../components/Hero";
 import Map from "../components/Map";
+import About from "../components/About";
 // import LatestProducts from "../components/LatestProducts";
 // import ShopByCategory from "../components/ShopByCategory";
 // import ShopByBrand from "../components/ShopByBrand";
@@ -92,14 +93,13 @@ const HomeScreen = ({ match, history, location }) => {
               />
               {/* <ShopByBrand products={products} /> */}
             </>
-
           )}
         </Container>
         {!keyword && pageNumber === 1 ? (
           <>
             <Map />
+            <About />
             <Testimonials />
-            
           </>
         ) : (
           <></>

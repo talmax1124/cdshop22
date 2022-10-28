@@ -256,7 +256,15 @@ const ProductEditScreen = ({ match, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId="price">
-                  <Form.Label>Price</Form.Label>
+                  {onSaleBadge === "true" ? (
+                    <>
+                      <Form.Label>Price for Sale</Form.Label>
+                    </>
+                  ) : (
+                    <>
+                      <Form.Label>Price</Form.Label>
+                    </>
+                  )}
                   <Form.Control
                     type="text"
                     step="any"
@@ -273,15 +281,15 @@ const ProductEditScreen = ({ match, history }) => {
                     value={onSaleBadge}
                     onChange={(e) => setOnSaleBadge(e.target.value)}
                   >
-                    <option value="true">True</option>
                     <option value="false">False</option>
+                    <option value="true">True</option>
                   </Form.Control>
                 </Form.Group>
 
                 {onSaleBadge === "true" && (
                   <Form.Group controlId="onSalePrice">
                     <Form.Label>
-                      Previous Price Before Sale. *Set Sale Price On Price Label
+                      Price Before Sale. This will be crossed out.
                     </Form.Label>
                     <Form.Control
                       type="text"
