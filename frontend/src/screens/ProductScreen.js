@@ -228,14 +228,20 @@ const ProductScreen = ({ history, match }) => {
                   />
                 </ListGroup.Item>
 
-                {product.price > 0 && (
-                  <ListGroup.Item>
-                    <span className="font-medium uppercase">Price:</span>{" "}
-                    <span className="font-light uppercase">
-                      ${product.price}
-                    </span>
-                  </ListGroup.Item>
-                )}
+                {/* {product.onSalePrice > 0.25 ? (
+                  <>
+                    <ListGroup.Item>
+                      <div className="flex items-center ">
+                        <span className="text-[1.5em]font-medium uppercase">
+                          Price:
+                        </span>{" "}
+                        <span className="flex"></span>
+                      </div>
+                    </ListGroup.Item>
+                  </>
+                ) : (
+                  <p className="font-bold text-[2em] mt-3">${product.price}</p>
+                )} */}
 
                 {/* <ListGroup.Item>
                   <span className="font-medium uppercase">Date Created:</span>{" "}
@@ -261,14 +267,27 @@ const ProductScreen = ({ history, match }) => {
               <Card>
                 <ListGroup variant="flush">
                   {product.price > 0 && (
-                    <>
-                      <ListGroup.Item>
-                        <Row>
-                          <Col>Price:</Col>
-                          <Col className="font-medium">${product.price}</Col>
-                        </Row>
-                      </ListGroup.Item>
-                    </>
+                    <ListGroup.Item>
+                      <span className="font-medium uppercase">Price:</span>{" "}
+                      {product.onSalePrice > 0 ? (
+                        <>
+                          <div className="flex">
+                            <p className="font-bold text-[1.2em] mt-3 mr-3">
+                              ${product.price}
+                            </p>
+                            <p className="font-bold mt-3 text-[1.2em] line-through text-red-500 opacity-[50%]">
+                              ${product.onSalePrice}
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-bold text-[1.2em] mt-3 mr-3">
+                            ${product.price}
+                          </p>
+                        </>
+                      )}
+                    </ListGroup.Item>
                   )}
 
                   <ListGroup.Item>
@@ -368,7 +387,7 @@ const ProductScreen = ({ history, match }) => {
                   alignItems: "center",
                 }}
               >
-                <h3 className="font-medium mb-3 font-[1.15em]">Description</h3>
+                <h3 className="font-medium mb-3 text-[1.15em]">Description</h3>
               </Row>
               <Row
                 style={{

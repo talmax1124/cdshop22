@@ -31,9 +31,9 @@ const Product = ({ product }) => {
         {product.onSalePrice > 0.25 ? (
           <>
             <div className="flex">
-              <p className="font-bold text-[2em] mt-3 mr-3">${product.onSalePrice}</p>
+              <p className="font-bold text-[2em] mt-3 mr-3">${product.price}</p>
               <p className="font-bold text-[1.9em] mt-3 line-through text-red-500 opacity-[50%]">
-                ${product.price}
+                ${product.onSalePrice}
               </p>
             </div>
           </>
