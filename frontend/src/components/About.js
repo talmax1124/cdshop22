@@ -196,7 +196,7 @@ const About = () => {
         <div className="team-head">
           <div className="team-left">
             <img
-              src="https://i.ibb.co/RYh4hvf/312327963-186223027246904-4694977534149071981-n.jpg"
+              src="https://res.cloudinary.com/cduoshop/image/upload/v1667397564/312327963_186223027246904_4694977534149071981_n_jvsafk.jpg"
               alt="Our Team"
               className="rounded-lg"
               width="100%"
@@ -216,27 +216,17 @@ const About = () => {
                 of our journey. Click Below To Learn More About Each Member.
               </p>
             </span>
-
-            <div className="content-about-buttons">
-              <button
-                className="inline-flex items-center justify-center px-4 py-2 mt-2 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700  focus:ring-4 focus:ring-primary-300 bg-blue-600 hover:bg-blue-700"
-                onClick={openModal}
-              >
-                CEO: Carlos (Left)
+            <span className="about-buttons">
+              <button onClick={openModal} className="rounded-md font-medium uppercase">
+                Carlos
               </button>
-              <button
-                className="inline-flex items-center justify-center px-4 py-2 mt-2 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700  focus:ring-4 focus:ring-primary-300 bg-blue-600 hover:bg-blue-700"
-                onClick={openModal2}
-              >
-                Socials/Marketing: Anaid (Middle)
+              <button onClick={openModal2} className="rounded-md font-medium uppercase">
+                Anaid
               </button>
-              <button
-                className="inline-flex items-center justify-center px-4 py-2 mt-2 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700  focus:ring-4 focus:ring-primary-300 bg-blue-600 hover:bg-blue-700"
-                onClick={openModal3}
-              >
-                Co-Founder: Yolymarie (Right)
+              <button onClick={openModal3} className="rounded-md font-medium uppercase">
+                Yolymarie
               </button>
-            </div>
+            </span>
           </div>
         </div>
       </div>

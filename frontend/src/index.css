@@ -527,6 +527,7 @@ svg#NDRSL-reviewhq_arrow .st1 {
     width: 100%;
     height: 100%;
     max-height: 100vh;
+    margin-bottom: .6em;
   }
   .Product-Card-Body {
     padding-left: 0;
@@ -615,7 +616,7 @@ svg#NDRSL-reviewhq_arrow .st1 {
           justify-content: space-between;
 }
 
-.team-head .team-right .content-about-buttons {
+.team-head .team-right .about-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -623,5 +624,78 @@ svg#NDRSL-reviewhq_arrow .st1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.team-head .team-right .about-buttons button {
+  margin-top: 1em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #1d4ed8;
+  color: white;
+  font-size: 1.2em;
+  width: 30%;
+}
+
+.team-head .team-right .about-buttons button:hover {
+  background-color: #2257e9;
+}
+
+@media (max-width: 1000px) {
+  .team-head {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .team-head .team-left {
+    width: 100%;
+  }
+  .team-head .team-left img {
+    width: 100%;
+  }
+  .team-head .team-right {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 1em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    font-size: .95em;
+  }
+  .team-head .team-right .about-buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+  .team-head .team-right .about-buttons button {
+    margin-top: 1em;
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: #1d4ed8;
+    color: white;
+    font-size: 1.2em;
+    width: 100%;
+  }
+  .team-head .team-right .about-buttons button:hover {
+    background-color: #2257e9;
+  }
 }
 /*# sourceMappingURL=index.css.map */

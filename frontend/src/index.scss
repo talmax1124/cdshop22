@@ -469,6 +469,7 @@ svg#NDRSL-reviewhq_arrow {
     width: 100%;
     height: 100%;
     max-height: 100vh;
+    margin-bottom: .6em;
   }
 
   .Product-Card-Body {
@@ -533,9 +534,62 @@ svg#NDRSL-reviewhq_arrow {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .content-about-buttons {
+
+    .about-buttons {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      transition: 1s ease;
+      button {
+        margin-top: 1em;
+        padding: 0.5em 1em 0.5em 1em;
+        background-color: rgb(29, 78, 216);
+        color: white;
+        font-size: 1.2em;
+        width: 30%;
+      }
+      button:hover {
+        background-color: rgb(34, 87, 233);
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .team-head {
+    flex-direction: column;
+    .team-left {
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+    .team-right {
+      width: 100%;
+      padding-left: 0;
+      margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      font-size: .95em;
+      .about-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        transition: 1s ease;
+        button {
+          margin-top: 1em;
+          padding: 0.5em 1em 0.5em 1em;
+          background-color: rgb(29, 78, 216);
+          color: white;
+          font-size: 1.2em;
+          width: 100%;
+        }
+        button:hover {
+          background-color: rgb(34, 87, 233);
+        }
+      }
     }
   }
 }
