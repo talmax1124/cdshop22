@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <section className="bg-white dark:bg-gray-900">
+      <center>
+      <img
+        src="https://res.cloudinary.com/cduoshop/image/upload/v1667671468/Brown_Minimalist_Twitter_Header_gnzuh7.jpg"
+        alt=""
+        width="100%"
+      />
+      </center>
       <div className="grid  px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="lg:mt-0 lg:col-span-5 lg:flex" id="hii">
           <img src="https://i.ibb.co/7bR4dpr/img.png" alt="mockup" />
