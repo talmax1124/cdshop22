@@ -99,7 +99,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="phone">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>Phone Number (Not Required)</Form.Label>
           <Form.Control
             type="tel"
             placeholder="Enter Phone Number"
@@ -129,7 +129,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="profileImage">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Add Profile Picture (Not Required)</Form.Label>
           <Form.Control
             label="Profile Image URL"
             name="profileImage"
