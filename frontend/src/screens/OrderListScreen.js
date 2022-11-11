@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listOrders, deleteOrder } from "../actions/orderActions";
+import LinkContainer from "react-router-bootstrap/lib/LinkContainer";
 import { Link } from "react-router-dom";
 
 const OrderListScreen = ({ history }) => {
@@ -57,9 +58,11 @@ const OrderListScreen = ({ history }) => {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <Link to={`/order/${order._id}`}>
-                  <td>{order._id}</td>
-                </Link>
+                <LinkContainer to={`/order/${order._id}`}>
+                  <td className="hover:cursor-pointer hover:underline">
+                    {order._id}
+                  </td>
+                </LinkContainer>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>${order.totalPrice}</td>

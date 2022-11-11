@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
@@ -63,10 +64,20 @@ const About = () => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Carlos D
+                    Carlos D (CEO)
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">Accomplishments:</p>
+                    <p className="font-medium">
+                      About: Carlos is a teen, currently in senior year. He is
+                      currently pursuing his career in cybersecurity.
+                    </p>
+                    <br />
+                    <p className="text-sm text-gray-700 font-bold">
+                      Accomplishments:
+                    </p>
+                    <ul className="mt-2 text-sm text-gray-500">
+                      <li>- Won The TSA Nationals (4th Place)</li>
+                    </ul>
                   </div>
 
                   <div className="mt-4">
@@ -115,10 +126,29 @@ const About = () => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Anaid D{" "}
+                    Anaid D (Marketing / Social Media)
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">Accomplishments:</p>
+                    <p className="font-medium">
+                      About: Anaid is a teen, currently in sophmore year. She is
+                      currently pursuing culinary. She also has her own small
+                      business. Click{" "}
+                      <a
+                        href="https://linktr.ee/anna.sweet.treats"
+                        target="blank"
+                      >
+                        <span className="text-black hover:underline hover:cursor-pointer">
+                          HERE!
+                        </span>
+                      </a>
+                    </p>
+                    <br />
+                    <p className="text-sm text-gray-700 font-bold">
+                      Accomplishments:
+                    </p>
+                    <ul className="mt-2 text-sm text-gray-500">
+                      <li>- Appeared In Teen Entrepeneur Show</li>
+                    </ul>
                   </div>
 
                   <div className="mt-4">
@@ -170,7 +200,10 @@ const About = () => {
                     Yolymarie D
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">Accomplishments</p>
+                    <p className="font-medium">
+                      About: She is our mother and the one that makes everything
+                      possible.{" "}
+                    </p>
                   </div>
 
                   <div className="mt-4">
@@ -217,13 +250,22 @@ const About = () => {
               </p>
             </span>
             <span className="about-buttons">
-              <button onClick={openModal} className="rounded-md font-medium uppercase">
+              <button
+                onClick={openModal}
+                className="rounded-md font-medium uppercase"
+              >
                 Carlos
               </button>
-              <button onClick={openModal2} className="rounded-md font-medium uppercase">
+              <button
+                onClick={openModal2}
+                className="rounded-md font-medium uppercase"
+              >
                 Anaid
               </button>
-              <button onClick={openModal3} className="rounded-md font-medium uppercase">
+              <button
+                onClick={openModal3}
+                className="rounded-md font-medium uppercase"
+              >
                 Yolymarie
               </button>
             </span>
