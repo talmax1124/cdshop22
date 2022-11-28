@@ -91,6 +91,7 @@ const ProductScreen = ({ history, match }) => {
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -412,7 +413,7 @@ const ProductScreen = ({ history, match }) => {
 
               {product.productImportantInformation && (
                 <>
-                  <h6>Product Important Information:</h6>
+                  <h6 className="mb-3 font-medium mt-2">Product Important Information:</h6>
                   <ProductInformation Product={product} />
                 </>
               )}
