@@ -268,7 +268,33 @@ svg#NDRSL-reviewhq_arrow .st1 {
   width: 55%;
 }
 
+.search-small {
+  display: none;
+}
+
+.search-big {
+  display: block;
+}
+
+.search-input {
+  width: 100%;
+}
+
 @media (max-width: 999px) {
+  .search-big {
+    display: none;
+  }
+  .search-input {
+    margin-top: 1em;
+  }
+  .search-btn {
+    font-size: 1.4em;
+    width: 98%;
+    margin-top: .5em;
+  }
+  .search-small {
+    display: block;
+  }
   .order-item-lg {
     display: none;
   }

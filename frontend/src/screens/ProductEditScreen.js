@@ -220,7 +220,7 @@ const ProductEditScreen = ({ match, history }) => {
         <div className="product-preview bg-slate-100">
           <h1 className="text-3xl font-medium mb-3 mt-3 p-2">Preview</h1>
 
-          <Image src={product.image} width="100%" className="p-2" fluid />
+          <Image src={image} width="100%" className="p-2" fluid />
           <div className="Product-Card-Body">
             <p className="font-bold text-[1.7em] font-sans uppercase mb-[.5em] text-black">
               {name}
