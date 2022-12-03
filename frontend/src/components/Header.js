@@ -110,8 +110,14 @@ const Header = () => {
                     {cartItems.reduce((acc, item) => acc + item.qty, 0)})
                   </Nav.Link>
                 </LinkContainer>
+                {/* <LinkContainer to="#"> */}
+                <Nav.Link onClick={openModalo} className="search-big">
+                  <i className="fas fa-search"></i> Search
+                </Nav.Link>
+                {/* </LinkContainer> */}
                 {userInfo ? (
                   <>
+                 
                     <NavDropdown
                       title={userInfo.name}
                       id="username"
@@ -148,10 +154,6 @@ const Header = () => {
                     </Nav.Link>
                   </LinkContainer>
                 )}
-
-                <Nav.Link onClick={openModalo} className="search-big">
-                  <i className="fas fa-search"></i> Search
-                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
