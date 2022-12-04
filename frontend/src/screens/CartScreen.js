@@ -12,8 +12,6 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
-import PayButton from "../components/pay";
-import { ToastContainer } from "react-toastify";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -51,7 +49,6 @@ const CartScreen = ({ match, location, history }) => {
           </Message>
         ) : (
           <>
-            <ToastContainer pauseOnHover={false} />
             <ListGroup variant="flush">
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.product}>
@@ -122,7 +119,11 @@ const CartScreen = ({ match, location, history }) => {
               {userInfo ? (
                 <>
                   {cartItems.length > 0 ? (
-                    <PayButton cartItems={cart.cartItems} />
+                    <Link to="/additionaldetails">
+                      <Button className="btn btn-block bg-slate-600 hover:bg-slate-700 no-underline">
+                        Proceed to checkout process
+                      </Button>
+                    </Link>
                   ) : (
                     <Link
                       to="/"

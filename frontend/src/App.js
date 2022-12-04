@@ -11,6 +11,8 @@ import CartScreen from "./screens/CartScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 
+import AdditionalDetails from "./screens/AdditionalDetails";
+
 // User Related Components / Screens
 
 import LoginScreen from "./screens/LoginScreen";
@@ -49,9 +51,11 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Route path="/" component={HomeScreen} exact />
+
         <Container>
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/order/:id" component={OrderScreen} />
+          <Route path="/additionaldetails" component={AdditionalDetails} />
           <Route path="/forgotpassword" component={forgotPassword} />
 
           <Route path="/product/:id" component={ProductScreen} />

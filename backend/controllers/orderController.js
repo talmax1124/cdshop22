@@ -21,21 +21,12 @@ const addOrderItems = asyncHandler(async (req, res) => {
       itemsPrice,
       totalPrice,
       shippingAddress,
+      orderNotes,
     });
 
     const createdOrder = await order.save();
 
     res.status(201).json(createdOrder);
-
-    //UPDATE COUNT IN STOCK
-    // ==========================================================
-    // for (const index in order.orderItems) {
-    //   const item = order.orderItems[index];
-    //   const product = await Product.findById(item.product);
-    //   product.countInStock -= item.qty;
-    //   await product.save();
-    // }
-    // ========================================================
 
     order.forEach(async (orderItems) => {
       const product = await Product.findById(orderItems.productId);

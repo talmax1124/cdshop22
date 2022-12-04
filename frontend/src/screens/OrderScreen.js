@@ -62,10 +62,8 @@ const OrderScreen = ({ match, history }) => {
   const { success: successDispatch, loading: loadingDispatch } = orderDispatch;
 
   const orderCancel = useSelector((state) => state.orderCancel);
-  const {
-    success: successOrderCancel,
-    loading: loadingOrderCancel,
-  } = orderCancel;
+  const { success: successOrderCancel, loading: loadingOrderCancel } =
+    orderCancel;
 
   // const orderStatus = useSelector((state) => state.orderStatus);
   // const { loading: loadingStatus, success: successStatus } = orderStatus;

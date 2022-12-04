@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -216,6 +220,34 @@ svg#NDRSL-reviewhq_arrow {
   }
   .st1 {
     z-index: 3;
+  }
+}
+
+.yt {
+  height: 78vh;
+}
+
+@media (max-width: 900px) {
+  .yt {
+    height: 70vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .yt {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .yt {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .yt {
+    height: 30vh;
   }
 }
 

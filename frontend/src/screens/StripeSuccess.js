@@ -86,6 +86,7 @@ const StripeSuccess = ({ match, history }) => {
         taxPrice: cart.taxPrice,
         totalPrice: totalAmount / 100,
         shippingAddress: Address,
+        orderNotes: cart.ordeNotes,
       })
     );
   };
