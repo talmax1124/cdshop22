@@ -9,8 +9,7 @@ const Hero = () => {
       <div className="bg-gray-800">
         <div className="container flex flex-col items-center px-4 py-16 pb-24 mx-auto text-center lg:pb-56 md:py-32 md:px-10 lg:px-32 text-white">
           <h1 className="text-[3em] font-bold leading-none sm:text-6xl text-white">
-            Create <span className="text-green-300">Incredible </span> Items
-            with just a thought
+            We <span className="text-green-300">Craft </span> your curiosity
           </h1>
           <p className="mt-6 mb-8 text-lg sm:mb-12 xl:max-w-3xl text-slate-300 font-medium">
             We specialize in making your ideas into a reality. With all sorts of
@@ -38,7 +37,7 @@ const Hero = () => {
       </div>
 
       <iframe
-        src="https://www.youtube.com/embed/JAZiVSgqhmI?controls=0"
+        src="https://www.youtube.com/embed/JAZiVSgqhmI?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&color=white&controls=0"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -51,7 +51,13 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Route path="/" component={HomeScreen} exact />
-
+        <Route path="/search/:keyword" component={HomeScreen} exact />
+        <Route path="/page/:pageNumber" component={HomeScreen} exact />
+        <Route
+          path="/search/:keyword/page/:pageNumber"
+          component={HomeScreen}
+          exact
+        />
         <Container>
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/order/:id" component={OrderScreen} />
@@ -82,13 +88,6 @@ const App = () => {
 
           <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
           <Route path="/admin/orderlist" component={OrderListScreen} />
-          <Route path="/search/:keyword" component={HomeScreen} exact />
-          <Route path="/page/:pageNumber" component={HomeScreen} exact />
-          <Route
-            path="/search/:keyword/page/:pageNumber"
-            component={HomeScreen}
-            exact
-          />
 
           {/* Stripe Related -> Creates Order (Stripe Endpoint) */}
           <Route path="/success/:session_id" component={StripeSuccess} />
