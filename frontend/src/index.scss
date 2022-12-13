@@ -291,11 +291,7 @@ svg#NDRSL-reviewhq_arrow {
   width: 100%;
 }
 
-
-
-
 @media (max-width: 999px) {
-
   .search-big {
     display: none;
   }
@@ -307,7 +303,7 @@ svg#NDRSL-reviewhq_arrow {
   .search-btn {
     font-size: 1.4em;
     width: 98%;
-    margin-top: .5em;
+    margin-top: 0.5em;
   }
 
   .search-small {
@@ -534,7 +530,7 @@ svg#NDRSL-reviewhq_arrow {
     width: 100%;
     height: 100%;
     max-height: 100vh;
-    margin-bottom: .6em;
+    margin-bottom: 0.6em;
   }
 
   .Product-Card-Body {
@@ -636,7 +632,7 @@ svg#NDRSL-reviewhq_arrow {
       margin-top: 1em;
       display: flex;
       flex-direction: column;
-      font-size: .95em;
+      font-size: 0.95em;
       .about-buttons {
         display: flex;
         flex-direction: column;

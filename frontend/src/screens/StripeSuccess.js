@@ -43,7 +43,8 @@ const StripeSuccess = ({ match, history }) => {
     if (data.session) {
       placeOrderHandler(
         data.session.amount_total,
-        data.session.customer_details.address
+        data.session.customer_details.address,
+        data.session.shipping_cost
       );
       // console.log(data.session)
       // placeOrderHandler(
@@ -77,7 +78,7 @@ const StripeSuccess = ({ match, history }) => {
   //   dispatch(payOrder(orderId, paymentResult));
   // };
 
-  const placeOrderHandler = (totalAmount, Address) => {
+  const placeOrderHandler = (totalAmount, Address, amount_shipping) => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -86,6 +87,7 @@ const StripeSuccess = ({ match, history }) => {
         taxPrice: cart.taxPrice,
         totalPrice: totalAmount / 100,
         shippingAddress: Address,
+        shippingCost: amount_shipping / 100,
         orderNotes: cart.ordeNotes,
       })
     );

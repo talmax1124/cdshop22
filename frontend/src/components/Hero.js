@@ -37,10 +37,10 @@ const Hero = () => {
       </div>
 
       <iframe
-        src="https://www.youtube.com/embed/JAZiVSgqhmI?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&color=white&controls=0"
+        src="https://www.youtube.com/embed/JAZiVSgqhmI?1&modestbranding=1&rel=0&iv_load_policy=3&color=white&controls=0"
         title="YouTube video player"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         className="yt w-5/6 mx-auto mb-12 -mt-20 rounded-lg lg:-mt-40 lg:h-[80vh] md:h-[70vh] sm:h-[65vh]"
       ></iframe>

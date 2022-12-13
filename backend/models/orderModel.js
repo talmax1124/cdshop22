@@ -50,6 +50,9 @@ const orderSchema = mongoose.Schema(
       postal_code: { type: String },
       country: { type: String },
     },
+    shippingCost: {
+      type: Number,
+    },
     // shipmentNumber: {
     //   type: String,
     // },

@@ -68,7 +68,7 @@ router.post("/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 450,
+            amount: 475,
             currency: "usd",
           },
           display_name: "Small Packet (1-2 Small Items)",
@@ -89,7 +89,7 @@ router.post("/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 650,
+            amount: 750,
             currency: "usd",
           },
           display_name: "Medium Packet (2-4 Small Items / 1-2 Medium Items)",
@@ -110,7 +110,28 @@ router.post("/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 350,
+            amount: 1100,
+            currency: "usd",
+          },
+          display_name: "USPS Regional Box Rate A",
+          // Delivers in exactly 1 business day
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 5,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 10,
+            },
+          },
+        },
+      },
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 450,
             currency: "usd",
           },
           display_name: "Kissimmee FL Pickup",

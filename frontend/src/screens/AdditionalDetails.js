@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+//  useState, useRef } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,8 +15,8 @@ import Message from "../components/Message";
 import { addToCart } from "../actions/cartActions";
 import PayButton from "../components/pay";
 import { ToastContainer } from "react-toastify";
-import JoditEditor from "jodit-react";
-import { saveordernotes } from "../actions/cartActions";
+// import JoditEditor from "jodit-react";
+// import { saveordernotes } from "../actions/cartActions";
 
 const AdditionalDetails = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -30,25 +31,25 @@ const AdditionalDetails = ({ match, location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const [ordernotes, setordernotes] = useState("");
+  // const [ordernotes, setordernotes] = useState("");
 
-  const editor = useRef(null);
-  const config = {
-    readonly: false,
-    placeholder: "Write Order Notes",
-    askBeforePasteHTML: false,
-  };
+  // const editor = useRef(null);
+  // const config = {
+  //   readonly: false,
+  //   placeholder: "Write Order Notes",
+  //   askBeforePasteHTML: false,
+  // };
 
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-    dispatch(saveordernotes(ordernotes));
-  }, [dispatch, productId, qty, ordernotes]);
+    // dispatch(saveordernotes(ordernotes));
+  }, [dispatch, productId, qty]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveordernotes(ordernotes));
+    // dispatch(saveordernotes(ordernotes));
   };
 
   return (
@@ -103,14 +104,14 @@ const AdditionalDetails = ({ match, location, history }) => {
                     <Form.Label className="font-medium mb-2">
                       Requests? Notes For The Order?
                     </Form.Label>
-                    <JoditEditor
+                    {/* <JoditEditor
                       id="description"
                       ref={editor}
                       value={ordernotes}
                       config={config}
                       tabIndex={1}
                       onBlur={(e) => setordernotes(e)}
-                    />
+                    /> */}
                   </Form.Group>
 
                   <Button

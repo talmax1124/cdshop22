@@ -194,10 +194,9 @@ const OrderScreen = ({ match, history }) => {
                 to us! Below, you can find your order information.
               </p>
               <p className="text-red-900 font-medium">
-                NOTE: Due to an increase of pricing from our shipping partners,
-                we will soon be increasing our shipping rates. We will be
-                notifying you of this change before it goes into effect. Thank
-                you for your patience and understanding.
+                Note: As the selection of shipping selected was manual, you may
+                be asked to pay an additional amount for shipping, if needed.
+                Thank you for your understanding.
               </p>
             </ListGroup.Item>
           </ListGroup>
@@ -253,6 +252,11 @@ const OrderScreen = ({ match, history }) => {
                   {order.shippingAddress.country}
                 </p>
               </div>
+
+              <p>
+                <strong className="text-[1.2em]"> Shipping Cost: </strong>
+                <strong>{order.shippingCost}</strong>
+              </p>
 
               {order.isCancelled && (
                 <Message variant="danger" className="mt-2 mb-2">

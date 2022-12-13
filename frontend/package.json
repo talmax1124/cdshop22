@@ -34,6 +34,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "shippo": "^1.7.1",
     "ssl-express-www": "^3.0.8",
     "webpack": "^5.72.0"
   },

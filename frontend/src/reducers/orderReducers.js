@@ -171,7 +171,12 @@ export const orderDispatchedReducer = (state = {}, action) => {
 };
 
 export const orderDetailsReducer = (
-  state = { loading: true, orderItems: [], shippingAddress: {} },
+  state = {
+    loading: true,
+    orderItems: [],
+    shippingAddress: {},
+    shippingCost: "",
+  },
   action
 ) => {
   switch (action.type) {
@@ -194,8 +199,6 @@ export const orderDetailsReducer = (
       return state;
   }
 };
-
-
 
 export const orderDeliverReducer = (state = {}, action) => {
   switch (action.type) {
