@@ -442,9 +442,9 @@ const ProductScreen = ({ history, match }) => {
                         height="250px"
                         src={product.productVideo}
                         title="YouTube video player"
-                        frameborder="0"
+                        frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
+                        allowFullScreen
                       ></iframe>
                     </Modal.Body>
                     <Modal.Footer>
@@ -485,9 +485,9 @@ const ProductScreen = ({ history, match }) => {
                         height="250px"
                         src={product.productTutorial}
                         title="YouTube video player"
-                        frameborder="0"
+                        frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
+                        allowFullScreen
                       ></iframe>
                     </Modal.Body>
                     <Modal.Footer>

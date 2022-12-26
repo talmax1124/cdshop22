@@ -21,7 +21,7 @@ const LatestProducts = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
- <div className="w-full mt-2 mb-1" style={{marginLeft: "-1em"}}>
+      <div className="w-full mt-2 mb-1" style={{ marginLeft: "-1em" }}>
         <section className="text-gray-600 body-font">
           <div className="container  ">
             <div className="flex flex-wrap w-full">
@@ -35,7 +35,7 @@ const LatestProducts = () => {
           </div>
         </section>
       </div>
-      
+
       <Row>
         {products.map((product) => (
           <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

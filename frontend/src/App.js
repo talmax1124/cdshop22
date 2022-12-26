@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 // Screens
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ArticleScreen from "./screens/ArticleScreen";
 // Order Related Components / Screens
 import CartScreen from "./screens/CartScreen";
 import OrderScreen from "./screens/OrderScreen";
@@ -28,6 +29,9 @@ import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 // Product Related Components / Screens
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+
+import ArticleListScreen from "./screens/ArticleListScreen";
+import ArticleEditScreen from "./screens/ArticleEditScreen";
 
 // Pages for Footer
 import returnpolicy from "./pages/returnpolicy";
@@ -113,6 +117,10 @@ const App = () => {
             exact
           />
           <Route path="/whatwecandoforyou" component={WWCDFY} exact />
+
+          <Route path="/article/:id" component={ArticleScreen} />
+          <Route path="/admin/articlelist" component={ArticleListScreen} />
+          <Route path="/admin/article/:id/edit" component={ArticleEditScreen} />
         </Container>
         <Route path="/login" component={LoginScreen} />
         <Route path="/register" component={RegisterScreen} />
