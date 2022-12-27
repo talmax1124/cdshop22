@@ -161,31 +161,6 @@ main {
   align-self: flex-end;
 }
 
-// .carousel {
-//   background: #FAFAFA;
-// }
-
-.carousel-celll {
-  max-height: 50vh;
-  margin-right: 2em;
-  border-radius: 1em;
-  counter-increment: carousel-cell;
-  img {
-    border-radius: 1em 0 0 1em;
-    max-width: 30vh;
-  }
-}
-
-/* cell number */
-.carousel-cell:before {
-  display: block;
-  text-align: center;
-  content: counter(carousel-cell);
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
-}
-
 .product-edit-container {
   display: flex;
   justify-content: space-between;
@@ -200,31 +175,32 @@ main {
   }
 }
 
-svg#NDRSL-reviewhq_logo {
-  fill: yellow;
-  stroke: none;
-  .cls-1 {
-    fill: yellow;
-    stroke: none;
-  }
-  .cls-2 {
-    opacity: 0.9;
-    fill: yellow;
-    stroke: transparent;
-  }
-}
-
-svg#NDRSL-reviewhq_arrow {
-  .st0 {
-    opacity: 1;
-  }
-  .st1 {
-    z-index: 3;
-  }
-}
-
 .yt {
   height: 78vh;
+  box-shadow: rgba(0, 0, 0, 0.34) 0px 4px 12px;
+}
+
+.wwd-card-container {
+  padding: 1.5em;
+  color: white;
+  background-color: #030c22;
+}
+
+.wwd-card {
+  background-color: #091a44;
+  color: white;
+  border-radius: 1.2em;
+  margin-right: 0.3em;
+  margin-left: 0.3em;
+  padding: 2em;
+  h3 {
+    color: white;
+  }
+  svg {
+    fill: white;
+    width: 20%;
+  }
+  width: clamp(300px, 30%, 400px);
 }
 
 @media (max-width: 900px) {
@@ -618,6 +594,12 @@ svg#NDRSL-reviewhq_arrow {
 }
 
 @media (max-width: 1000px) {
+  .top-products {
+    flex-direction: column;
+  }
+  .top-card {
+    margin-top: 1em;
+  }
   .team-head {
     flex-direction: column;
     .team-left {

@@ -16,22 +16,23 @@ const Hero = () => {
             products both physical and digital ready to be personalized.
           </p>
           <div className="flex flex-wrap justify-center">
-            <a href="#prod">
+            <Link to="/support">
               <button
                 type="button"
-                className="px-8 py-3 m-2 text-lg font-semibold rounded shadow-md text-white bg-green-500 hover:bg-green-600"
+                className="px-8 py-3 m-2 text-lg font-semibold rounded shadow-md text-white bg-green-500 hover:bg-green-600 w-full "
               >
-                Get started
+                Let's Talk
               </button>
-            </a>
-            <Link to="/support">
+            </Link>
+
+            {/* <a href="#prod">
               <button
                 type="button"
                 className="px-8 py-3 m-2 text-lg border rounded shadow-md text-white border-white hover:bg-slate-700 hover:text-gray-800 hover:border-slate-700"
               >
-                Contact Us!
+                View Our Site
               </button>
-            </Link>
+            </a> */}
           </div>
         </div>
       </div>
@@ -42,7 +43,7 @@ const Hero = () => {
         frameBorder="0"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        className="yt w-5/6 mx-auto mb-12 -mt-20 rounded-lg lg:-mt-40 lg:h-[80vh] md:h-[70vh] sm:h-[65vh]"
+        className="yt w-5/6 mx-auto mb-12 -mt-20 rounded-lg lg:-mt-40 lg:h-[80vh] md:h-[70vh] sm:h-[65vh] yt-iframe"
       ></iframe>
       {/*  className="w-5/6 mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 dark:bg-gray-500" */}
     </section>

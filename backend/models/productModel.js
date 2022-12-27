@@ -32,6 +32,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    images: [String],
     additionalimageone: {
       type: String,
     },

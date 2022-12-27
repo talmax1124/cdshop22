@@ -256,7 +256,7 @@ const deleteProductReview = asyncHandler(async (req, res) => {
 
 const getTopProducts = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
-  const products = await Product.find({}).sort({ rating: -1 }).limit(8);
+  const products = await Product.find({}).sort({ rating: -1 }).limit(4);
   res.json(products);
 });
 

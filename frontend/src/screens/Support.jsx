@@ -20,8 +20,8 @@ const Support = () => {
             <p className="font-medium text-2xl mt-5 text-black">
               Other Methods of Contact:
             </p>
-            <a href="tel: 4074832251">
-              <p className="font-light text-1xl">Office Number: 407-483-2251</p>
+            <a href="tel: 4077566386">
+              <p className="font-light text-1xl">Office Number: (407) 756-6386</p>
             </a>
             <a href="mailto: creativeduo2020@gmail.com">
               <p className="font-light text-1xl">

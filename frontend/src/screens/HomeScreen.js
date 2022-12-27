@@ -13,7 +13,8 @@ import { listProducts } from "../actions/productActions";
 import Testimonials from "../components/Testimonials";
 import Hero from "../components/Hero";
 import Map from "../components/Map";
-import About from "../components/About";
+// import About from "../components/About";
+import WhatWeDoCarousel from "../components/WhatWeDoCarousel";
 // import LatestProducts from "../components/LatestProducts";
 // import ShopByCategory from "../components/ShopByCategory";
 // import ShopByBrand from "../components/ShopByBrand";
@@ -49,13 +50,20 @@ const HomeScreen = ({ match, history, location }) => {
       <Hero />
       {/* <ShopByCategory /> */}
       <span id="prod"></span>
+      <WhatWeDoCarousel />
       <main className="py-3">
         <Container>
           {!keyword && pageNumber === 1 ? (
             <>
-              <h1 className="text-[2em] font-bold font-sans mt-4 mb-4">
-                Our Most Popular Products
-              </h1>
+              <span>
+                <p className="text-[2.3em] font-bold font-sans mt-4 text-black uppercase">
+                  Top Rated Products
+                </p>
+                <p className="font-medium text-[1.4em] mt-[-0.4em] mb-3">
+                  this week
+                </p>
+              </span>
+
               <ProductCarousel />
             </>
           ) : (
@@ -68,7 +76,7 @@ const HomeScreen = ({ match, history, location }) => {
           )}
           {/* <ShopByCategory products={products} /> */}
           <h1 className="text-[2em] font-bold font-sans mt-4 mb-4">
-            Latest Products
+            Ready To Be <span className="text-green-600 font-extrabold">Customized</span> ...
           </h1>
           {loading ? (
             <Loader />
@@ -99,7 +107,7 @@ const HomeScreen = ({ match, history, location }) => {
         {!keyword && pageNumber === 1 ? (
           <>
             <Map />
-            <About />
+            {/* <About /> */}
             <Testimonials />
           </>
         ) : (

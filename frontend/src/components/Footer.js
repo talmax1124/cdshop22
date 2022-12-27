@@ -20,12 +20,14 @@ const Footer = () => {
             <p className="font-medium">
               <span className="text-xs tracking-widest uppercase">Call</span>
 
-              <Link
+              <a
                 className="block text-2xl sm:text-3xl  hover:text-slate-100"
-                to=""
+                href="tel:4077566386"
               >
-                (407)536-8743
-              </Link>
+                <span>(407) 756-6DUO</span>
+                <br />
+                <span className="text-[.4em] ">(6386)</span>
+              </a>
             </p>
 
             <div className="flex mt-16 space-x-3">

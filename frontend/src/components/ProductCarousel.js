@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Carousel, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import Message from "./Message";
@@ -21,20 +21,20 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
-    <Carousel pause="hover" className="bg-dark">
+    <div className="flex justify-between top-products">
       {products.map((product) => (
-        <Carousel.Item key={product._id}>
+        <div key={product._id} className="bg-slate-100 mr-2 ml-2 p-3 top-card">
           <Link to={`/product/${product._id}`}>
             <Image src={product.image} alt={product.name} fluid />
-            <Carousel.Caption className="carousel-caption">
-              <h2 className="font-medium">
-                {product.name} ~ ${product.price}
-              </h2>
-            </Carousel.Caption>
+            <p>
+              <h2 className="font-bold mt-3 mb-">{product.name}</h2>
+
+              <h2 className="font-medium mt-1">$ {product.price}</h2>
+            </p>
           </Link>
-        </Carousel.Item>
+        </div>
       ))}
-    </Carousel>
+    </div>
   );
 };
 

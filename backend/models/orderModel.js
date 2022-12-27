@@ -50,6 +50,12 @@ const orderSchema = mongoose.Schema(
       postal_code: { type: String },
       country: { type: String },
     },
+    paymentResult: {
+      id: String,
+      status: String,
+      update_time: String,
+      email_address: String,
+    },
     shippingCost: {
       type: Number,
     },
