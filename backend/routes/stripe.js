@@ -37,6 +37,26 @@ router.post("/create-checkout-session", async (req, res) => {
     };
   });
 
+  // Calculate the tax amount
+  const tax_percent = 7;
+  let subtotal = 0;
+  line_items.forEach((item) => {
+    subtotal += item.price_data.unit_amount * item.quantity;
+  });
+  const tax_amount = Math.round(subtotal * (tax_percent / 100));
+
+  // Add the tax amount to the line items list
+  line_items.push({
+    price_data: {
+      currency: "usd",
+      product_data: {
+        name: "Tax",
+      },
+      unit_amount: tax_amount,
+    },
+    quantity: 1,
+  });
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     shipping_address_collection: {
