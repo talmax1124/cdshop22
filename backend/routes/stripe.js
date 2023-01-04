@@ -63,27 +63,6 @@ router.post("/create-checkout-session", async (req, res) => {
       allowed_countries: ["US"],
     },
     shipping_options: [
-      // {
-      //   shipping_rate_data: {
-      //     type: "fixed_amount",
-      //     fixed_amount: {
-      //       amount: 0,
-      //       currency: "usd",
-      //     },
-      //     display_name: "Special Pickup",
-      //     // Delivers between 5-7 business days
-      //     delivery_estimate: {
-      //       minimum: {
-      //         unit: "business_day",
-      //         value: 1,
-      //       },
-      //       maximum: {
-      //         unit: "business_day",
-      //         value: 4,
-      //       },
-      //     },
-      //   },
-      // },
       {
         shipping_rate_data: {
           type: "fixed_amount",

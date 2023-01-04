@@ -47,6 +47,9 @@ import ShopByBrandScreen from "./screens/ShopByBrandScreen";
 // Stripe
 import StripeSuccess from "./screens/StripeSuccess";
 
+import Sales from "./screens/Sales";
+import CheckOut from "./screens/CheckOut";
+
 import { Container } from "react-bootstrap";
 
 const App = () => {
@@ -72,6 +75,9 @@ const App = () => {
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/admin/userlist" component={UserListScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
+
+          <Route path="/sales" component={Sales} />
+          <Route path="/checkout" component={CheckOut} />
 
           <Route
             path="/admin/productlist"

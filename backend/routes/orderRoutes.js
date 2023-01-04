@@ -33,6 +33,47 @@ router.route("/:id/packed").put(protect, admin, updateOrderToPacked);
 router.route("/:id/dispatched").put(protect, admin, updateOrderToDispatched);
 router.route("/:id/cancelled").put(protect, cancelOrder);
 
+router.get("/rates", (req, res) => {
+  // Replace YOUR_EASYPOST_API_KEY with your actual EasyPost API key
+
+  const options = {
+    method: "POST",
+    url: "https://api.easypost.com/v2/shipments",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer EZTKac9850fe11c04e64980be8e2892a08d8tTCJ0SdTx3hw0j6mKNxEv`,
+    },
+    body: {
+      shipment: {
+        to_address: {
+          zip: "34758",
+          state: "FL",
+          country: "US",
+        },
+        from_address: {
+          zip: "90210",
+          state: "CA",
+          country: "US",
+        },
+        parcel: {
+          weight: 10,
+        },
+      },
+    },
+    json: true,
+  };
+
+  request(options, function (error, response, body) {
+    if (error) {
+      console.log(error);
+      return res.send({ error });
+    }
+
+    console.log(body.rates);
+    return res.send({ rates: body.rates });
+  });
+});
+
 // router
 //   .route("/:id/shipmentpaymentlink")
 //   .put(protect, admin, updateOrderShipmentPaymentLink);

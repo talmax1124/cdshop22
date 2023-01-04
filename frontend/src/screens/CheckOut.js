@@ -1,5 +1,5 @@
 //  useState, useRef } from "react";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,12 +16,10 @@ import { addToCart } from "../actions/cartActions";
 import { saveShippingAddress } from "../actions/cartActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import JoditEditor from "jodit-react";
-import { saveOrderNotes } from "../actions/cartActions";
 
-// import PayButton from "../components/pay";
+import PayButton from "../components/pay";
 
-const AdditionalDetails = ({ match, location, history }) => {
+const CheckOut = ({ match, location, history }) => {
   const productId = match.params.id;
 
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
@@ -29,7 +27,7 @@ const AdditionalDetails = ({ match, location, history }) => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  const { cartItems, shippingAddress, orderNotes } = cart;
+  const { cartItems, shippingAddress } = cart;
 
   const [line1, setLine1] = useState(shippingAddress.line1);
   const [line2, setLine2] = useState(shippingAddress.line2);
@@ -37,15 +35,6 @@ const AdditionalDetails = ({ match, location, history }) => {
   const [state, setState] = useState(shippingAddress.state);
   const [postal_code, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
-
-  const [notes, setOrderNotes] = useState(orderNotes.notes);
-
-  const editor = useRef(null);
-  const config = {
-    readonly: false,
-    placeholder: "Write Order Notes",
-    askBeforePasteHTML: false,
-  };
 
   useEffect(() => {
     if (productId) {
@@ -59,13 +48,12 @@ const AdditionalDetails = ({ match, location, history }) => {
     dispatch(
       saveShippingAddress({ line1, line2, postal_code, city, state, country })
     );
-    dispatch(saveOrderNotes(orderNotes));
     toast.success("Shipping Address and or Order Notes Saved!");
   };
 
-  const submitToNext = (e) => {
-    history.push("/checkout");
-  };
+  // const submitToNext = (e) => {
+  //   history.push("/checkout");
+  // };
 
   return (
     <>
@@ -83,19 +71,20 @@ const AdditionalDetails = ({ match, location, history }) => {
               <i className="fas fa-arrow-right mr-1 text-[1.4em]"></i>
             </p>
 
-            <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-900">
-              Final Details
-            </p>
+            <Link to="/additionaldetails">
+              <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-500">
+                Final Details
+              </p>
+            </Link>
 
             <p>
               <i className="fas fa-arrow-right mr-1 text-[1.4em]"></i>
             </p>
 
-            <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-500">
+            <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-900">
               Payment
             </p>
-          </span>
-
+          </span>{" "}
           {cartItems.length === 0 ? (
             <Message>
               Your cart is empty <Link to="/">Go Back</Link>
@@ -106,7 +95,7 @@ const AdditionalDetails = ({ match, location, history }) => {
                 <ListGroup variant="flush">
                   <ListGroup.Item className="border-transparent">
                     <h2 className="text-[2em] uppercase font-bold font-sans text-black">
-                      Shipping / Order Notes
+                      Select Shipping Method
                     </h2>
                   </ListGroup.Item>
 
@@ -183,19 +172,6 @@ const AdditionalDetails = ({ match, location, history }) => {
                           disabled
                           onChange={(e) => setCountry(e.target.value)}
                         ></Form.Control>
-                        <Form.Group controlId="orderNotes">
-                          <Form.Label className="font-medium mb-2 mt-3">
-                            Requests? Notes For The Order?
-                          </Form.Label>
-                          <JoditEditor
-                            id="description"
-                            ref={editor}
-                            value={notes}
-                            config={config}
-                            tabIndex={1}
-                            onBlur={(e) => setOrderNotes(e)}
-                          />
-                        </Form.Group>
                       </Form.Group>
                       <Button
                         type="submit"
@@ -255,14 +231,7 @@ const AdditionalDetails = ({ match, location, history }) => {
           ))}
 
           <Link>
-            <Button
-              className="btn btn-block bg-gray-700 hover:bg-black text-white"
-              onClick={submitToNext}
-            >
-              Go To Payment Screen
-            </Button>
-
-            {/* <PayButton cartItems={cart.cartItems} /> */}
+            <PayButton cartItems={cart.cartItems} />
           </Link>
         </Col>
       </Row>
@@ -270,4 +239,4 @@ const AdditionalDetails = ({ match, location, history }) => {
   );
 };
 
-export default AdditionalDetails;
+export default CheckOut;

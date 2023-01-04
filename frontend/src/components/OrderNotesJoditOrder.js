@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
- const OrderNotesJoditOrder = ({ order }) => {
-   useEffect(() => {
-     const orderNotes = document.querySelector('.orderNotes')
-     if (orderNotes) {
-        orderNotes.innerHTML = order.orderNotes
-       let images = document.querySelectorAll('.orderNotes img')
-       if (images) {
-         images.forEach((item) => {
-           item.style.width = '100%'
-         })
-       }
-     }
-   }, [order])
+const OrderNotesJoditOrder = ({ order }) => {
+  useEffect(() => {
+    const orderNotes = document.querySelector(".orderNotes");
+    if (orderNotes) {
+      orderNotes.innerHTML = order.orderNotes.notes;
+      let images = document.querySelectorAll(".orderNotes img");
+      if (images) {
+        images.forEach((item) => {
+          item.style.width = "100%";
+        });
+      }
+    }
+  }, [order]);
 
-   return <p className='orderNotes'></p>
- }
+  return <p className="orderNotes"></p>;
+};
 
- export default OrderNotesJoditOrder
+export default OrderNotesJoditOrder;

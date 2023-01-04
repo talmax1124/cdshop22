@@ -23,7 +23,7 @@ const orderSchema = mongoose.Schema(
     ],
 
     orderNotes: {
-      type: String,
+      notes: { type: String },
     },
 
     totalPrice: {
@@ -50,6 +50,7 @@ const orderSchema = mongoose.Schema(
       postal_code: { type: String },
       country: { type: String },
     },
+
     paymentResult: {
       id: String,
       status: String,

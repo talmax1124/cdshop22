@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
+import { ToastContainer } from "react-toastify";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -39,32 +40,54 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <Row>
       <Col md={8}>
-        <h1 className=" text-black text-2xl font-medium tracking-tight leading-none md:text-4xl xl:text-6xl mb-1 ">
-          Shopping Cart
-        </h1>
+        <span className="flex items-center">
+          <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-900">
+            Cart
+          </p>
+
+          <p>
+            <i className="fas fa-arrow-right mr-1 text-[1.4em]"></i>
+          </p>
+
+          <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-500">
+            Final Details
+          </p>
+
+          <p>
+            <i className="fas fa-arrow-right mr-1 text-[1.4em]"></i>
+          </p>
+
+          <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-500">
+            Payment
+          </p>
+        </span>
         <hr className="mb-2" />
         {cartItems.length === 0 ? (
-          <Message>
-            Your cart is empty <Link to="/">Go Back</Link>
+          <Message className="p-1">
+            Looks like your cart is empty.{" "}
+            <Link to="/" className="p-3 bg-slate-700 text-white ml-1">
+              Go Back
+            </Link>
           </Message>
         ) : (
           <>
+            <ToastContainer pauseOnHover={false} />
             <ListGroup variant="flush">
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.product}>
-                  <Row className="bg-gray-100 p-2 rounded flex items-center justify-between">
+                  <Row className="bg-slate-100 p-2 rounded-md flex items-center justify-between">
                     <Col md={2}>
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
                       <Link
                         to={`/product/${item.product}`}
-                        className="font-light"
+                        className="font-medium"
                       >
                         {item.name}
                       </Link>
                     </Col>
-                    <Col md={2} className="font-light">
+                    <Col md={2} className="font-bold">
                       ${item.price}
                     </Col>
                     <Col md={2}>
@@ -87,7 +110,7 @@ const CartScreen = ({ match, location, history }) => {
                     <Col md={2}>
                       <Button
                         type="button"
-                        variant="light"
+                        className="bg-red-600 hover:bg-red-700 text-white rounded-md text-1xl"
                         onClick={() => removeFromCartHandler(item.product)}
                       >
                         <i className="fas fa-trash"></i>
@@ -105,10 +128,10 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2 className="font-medium mb-1 text-[1.3em]">
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
+                {cartItems.reduce((acc, item) => acc + item.qty, 0)} item(s) in
+                your cart
               </h2>
-              <p className="mt-2 text-[1.1em] font-light">
+              <p className="mt-2 text-[1.1em] font-medium">
                 Cart Value: $
                 {cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
@@ -120,8 +143,8 @@ const CartScreen = ({ match, location, history }) => {
                 <>
                   {cartItems.length > 0 ? (
                     <Link to="/additionaldetails">
-                      <Button className="btn btn-block bg-slate-600 hover:bg-slate-700 no-underline">
-                        Proceed to checkout process
+                      <Button className="btn btn-block bg-gray-900 hover:bg-black no-underline">
+                        Proceed to View Final Details
                       </Button>
                     </Link>
                   ) : (
