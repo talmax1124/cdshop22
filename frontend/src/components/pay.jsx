@@ -7,7 +7,7 @@ const PayButton = ({ cartItems }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
 
   const handleCheckout = () => {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.VITE_NODE_ENV === "development") {
       toast.info("Please Wait While We Load Stripe Checkout For You!");
       axios
         .post("http://localhost:3000/api/stripe/create-checkout-session", {
@@ -26,7 +26,7 @@ const PayButton = ({ cartItems }) => {
         });
     }
 
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.VITE_NODE_ENV === "production") {
       toast.info("Please Wait While We Load Stripe Checkout For You!");
       axios
         .post("https://creativeduo.net/api/stripe/create-checkout-session", {

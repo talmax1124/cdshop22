@@ -32,11 +32,11 @@ connectDB();
 
 const app = express();
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.VITE_NODE_ENV === "development") {
   app.use(morgan("dev"), cors());
 }
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.VITE_NODE_ENV === "production") {
   app.use(secure, cors());
 }
 
@@ -45,7 +45,7 @@ app.use(express.json());
 // Session
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.VITE_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
@@ -72,7 +72,7 @@ app.use("/api/auth", authRoutes);
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.VITE_NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
   app.get("*", (req, res) =>
@@ -94,11 +94,11 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 7500;
+const PORT = process.env.VITE_PORT || 7500;
 
 app.listen(
   PORT,
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+    `Server running in ${process.env.VITE_NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
 );

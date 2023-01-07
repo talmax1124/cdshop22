@@ -6,7 +6,7 @@ import generateToken from "../utils/generateToken.js";
 
 const router = express.Router();
 
-const originUri = process.env.ORIGIN_URI;
+const originUri = process.env.VITE_ORIGIN_URI;
 
 // @desc Auth with Google
 // @route GET /auth/google

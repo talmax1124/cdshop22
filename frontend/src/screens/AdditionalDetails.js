@@ -19,9 +19,13 @@ import "react-toastify/dist/ReactToastify.css";
 import JoditEditor from "jodit-react";
 import { saveOrderNotes } from "../actions/cartActions";
 
+import { Shippo } from "shippo";
+
 // import PayButton from "../components/pay";
 
 const AdditionalDetails = ({ match, location, history }) => {
+  const shippo = Shippo("shippo_test_5d0b5b5b0b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b");
+
   const productId = match.params.id;
 
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
@@ -31,6 +35,9 @@ const AdditionalDetails = ({ match, location, history }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress, orderNotes } = cart;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [line1, setLine1] = useState(shippingAddress.line1);
   const [line2, setLine2] = useState(shippingAddress.line2);
   const [city, setCity] = useState(shippingAddress.city);
@@ -39,6 +46,49 @@ const AdditionalDetails = ({ match, location, history }) => {
   const [country, setCountry] = useState(shippingAddress.country);
 
   const [notes, setOrderNotes] = useState(orderNotes.notes);
+
+  var addressFrom = {
+    name: "Shawn Ippotle",
+    street1: "215 Clayton St.",
+    city: "San Francisco",
+    state: "CA",
+    zip: "94117",
+    country: "US",
+  };
+  var addressTo = {
+    name: userInfo.name,
+    street1: line1,
+    city: city,
+    state: state,
+    zip: postal_code,
+    country: country,
+  };
+
+  var parcel = {
+    length: "5",
+    width: "5",
+    height: "5",
+    distance_unit: "in",
+    weight: "2",
+    mass_unit: "lb",
+  };
+
+  shippo.shipment.create(
+    {
+      address_from: addressFrom,
+      address_to: addressTo,
+      parcels: [parcel],
+      async: false,
+    },
+    function (err, shipment) {
+      // asynchronously called
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(shipment);
+      }
+    }
+  );
 
   const editor = useRef(null);
   const config = {

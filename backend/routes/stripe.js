@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
 const router = express.Router();
 
@@ -157,8 +157,8 @@ router.post("/create-checkout-session", async (req, res) => {
     consent_collection: {
       promotions: "auto",
     },
-    success_url: `${process.env.CLIENT_URL}/success/{CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.CLIENT_URL}/cart`,
+    success_url: `${process.env.VITE_CLIENT_URL}/success/{CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.VITE_CLIENT_URL}/cart`,
   });
 
   // res.redirect(303, session.url);

@@ -63,8 +63,8 @@ const verificationLink = asyncHandler(async (req, res) => {
   );
   //send email to regitering user
   var mailgun = new Mailgun({
-    apiKey: process.env.MailGunAPI,
-    domain: process.env.MailGunDomain,
+    apiKey: process.env.VITE_MailGunAPI,
+    domain: process.env.VITE_MailGunDomain,
   });
   var data = {
     from: "Creative Duo Shopping <creativeduo2020@gmail.com>",
@@ -197,9 +197,9 @@ const verificationLink = asyncHandler(async (req, res) => {
         <img src="https://i.ibb.co/1J6y513/undraw-festivities-tvvj-transparent.png" alt="undraw-festivities-tvvj-transparent" border="0">
         <h2>You're nearly there!</h2>
         <p class="text-main">We just need to verify your email address to complete setting up your account.</p>
-        <a href="${process.env.CLIENT_URL}/verify/${tokengenerate}" class="button">Verify Email</a>
+        <a href="${process.env.VITE_CLIENT_URL}/verify/${tokengenerate}" class="button">Verify Email</a>
         <p class="sub-text">Or paste this link into your browser:</p>
-        <p class="long-link">${process.env.CLIENT_URL}/verify/${tokengenerate}</p>
+        <p class="long-link">${process.env.VITE_CLIENT_URL}/verify/${tokengenerate}</p>
       </div>
     </div>
     <div class="footer">
@@ -236,7 +236,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ email });
 
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET),
+    jwt.verify(token, process.env.VITE_JWT_SECRET),
       function (err, decoded) {
         if (err) {
           // console.log('JWT verify error')
@@ -402,8 +402,8 @@ const getUserById = asyncHandler(async (req, res) => {
 const forgotPassword = (req, res) => {
   const { email } = req.body;
   var mg = new Mailgun({
-    apiKey: process.env.MailGunAPI,
-    domain: process.env.MailGunDomain,
+    apiKey: process.env.VITE_MailGunAPI,
+    domain: process.env.VITE_MailGunDomain,
   });
 
   User.findOne({ email }, (err, user) => {
@@ -457,7 +457,7 @@ const forgotPassword = (req, res) => {
                                             password has been generated for you. To reset your password, click the
                                             following link and follow the instructions.
                                         </p>
-                                        <a href="${process.env.CLIENT_URL}/reset-password/${token}"
+                                        <a href="${process.env.VITE_CLIENT_URL}/reset-password/${token}"
                                             style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                             Password</a>
                                     </td>
@@ -515,7 +515,7 @@ const resetPassword = (req, res) => {
   if (resetLink) {
     jwt.verify(
       resetLink,
-      process.env.JWT_SECRET,
+      process.env.VITE_JWT_SECRET,
       function (error, decodedData) {
         if (error) {
           return res

@@ -34,7 +34,7 @@ const LoginScreen = ({ location, history }) => {
   const signInWithGoogleHandler = (e) => {
     e.preventDefault();
     const googleSignInEndPoint =
-      process.env.NODE_ENV === "development"
+      process.env.VITE_NODE_ENV === "development"
         ? `http://localhost:7500/api/auth/google?redirect=${redirect}`
         : `/api/auth/google?redirect=${redirect}`;
     window.location.href = googleSignInEndPoint;
