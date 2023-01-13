@@ -253,7 +253,7 @@ const AdditionalDetails = ({ match, location, history }) => {
               </ListGroup.Item>
             </>
           ))}
-
+          {/* {state.length > 0 && ( */}
           <Link>
             <Button
               className="btn btn-block bg-gray-700 hover:bg-black text-white"
@@ -264,6 +264,7 @@ const AdditionalDetails = ({ match, location, history }) => {
 
             {/* <PayButton cartItems={cart.cartItems} /> */}
           </Link>
+          {/* )} */}
         </Col>
       </Row>
     </>

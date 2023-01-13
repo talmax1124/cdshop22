@@ -60,7 +60,7 @@ app.use("/api", cors());
 app.use("/api/", cors());
 
 app.use("/api/products", productRoutes, cors());
-app.use("/api/articles", articleRoutes);
+app.use("/api/articles", articleRoutes, cors());
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes, cors());
 app.use("/api/rates", orderRoutes, cors());

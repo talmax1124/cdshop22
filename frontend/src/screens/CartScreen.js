@@ -40,6 +40,12 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <Row>
       <Col md={8}>
+        <Link to="/products">
+          <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
+            <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
+            Go Back
+          </Button>
+        </Link>
         <span className="flex items-center">
           <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-900">
             Cart

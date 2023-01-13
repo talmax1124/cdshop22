@@ -104,20 +104,25 @@ const Header = () => {
                 />
               </div>
               <Nav className="ml-auto">
+                <LinkContainer to="/articles">
+                  <Nav.Link>Articles</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/products">
+                  <Nav.Link>Products</Nav.Link>
+                </LinkContainer>
                 <LinkContainer to="/cart">
                   <Nav.Link>
-                    <i className="fas fa-shopping-cart"></i> Cart (
-                    {cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                    Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
                   </Nav.Link>
                 </LinkContainer>
+
                 {/* <LinkContainer to="#"> */}
                 <Nav.Link onClick={openModalo} className="search-big">
-                  <i className="fas fa-search"></i> Search
+                  Search
                 </Nav.Link>
                 {/* </LinkContainer> */}
                 {userInfo ? (
                   <>
-                 
                     <NavDropdown
                       title={userInfo.name}
                       id="username"

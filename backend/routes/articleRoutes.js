@@ -9,7 +9,7 @@ import {
 } from "../controllers/articleController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
-router.route("/articles").get(getArticles).post(protect, admin, createArticle);
+router.route("/").get(getArticles).post(protect, admin, createArticle);
 
 router
   .route("/:id")

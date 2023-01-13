@@ -100,6 +100,7 @@ const CheckOut = ({ match, location, history }) => {
                   </ListGroup.Item>
 
                   <ListGroup.Item className="border-transparent">
+                    {/* Remove the form and add the options below */}
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId="line1">
                         <Form.Label className="font-medium mb-2">

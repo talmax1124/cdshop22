@@ -6,7 +6,9 @@ import Footer from "./components/Footer";
 // Screens
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import Products from "./screens/Products";
 import ArticleScreen from "./screens/ArticleScreen";
+import Articles from "./screens/Articles";
 // Order Related Components / Screens
 import CartScreen from "./screens/CartScreen";
 import OrderScreen from "./screens/OrderScreen";
@@ -56,13 +58,15 @@ const App = () => {
   return (
     <Router>
       <Header />
+
       <main className="py-3">
         <Route path="/" component={HomeScreen} exact />
-        <Route path="/search/:keyword" component={HomeScreen} exact />
-        <Route path="/page/:pageNumber" component={HomeScreen} exact />
+        <Route path="/products" component={Products} />
+        <Route path="/search/:keyword" component={Products} exact />
+        <Route path="/page/:pageNumber" component={Products} exact />
         <Route
           path="/search/:keyword/page/:pageNumber"
-          component={HomeScreen}
+          component={Products}
           exact
         />
         <Container>
@@ -123,7 +127,7 @@ const App = () => {
             exact
           />
           <Route path="/whatwecandoforyou" component={WWCDFY} exact />
-
+          <Route path="/articles" component={Articles} />
           <Route path="/article/:id" component={ArticleScreen} />
           <Route path="/admin/articlelist" component={ArticleListScreen} />
           <Route path="/admin/article/:id/edit" component={ArticleEditScreen} />
