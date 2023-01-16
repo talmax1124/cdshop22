@@ -28,6 +28,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [additionalimagethree, setAdditionalimagethree] = useState("");
   const [productVideo, setProductVideo] = useState("");
   const [productTutorial, setProductTutorial] = useState("");
+  const [digitalLink, setDigitalLink] = useState("");
   const [onSalePrice, setOnSalePrice] = useState(0);
   const [onSaleBadge, setOnSaleBadge] = useState(false);
   const [productImportantInformation, setProductImportantInformation] =
@@ -82,6 +83,7 @@ const ProductEditScreen = ({ match, history }) => {
         setProductImportantInformation(product.productImportantInformation);
         setProductVideo(product.productVideo);
         setProductTutorial(product.productTutorial);
+        setDigitalLink(product.digitalLink);
         setOnSalePrice(product.onSalePrice);
         setOnSaleBadge(product.onSaleBadge);
       }
@@ -202,6 +204,7 @@ const ProductEditScreen = ({ match, history }) => {
           additionalimagethree,
           productVideo,
           productTutorial,
+          digitalLink,
           onSalePrice,
           onSaleBadge,
           productImportantInformation,
@@ -437,6 +440,15 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.Control> */}
                 </Form.Group>
 
+                <Form.Group controlId="digitalLink">
+                  <Form.Label>Digital Linker </Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Digital Link"
+                    value={digitalLink}
+                    onChange={(e) => setDigitalLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
                 <Form.Group controlId="productVideo">
                   <Form.Label>Product Video</Form.Label>
                   <Form.Control

@@ -14,6 +14,7 @@ const orderSchema = mongoose.Schema(
         image: { type: String, required: true },
         price: { type: Number, required: true },
         countInStock: { type: Number, required: true },
+        digitalLink: { type: String },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
@@ -23,6 +24,10 @@ const orderSchema = mongoose.Schema(
     ],
 
     orderNotes: {
+      notes: { type: String },
+    },
+
+    digitalLink: {
       type: String,
     },
 
@@ -50,6 +55,7 @@ const orderSchema = mongoose.Schema(
       postal_code: { type: String },
       country: { type: String },
     },
+
     paymentResult: {
       id: String,
       status: String,

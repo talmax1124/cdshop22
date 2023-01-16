@@ -115,7 +115,7 @@ const ArticleEditScreen = ({ match, history }) => {
           <Image src={image} width="100%" className="p-2" fluid />
           <div className="Product-Card-Body">
             <p className="font-bold text-[1.7em] font-sans uppercase mb-[.5em] text-black">
-              {name}
+              Title: {name}
             </p>
           </div>
         </div>

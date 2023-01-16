@@ -42,6 +42,9 @@ const productSchema = mongoose.Schema(
     additionalimagethree: {
       type: String,
     },
+    digitalLink: {
+      type: String,
+    },
     brand: {
       type: String,
       required: true,

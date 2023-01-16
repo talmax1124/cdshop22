@@ -89,6 +89,7 @@ const StripeSuccess = ({ match, history }) => {
         shippingAddress: Address,
         shippingCost: amount_shipping / 100,
         orderNotes: cart.ordeNotes,
+        digitalLink: cart.digitalLink,
       })
     );
   };

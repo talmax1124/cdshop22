@@ -6,8 +6,15 @@ import Product from "../models/productModel.js";
 // @route   POST /api/orders
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
-  const { orderItems, orderNotes, itemsPrice, totalPrice, shippingAddress, shippingCost } =
-    req.body;
+  const {
+    orderItems,
+    orderNotes,
+    itemsPrice,
+    totalPrice,
+    shippingAddress,
+    digitalLink,
+    shippingCost,
+  } = req.body;
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
@@ -21,6 +28,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       itemsPrice,
       totalPrice,
       shippingAddress,
+      digitalLink,
       shippingCost,
       orderNotes,
     });

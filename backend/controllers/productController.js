@@ -104,10 +104,12 @@ const createProduct = asyncHandler(async (req, res) => {
     name: "Sample name",
     price: 0,
     user: req.user._id,
-    image: "https://i.ibb.co/5cwCHky/FY3017-2.jpg",
+    image:
+      "https://images.selfedge.com/cache/catalog/20210716/Samurai_Blank_T_Shirt_2_Pack_Medium_Weight_White-4-1025x680.jpg",
     additionalimageone: "",
     additionalimagetwo: "",
     additionalimagethree: "",
+    digitalLink: "",
     productVideo: "",
     productTutorial: "",
     onSalePrice: 0,
@@ -140,6 +142,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     shortdescription,
     productWeightLbs,
     productWeightOz,
+    digitalLink,
     type,
     image,
     brand,
@@ -161,6 +164,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (product) {
     product.name = name;
     product.price = price;
+    product.digitalLink = digitalLink;
     product.description = description;
     product.shortdescription = shortdescription;
     product.productWeightLbs = productWeightLbs;

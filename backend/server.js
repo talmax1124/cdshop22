@@ -8,16 +8,19 @@ import session from "express-session";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
+import cors from "cors";
+
 import productRoutes from "./routes/productRoutes.js";
 import articleRoutes from "./routes/articleRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+import rateRoutes from "./routes/rateRoutes.js";
 
 // Upload Route for Profile Picture
 import uploadRoutesProfilePicture from "./routes/uploadRoutesProfilePicture.js";
 
-// Stripe API
+//  API
 import stripe from "./routes/stripe.js";
 
 // Google
@@ -31,11 +34,11 @@ connectDB();
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+  app.use(morgan("dev"), cors());
 }
 
 if (process.env.NODE_ENV === "production") {
-  app.use(secure);
+  app.use(secure, cors());
 }
 
 app.use(express.json());
@@ -53,10 +56,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/products", productRoutes);
-app.use("/api/articles", articleRoutes);
+app.use("/", cors());
+app.use("/api", cors());
+app.use("/api/", cors());
+
+app.use("/api/products", productRoutes, cors());
+app.use("/api/articles", articleRoutes, cors());
 app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/api/orders", orderRoutes, cors());
+app.use("/api/rates", rateRoutes, cors());
 app.use("/api/upload", uploadRoutes);
 app.use("/api/stripe", stripe);
 app.use("/api/uploadprofilepicture", uploadRoutesProfilePicture);
@@ -69,12 +77,19 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
   app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+    res.sendFile(
+      path.resolve(__dirname, "frontend", "build", "index.html"),
+      cors()
+    )
   );
 } else {
-  app.get("/", (req, res) => {
-    res.send("API is running....");
-  });
+  app.get(
+    "/",
+    (req, res) => {
+      res.send("API is running....");
+    },
+    cors()
+  );
 }
 
 app.use(notFound);
@@ -88,3 +103,6 @@ app.listen(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
 );
+
+///Testing
+

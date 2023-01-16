@@ -91,7 +91,6 @@ const ProductScreen = ({ history, match }) => {
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
-  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -170,8 +169,11 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <React.Fragment>
-      <Link className="btn btn-dark my-3" to="/">
-        Go Back
+      <Link to="/products">
+        <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
+          <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
+          Go Back
+        </Button>
       </Link>
       {loading ? (
         <Loader />
@@ -413,7 +415,9 @@ const ProductScreen = ({ history, match }) => {
 
               {product.productImportantInformation && (
                 <>
-                  <h6 className="mb-3 font-medium mt-2">Product Important Information:</h6>
+                  <h6 className="mb-3 font-medium mt-2">
+                    Product Important Information:
+                  </h6>
                   <ProductInformation Product={product} />
                 </>
               )}

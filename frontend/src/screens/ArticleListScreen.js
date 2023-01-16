@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Table, Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -7,11 +7,11 @@ import Loader from "../components/Loader";
 import PaginateArticle from "../components/PaginateArticle";
 import {
   listArticles,
-  // deleteArticle,
+  deleteArticle,
   createArticle,
 } from "../actions/articleActions";
 import { ARTICLE_CREATE_RESET } from "../constants/articleConstants";
-// import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const ArticleListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -20,7 +20,7 @@ const ArticleListScreen = ({ history, match }) => {
 
   const articleList = useSelector((state) => state.articleList);
   const { loading, error,
-    //  articles, 
+     articles, 
      page, pages } = articleList;
 
   const articleDelete = useSelector((state) => state.articleDelete);
@@ -63,11 +63,11 @@ const ArticleListScreen = ({ history, match }) => {
     pageNumber,
   ]);
 
-  // const deleteHandler = (id) => {
-  //   if (window.confirm("Are you sure")) {
-  //     dispatch(deleteArticle(id));
-  //   }
-  // };
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure")) {
+      dispatch(deleteArticle(id));
+    }
+  };
 
   const createArticleHandler = () => {
     dispatch(createArticle());
@@ -107,7 +107,7 @@ const ArticleListScreen = ({ history, match }) => {
               </tr>
             </thead>
             <tbody>
-              {/* {articles.map((article) => (
+              {articles.map((article) => (
                 <tr key={article._id}>
                   <LinkContainer to={`/article/${article._id}`}>
                     <td className="hover:underline hover:cursor-pointer">
@@ -132,7 +132,7 @@ const ArticleListScreen = ({ history, match }) => {
                     </Button>
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </Table>
           <PaginateArticle pages={pages} page={page} isAdmin={true} />

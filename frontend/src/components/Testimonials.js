@@ -1,10 +1,59 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 // import { Container } from "react-bootstrap";
+import Flicking from "@egjs/react-flicking";
+import "@egjs/react-flicking/dist/flicking.css";
 
 const Testimonials = () => {
   return (
     <>
+      <div className="">
+        <p className="text-[3em] font-extrabold font-sans mt-4 mb-3  uppercase">
+          What People <span className="text-green-400">Say</span>
+        </p>
+        <Flicking
+          align="prev"
+          circular={true}
+          circularFallback="linear"
+          onMoveEnd={(e) => {
+            console.log(e);
+          }}
+          //   plugins={plugins}
+        >
+          <div className="panel wwd-card">
+            {/* Icon */}
+
+            {/* Title */}
+            <h3 className="text-[1.5em] font-bold font-sans mt-4 uppercase">
+              Physical
+            </h3>
+
+            {/* Short Description About Service */}
+            <p className="text-[1em] font-sans mt-4 text-slate-300">
+              We can make anything plain to a customized physical reality such
+              as shirts, stickers, car magnets, and so much more.
+            </p>
+          </div>
+          <div className="panel wwd-card ">
+            {/* Icon */}
+
+            {/* Title */}
+            <h3 className="text-[1.5em] font-bold font-sans mt-4 uppercase">
+              Web/Tech
+            </h3>
+
+            {/* Short Description About Service */}
+            <p className="text-[1em] font-sans mt-4 text-slate-300">
+              We can help create a online presence that can allow for a better
+              view of your brand. We also assist with any technological
+              endeavors.
+            </p>
+          </div>
+        </Flicking>
+      </div>
+
+      {/*  */}
+      {/*  */}
       {/* <div id="ndrsl-63478bd3fa9cdd4fd6e82fa2" className="ndrsl-widget"></div> */}
       <div className="rounded-lg bg-slate-50 m-4">
         <div className="p-5">

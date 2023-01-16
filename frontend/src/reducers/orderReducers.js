@@ -176,6 +176,7 @@ export const orderDetailsReducer = (
     orderItems: [],
     shippingAddress: {},
     shippingCost: "",
+    orderNotes: {},
   },
   action
 ) => {

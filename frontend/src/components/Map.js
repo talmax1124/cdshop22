@@ -9,7 +9,7 @@ const Map = () => {
         </h1>
         <p className=" text-black text-[1.3em] font-medium tracking-tight leading-none font-serif mt-2">
           We want thank you for being part of our small business. Our goal is to
-          fill the map by the end of 2022.
+          fill the map by the end of 2023.
         </p>
         <p className=" text-black text-[1.3em] font-medium tracking-tight leading-none font-serif mt-2">
           For any order from a state not with a circle, will get a free random

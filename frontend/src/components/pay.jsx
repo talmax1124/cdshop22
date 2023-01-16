@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PayButton = ({ cartItems }) => {
+const PayButton = ({ cartItems,shippingPrice }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
 
   const handleCheckout = () => {
@@ -14,6 +14,7 @@ const PayButton = ({ cartItems }) => {
           cartItems,
           userId: userInfo._id,
           email: userInfo.email,
+          shippingPrice,
         })
         .then((response) => {
           if (response.data.url) {

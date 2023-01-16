@@ -162,7 +162,7 @@ router.get("/api/auth/logout", (req, res) => {
     localStorage.removeItem("cartItems");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
-    localStorage.removeItem("ordernotes");
+    localStorage.removeItem("orderNotes");
     req.logout();
     dispatch({ type: USER_LIST_RESET });
     res.redirect("/login");

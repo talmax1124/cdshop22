@@ -15,6 +15,16 @@ const UserListScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // Create a for loop statement so that for every user it adds one to the variable userCount
+
+  // function userCount() {
+  //   let userCount = 0;
+  //   for (let i = 0; i < users.length; i++) {
+  //     userCount++;
+  //   }
+  //   return userCount;
+  // }
+
   const userDelete = useSelector((state) => state.userDelete);
   const { success: successDelete } = userDelete;
 

@@ -24,7 +24,7 @@ export const listArticles =
       dispatch({ type: ARTICLE_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `/api/articles?keyword=${keyword}&pageNumber=${pageNumber}`
       );
 
       dispatch({
