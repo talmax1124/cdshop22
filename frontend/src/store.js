@@ -96,6 +96,10 @@ const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
   ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {};
 
+  const shippingRatesFromStorage = localStorage.getItem("shippingRates")
+  ? JSON.parse(localStorage.getItem("shippingRates"))
+  : {};
+
 const orderNotesFromStorage = localStorage.getItem("orderNotes")
   ? JSON.parse(localStorage.getItem("orderNotes"))
   : {};
@@ -104,6 +108,7 @@ const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,
+    shippingRates: shippingRatesFromStorage,
     orderNotes: orderNotesFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },

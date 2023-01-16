@@ -19,6 +19,8 @@ import "react-toastify/dist/ReactToastify.css";
 import JoditEditor from "jodit-react";
 import { saveOrderNotes } from "../actions/cartActions";
 
+// import ShippingRates from "../components/ShippingRates";
+
 // import PayButton from "../components/pay";
 
 const AdditionalDetails = ({ match, location, history }) => {
@@ -40,6 +42,10 @@ const AdditionalDetails = ({ match, location, history }) => {
 
   const [notes, setOrderNotes] = useState(orderNotes.notes);
 
+  // laoindg sate
+  const [loading, setLoading] = useState(false);
+  const [showButton,setShowButton] = useState(false);
+
   const editor = useRef(null);
   const config = {
     readonly: false,
@@ -54,24 +60,100 @@ const AdditionalDetails = ({ match, location, history }) => {
     // dispatch(saveordernotes(ordernotes));
   }, [dispatch, productId, qty]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+setLoading(true)
+    // GET SHIPPING RATES HERE
+
+    const payload = {
+      // "address_from": "fdabf0abb93c4460b60aa596116872a7",
+      // OR
+      address_from: {
+        name: "Carlos Diaz",
+        company: "Creative Duo LLC",
+        street1: "4706 Sutton Lane",
+        street_no: "",
+        street2: "",
+        street3: "",
+        city: "Kissimmee",
+        state: "FL",
+        zip: "34758",
+        country: "US",
+      },
+  
+      address_to: {
+        name: "Bob Bloat",
+        company: "",
+        street1: line1,
+        street_no: "",
+        street2: line2,
+        street3: "",
+        city: city,
+        state: state,
+        zip: postal_code,
+        country: "US",
+      },
+  
+      line_items: [
+        {
+          quantity: 1,
+          total_price: "12.00",
+          currency: "USD",
+          weight: "1.0",
+          weight_unit: "lb",
+          title: "Creative Duo LLC",
+          manufacture_country: "US",
+          sku: "1234567890",
+        },
+      ],
+  
+      parcel: {
+        length: "10",
+        width: "15",
+        height: "10",
+        distance_unit: "in",
+        weight: "1",
+        mass_unit: "lb",
+      },
+    };
+  
+    const response = await fetch(`http://creativeduo.net/api/rates/liverates`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  
+    const json = await response.json();
+  
+    console.log("data", json)  
+    const shippinRates= [...json.results]
+    
+    setLoading(false)
+    setShowButton(true)
+
     dispatch(
-      saveShippingAddress({ line1, line2, postal_code, city, state, country })
+      saveShippingAddress({ line1, line2, postal_code, city, state, country,shippinRates })
     );
     dispatch(saveOrderNotes(orderNotes));
     toast.success("Shipping Address and or Order Notes Saved!");
+    waitthreee();
   };
 
-  const submitToNext = (e) => {
-    history.push("/checkout");
-  };
+  function waitthreee() {
+    setTimeout(() => {
+      history.push("/checkout");
+    }, 3000);
+  }
 
   return (
     <>
       <ToastContainer />
       <Row>
         <Col md={7}>
+          {/* <ShippingRates /> */}
           <span className="flex items-center">
             <Link to="/cart">
               <p className="mr-1 text-[1.6em] uppercase font-medium text-gray-500">
@@ -197,13 +279,15 @@ const AdditionalDetails = ({ match, location, history }) => {
                           />
                         </Form.Group>
                       </Form.Group>
-                      <Button
-                        type="submit"
-                        variant="primary"
-                        className="bg-gray-800"
-                      >
-                        Save Address & Notes
-                      </Button>
+                      {postal_code && (
+                        <Button
+                          type="submit"
+                          variant="primary"
+                          className="bg-slate-600 hover:bg-slate-700 w-full"
+                        >
+                          {loading ? "Saving...":"Save Address & Notes & Continue"}
+                        </Button>
+                      )}
                     </Form>
                   </ListGroup.Item>
                 </ListGroup>
@@ -238,33 +322,22 @@ const AdditionalDetails = ({ match, location, history }) => {
                     QTY: {item.qty}
                   </Col>
                 </Row>
-                <Row className="">
-                  <hr
-                    style={{ border: "1px solid black", width: "100%" }}
-                    className="mt-3"
-                  />
-                  <p className="mt-2 text-[1.3em] font-medium">
-                    Cart Value: $
-                    {cartItems
-                      .reduce((acc, item) => acc + item.qty * item.price, 0)
-                      .toFixed(2)}
-                  </p>
-                </Row>
               </ListGroup.Item>
             </>
           ))}
+          <Row className=" mb-3">
+            <hr
+              style={{ border: "1px solid black", width: "100%" }}
+              className="mt-3"
+            />
+            <p className="mt-2 text-[1.3em] font-medium">
+              Cart Value: $
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+            </p>
+          </Row>
           {/* {state.length > 0 && ( */}
-          <Link>
-            <Button
-              className="btn btn-block bg-gray-700 hover:bg-black text-white"
-              onClick={submitToNext}
-            >
-              Go To Payment Screen
-            </Button>
-
-            {/* <PayButton cartItems={cart.cartItems} /> */}
-          </Link>
-          {/* )} */}
         </Col>
       </Row>
     </>

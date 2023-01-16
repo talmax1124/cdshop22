@@ -69,12 +69,7 @@ const CartScreen = ({ match, location, history }) => {
         </span>
         <hr className="mb-2" />
         {cartItems.length === 0 ? (
-          <Message className="p-1">
-            Looks like your cart is empty.{" "}
-            <Link to="/" className="p-3 bg-slate-700 text-white ml-1">
-              Go Back
-            </Link>
-          </Message>
+          <Message className="p-1">Looks like your cart is empty. </Message>
         ) : (
           <>
             <ToastContainer pauseOnHover={false} />

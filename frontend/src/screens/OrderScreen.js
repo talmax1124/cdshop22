@@ -345,6 +345,34 @@ const OrderScreen = ({ match, history }) => {
                               {""} = ${item.qty * item.price} (total)
                             </Col>
                           </div>
+                          {/* <Col md={2}>
+                            <Col>
+                              {" "}
+                              Digital Link: <p> {item.digitalLink}</p>
+                            </Col>
+                          </Col> */}
+                          <Row>
+                            {item.digitalLink && (
+                              <Col md={12}>
+                                <Col>
+                                  <div className="mt-2">
+                                    <p className="font-medium text-[1.1em]">
+                                      Digital Link:{" "}
+                                    </p>
+                                    <a
+                                      href={item.digitalLink}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      <p className="font-light text-[1.1em]">
+                                        {item.digitalLink}
+                                      </p>
+                                    </a>
+                                  </div>
+                                </Col>
+                              </Col>
+                            )}
+                          </Row>
                         </Row>
                       </ListGroup.Item>
                     ))}

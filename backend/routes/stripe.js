@@ -51,112 +51,37 @@ router.post("/create-checkout-session", async (req, res) => {
       currency: "usd",
       product_data: {
         name: "Tax",
+        images: [
+          "https://www.aradvocates.org/wp-content/uploads/6355404323_cf97f9c58e_b.jpg",
+        ],
       },
       unit_amount: tax_amount,
     },
     quantity: 1,
   });
 
+  // Get the shipping price from the rates component and push it as a lineItem
+  const shipping_price = req.body.shippingPrice;
+  line_items.push({
+    price_data: {
+      currency: "usd",
+      product_data: {
+        name: "Shipping",
+        images: [
+          "https://media.istockphoto.com/id/1302438914/vector/fast-delivery-truck-icon-fast-shipping-design-for-website-and-mobile-apps-vector-illustration.jpg?s=612x612&w=0&k=20&c=1aEygfLbr7XCq2Lr61qrrFS2SjY6cVccOySPu_N7gww=",
+        ],
+      },
+      unit_amount: shipping_price * 100,
+    },
+    quantity: 1,
+  });
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
-    shipping_address_collection: {
-      allowed_countries: ["US"],
-    },
-    shipping_options: [
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 475,
-            currency: "usd",
-          },
-          display_name: "Small Packet (1-2 Small Items)",
-          // Delivers in exactly 1 business day
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 3,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 7,
-            },
-          },
-        },
-      },
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 750,
-            currency: "usd",
-          },
-          display_name: "Medium Packet (2-4 Small Items / 1-2 Medium Items)",
-          // Delivers in exactly 1 business day
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 3,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 7,
-            },
-          },
-        },
-      },
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 1100,
-            currency: "usd",
-          },
-          display_name: "USPS Regional Box Rate A",
-          // Delivers in exactly 1 business day
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 5,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 10,
-            },
-          },
-        },
-      },
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 450,
-            currency: "usd",
-          },
-          display_name: "Kissimmee FL Pickup",
-          // Delivers between 5-7 business days
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 5,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 7,
-            },
-          },
-        },
-      },
-    ],
-
     line_items,
     mode: "payment",
     customer: customer.id,
-    // receipt_email: customer.email,
     allow_promotion_codes: true,
-    consent_collection: {
-      promotions: "auto",
-    },
     success_url: `${process.env.CLIENT_URL}/success/{CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });

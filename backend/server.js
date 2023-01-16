@@ -15,6 +15,7 @@ import articleRoutes from "./routes/articleRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+import rateRoutes from "./routes/rateRoutes.js";
 
 // Upload Route for Profile Picture
 import uploadRoutesProfilePicture from "./routes/uploadRoutesProfilePicture.js";
@@ -63,7 +64,7 @@ app.use("/api/products", productRoutes, cors());
 app.use("/api/articles", articleRoutes, cors());
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes, cors());
-app.use("/api/rates", orderRoutes, cors());
+app.use("/api/rates", rateRoutes, cors());
 app.use("/api/upload", uploadRoutes);
 app.use("/api/stripe", stripe);
 app.use("/api/uploadprofilepicture", uploadRoutesProfilePicture);
@@ -102,3 +103,6 @@ app.listen(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
 );
+
+///Testing
+

@@ -23,7 +23,7 @@ const ProductCarousel = () => {
   ) : (
     <div className="flex justify-between top-products">
       {products.map((product) => (
-        <div key={product._id} className="bg-slate-100 mr-2 ml-2 p-3 top-card">
+        <div key={product._id} className="bg-slate-100 mr-2 ml-2 p-3 top-card rounded-md">
           <Link to={`/product/${product._id}`}>
             <Image src={product.image} alt={product.name} fluid />
             <p>

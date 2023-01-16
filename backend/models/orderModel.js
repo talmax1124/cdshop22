@@ -14,6 +14,7 @@ const orderSchema = mongoose.Schema(
         image: { type: String, required: true },
         price: { type: Number, required: true },
         countInStock: { type: Number, required: true },
+        digitalLink: { type: String },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
@@ -24,6 +25,10 @@ const orderSchema = mongoose.Schema(
 
     orderNotes: {
       notes: { type: String },
+    },
+
+    digitalLink: {
+      type: String,
     },
 
     totalPrice: {

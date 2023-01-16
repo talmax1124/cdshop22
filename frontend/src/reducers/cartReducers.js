@@ -13,6 +13,7 @@ export const cartReducer = (
     orderNotes: "",
     cdnURL: "",
     shippingCost: "",
+    shippingRates: [],
   },
   action
 ) => {
@@ -50,6 +51,7 @@ export const cartReducer = (
       return {
         ...state,
         shippingAddress: action.payload,
+        shippingRates:[...action.payload.shippingRates],
       };
     case CART_CLEAR_ITEMS:
       return {

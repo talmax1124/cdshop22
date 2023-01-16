@@ -2,22 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Button,
-  Card,
-  Form,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart } from "../actions/cartActions";
-import { saveShippingAddress } from "../actions/cartActions";
-import { ToastContainer, toast } from "react-toastify";
+// import { saveShippingAddress } from "../actions/cartActions";
+// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import PayButton from "../components/pay";
+import ShippingRate from "../components/ShippingRate";
 
 const CheckOut = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -27,37 +20,31 @@ const CheckOut = ({ match, location, history }) => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  const { cartItems, shippingAddress } = cart;
+  const { cartItems } = cart;
 
-  const [line1, setLine1] = useState(shippingAddress.line1);
-  const [line2, setLine2] = useState(shippingAddress.line2);
-  const [city, setCity] = useState(shippingAddress.city);
-  const [state, setState] = useState(shippingAddress.state);
-  const [postal_code, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
+  const [shippingPrice, setShippingPrice] = useState(0);
 
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-    // dispatch(saveordernotes(ordernotes));
-  }, [dispatch, productId, qty]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      saveShippingAddress({ line1, line2, postal_code, city, state, country })
-    );
-    toast.success("Shipping Address and or Order Notes Saved!");
-  };
+    console.log("Shipping Rates..", cart.shippingRates);
+    // dispatch(saveordernotes(ordernotes));
+  }, [dispatch, productId, qty, cart.shippingRates]);
 
   // const submitToNext = (e) => {
   //   history.push("/checkout");
   // };
 
+  const rateSelectHandelr = (rate) => {
+    console.log("rate", rate);
+    setShippingPrice(rate.amount);
+    // dispatch(saveShippingAddress({ rate }));
+  };
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Row>
         <Col md={7}>
           <span className="flex items-center">
@@ -101,87 +88,16 @@ const CheckOut = ({ match, location, history }) => {
 
                   <ListGroup.Item className="border-transparent">
                     {/* Remove the form and add the options below */}
-                    <Form onSubmit={submitHandler}>
-                      <Form.Group controlId="line1">
-                        <Form.Label className="font-medium mb-2">
-                          Address Line 1
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Address Line 1"
-                          value={line1}
-                          required
-                          onChange={(e) => setLine1(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Form.Group controlId="line2">
-                        <Form.Label className="font-medium mb-2">
-                          Address Line 2
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Address Line 2"
-                          value={line2}
-                          onChange={(e) => setLine2(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Form.Group controlId="city">
-                        <Form.Label className="font-medium mb-2">
-                          City
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter City"
-                          value={city}
-                          required
-                          onChange={(e) => setCity(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Form.Group controlId="state">
-                        <Form.Label className="font-medium mb-2">
-                          State
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter State"
-                          value={state}
-                          required
-                          onChange={(e) => setState(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Form.Group controlId="postal_code">
-                        <Form.Label className="font-medium mb-2">
-                          Zip Code
-                        </Form.Label>
-                        <Form.Control
-                          type="number"
-                          placeholder="Enter Zip Code"
-                          value={postal_code}
-                          required
-                          onChange={(e) => setPostalCode(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-
-                      <Form.Group controlId="country">
-                        <Form.Label className="font-medium mb-2">
-                          Country
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Country"
-                          value="USA"
-                          disabled
-                          onChange={(e) => setCountry(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Button
-                        type="submit"
-                        variant="primary"
-                        className="bg-gray-800"
-                      >
-                        Save Address & Notes
-                      </Button>
-                    </Form>
+                    <ul className="shippingRates">
+                      {cart.shippingRates.map((rate) => {
+                        return (
+                          <ShippingRate
+                            rate={rate}
+                            onSelect={rateSelectHandelr}
+                          />
+                        );
+                      })}
+                    </ul>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -215,24 +131,32 @@ const CheckOut = ({ match, location, history }) => {
                     QTY: {item.qty}
                   </Col>
                 </Row>
-                <Row className="">
-                  <hr
-                    style={{ border: "1px solid black", width: "100%" }}
-                    className="mt-3"
-                  />
-                  <p className="mt-2 text-[1.3em] font-medium">
-                    Cart Value: $
-                    {cartItems
-                      .reduce((acc, item) => acc + item.qty * item.price, 0)
-                      .toFixed(2)}
-                  </p>
-                </Row>
               </ListGroup.Item>
             </>
           ))}
+          <Row className=" mb-3">
+            <hr
+              style={{ border: "1px solid black", width: "100%" }}
+              className="mt-3"
+            />
+            <p className="mt-2 text-[1.3em] font-medium">
+              Cart Value: $
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+            </p>
+          </Row>
+          <Row className="mb-2 mt-[-1em]">
+            <p className="mt-2 text-[1.3em] font-medium">
+              Shipping Price: ${shippingPrice}
+            </p>
+          </Row>
 
           <Link>
-            <PayButton cartItems={cart.cartItems} />
+            <PayButton
+              cartItems={cart.cartItems}
+              shippingPrice={shippingPrice}
+            />
           </Link>
         </Col>
       </Row>
