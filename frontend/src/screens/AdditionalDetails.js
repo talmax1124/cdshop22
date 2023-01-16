@@ -117,7 +117,7 @@ setLoading(true)
       },
     };
   
-    const response = await fetch(`http://creativeduo.net/api/rates/liverates`, {
+    const response = await fetch(`https://creativeduo.net/api/rates/liverates`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
