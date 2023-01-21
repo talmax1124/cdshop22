@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart } from "../actions/cartActions";
-// import { saveShippingAddress } from "../actions/cartActions";
+import { saveShippingCost } from "../actions/cartActions";
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -41,6 +41,7 @@ const CheckOut = ({ match, location, history }) => {
     console.log("rate", rate);
     setShippingPrice(rate.amount);
     // dispatch(saveShippingAddress({ rate }));
+    dispatch(saveShippingCost(rate.amount));
   };
   return (
     <>

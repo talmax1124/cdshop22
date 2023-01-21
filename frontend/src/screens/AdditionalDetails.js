@@ -147,6 +147,7 @@ const AdditionalDetails = ({ match, location, history }) => {
           state,
           country,
           shippinRates,
+          cartItems,
         })
       );
       dispatch(saveOrderNotes(orderNotes));
@@ -182,6 +183,7 @@ const AdditionalDetails = ({ match, location, history }) => {
           state,
           country,
           shippinRates,
+          cartItems,
         })
       );
       dispatch(saveOrderNotes(orderNotes));

@@ -4,6 +4,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_ORDERNOTES,
   CART_SAVE_SHIPPING_ADDRESS,
+  CART_SAVE_SHIPPING_COST,
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -25,8 +26,38 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
+export const saveShippingCost = (cost) => async (dispatch) => {
+  dispatch({
+    type: CART_SAVE_SHIPPING_COST,
+    payload: {
+      cost: cost,
+    },
+  });
+
+  localStorage.setItem("cost", cost);
+};
+
 export const saveShippingAddress = (data) => async (dispatch) => {
   //saveShippingAddress({ line1, line2, postal_code, city, state, country })
+
+
+  // compose line_items array
+
+  let cartLineItems = [];
+  data.cartItems.forEach(item=>{
+
+    let lineItem =  {
+      quantity: item.qty,
+      total_price: item.price.toString(),
+      currency: "USD",
+      weight: "1.0",
+      weight_unit: "lb",
+      title: item.name,
+        manufacture_country: "US",
+        sku: item.product.toString(),
+      }
+      cartLineItems.push(lineItem);
+  })
 
   const payload = {
     address_from: {
@@ -55,18 +86,22 @@ export const saveShippingAddress = (data) => async (dispatch) => {
       country: "US",
     },
 
-    line_items: [
-      {
-        quantity: 1,
-        total_price: "12.00",
-        currency: "USD",
-        weight: "1.0",
-        weight_unit: "lb",
-        title: "Creative Duo LLC",
-        manufacture_country: "US",
-        sku: "1234567890",
-      },
-    ],
+    // composing lien_items array
+
+  
+    line_items: cartLineItems,
+    // line_items: [
+    //   {
+    //     quantity: 1,
+    //     total_price: "12.00",
+    //     currency: "USD",
+    //     weight: "1.0",
+    //     weight_unit: "lb",
+    //     title: "Creative Duo LLC",
+    //       manufacture_country: "US",
+    //       sku: "1234567890",
+    //     },
+    // ],
 
     parcel: {
       length: "10",

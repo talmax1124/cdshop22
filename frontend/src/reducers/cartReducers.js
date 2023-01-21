@@ -2,6 +2,7 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
+  CART_SAVE_SHIPPING_COST,
   CART_SAVE_ORDERNOTES,
   CART_CLEAR_ITEMS,
 } from "../constants/cartConstants";
@@ -51,7 +52,13 @@ export const cartReducer = (
       return {
         ...state,
         shippingAddress: action.payload,
-        shippingRates:[...action.payload.shippingRates],
+        shippingRates: [...action.payload.shippingRates],
+      };
+
+    case CART_SAVE_SHIPPING_COST:
+      return {
+        ...state,
+        shippingCost: action.payload.shippingCost,
       };
     case CART_CLEAR_ITEMS:
       return {
