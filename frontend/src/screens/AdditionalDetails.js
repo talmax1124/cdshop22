@@ -44,7 +44,7 @@ const AdditionalDetails = ({ match, location, history }) => {
 
   // laoindg sate
   const [loading, setLoading] = useState(false);
-  const [showButton,setShowButton] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   const editor = useRef(null);
   const config = {
@@ -62,7 +62,7 @@ const AdditionalDetails = ({ match, location, history }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-setLoading(true)
+    setLoading(true);
     // GET SHIPPING RATES HERE
 
     const payload = {
@@ -80,7 +80,7 @@ setLoading(true)
         zip: "34758",
         country: "US",
       },
-  
+
       address_to: {
         name: "Bob Bloat",
         company: "",
@@ -93,7 +93,7 @@ setLoading(true)
         zip: postal_code,
         country: "US",
       },
-  
+
       line_items: [
         {
           quantity: 1,
@@ -106,7 +106,7 @@ setLoading(true)
           sku: "1234567890",
         },
       ],
-  
+
       parcel: {
         length: "10",
         width: "15",
@@ -116,37 +116,87 @@ setLoading(true)
         mass_unit: "lb",
       },
     };
-  
-    const response = await fetch(`https://creativeduo.net/api/rates/liverates`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-  
-    const json = await response.json();
-  
-    console.log("data", json)  
-    const shippinRates= [...json.results]
-    
-    setLoading(false)
-    setShowButton(true)
 
-    dispatch(
-      saveShippingAddress({ line1, line2, postal_code, city, state, country,shippinRates })
-    );
-    dispatch(saveOrderNotes(orderNotes));
-    toast.success("Shipping Address and or Order Notes Saved!");
-    waitthreee();
+    if (process.env.NODE_ENV === "production") {
+      const response = await fetch(
+        `https://creativeduo.net/api/rates/liverates`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const json = await response.json();
+
+      console.log("data", json);
+      const shippinRates = [...json.results];
+
+      setLoading(false);
+      setShowButton(true);
+
+      dispatch(
+        saveShippingAddress({
+          line1,
+          line2,
+          postal_code,
+          city,
+          state,
+          country,
+          shippinRates,
+        })
+      );
+      dispatch(saveOrderNotes(orderNotes));
+      toast.success("Shipping Address and or Order Notes Saved!");
+      history.push("/checkout");
+    } else if (process.env.NODE_ENV === "development") {
+      const response = await fetch(
+        `http://localhost:7500/api/rates/liverates`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const json = await response.json();
+
+      console.log("data", json);
+      const shippinRates = [...json.results];
+
+      setLoading(false);
+      setShowButton(true);
+
+      dispatch(
+        saveShippingAddress({
+          line1,
+          line2,
+          postal_code,
+          city,
+          state,
+          country,
+          shippinRates,
+        })
+      );
+      dispatch(saveOrderNotes(orderNotes));
+      toast.success("Shipping Address and or Order Notes Saved!");
+      history.push("/checkout");
+    } else {
+      console.log("error");
+    }
   };
 
-  function waitthreee() {
-    setTimeout(() => {
-      history.push("/checkout");
-    }, 3000);
-  }
+  // function waitthreee() {
+  //   setTimeout(() => {
+  //     history.push("/checkout");
+  //   }, 3000);
+  // }
 
   return (
     <>
@@ -285,7 +335,9 @@ setLoading(true)
                           variant="primary"
                           className="bg-slate-600 hover:bg-slate-700 w-full"
                         >
-                          {loading ? "Saving...":"Save Address & Notes & Continue"}
+                          {loading
+                            ? "Saving..."
+                            : "Save Address & Notes & Continue"}
                         </Button>
                       )}
                     </Form>

@@ -29,8 +29,6 @@ export const saveShippingAddress = (data) => async (dispatch) => {
   //saveShippingAddress({ line1, line2, postal_code, city, state, country })
 
   const payload = {
-    // "address_from": "fdabf0abb93c4460b60aa596116872a7",
-    // OR
     address_from: {
       name: "Carlos Diaz",
       company: "Creative Duo LLC",
@@ -79,28 +77,56 @@ export const saveShippingAddress = (data) => async (dispatch) => {
       mass_unit: "lb",
     },
   };
+  // Add the process env to the fetch url
+  if (process.env.NODE_ENV === "development") {
+    const response = await fetch(`http://localhost:7500/api/rates/liverates `, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
-  const response = await fetch(`https://creativeduo.net/api/rates/liverates`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+    console.log(process.env.CLIENT_URL);
 
-  const json = await response.json();
+    const json = await response.json();
 
-  console.log("data", json);
+    console.log("data", json);
 
-  data["shippingRates"] = [...json.results];
+    data["shippingRates"] = [...json.results];
+    localStorage.setItem("shippingRates", JSON.stringify(data.shippingRates));
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    const response = await fetch(
+      `https://creativeduo.net/api/rates/liverates `,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    console.log(process.env.CLIENT_URL);
+
+    const json = await response.json();
+
+    console.log("data", json);
+
+    data["shippingRates"] = [...json.results];
+    localStorage.setItem("shippingRates", JSON.stringify(data.shippingRates));
+  }
+
   dispatch({
     type: CART_SAVE_SHIPPING_ADDRESS,
     payload: data,
   });
 
   localStorage.setItem("shippingAddress", JSON.stringify(data));
-  localStorage.setItem("shippingRates", JSON.stringify(data.shippingRates))
 };
 
 export const removeFromCart = (id) => (dispatch, getState) => {
