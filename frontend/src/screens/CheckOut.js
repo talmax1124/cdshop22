@@ -89,14 +89,15 @@ const CheckOut = ({ match, location, history }) => {
                   <ListGroup.Item className="border-transparent">
                     {/* Remove the form and add the options below */}
                     <ul className="shippingRates">
-                      {cart.shippingRates.map((rate) => {
-                        return (
-                          <ShippingRate
-                            rate={rate}
-                            onSelect={rateSelectHandelr}
-                          />
-                        );
-                      })}
+                      {cart.shippingRates &&
+                        cart.shippingRates.map((rate) => {
+                          return (
+                            <ShippingRate
+                              rate={rate}
+                              onSelect={rateSelectHandelr}
+                            />
+                          );
+                        })}
                     </ul>
                   </ListGroup.Item>
                 </ListGroup>
