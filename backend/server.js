@@ -58,16 +58,6 @@ app.use(
 
 // Allow headers for CORS
 
-const corsOptions = {
-  origin: true,
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  credentials: true,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: ["Content-Type" /*, "Authorization"*/],
-};
-
-app.use(cors(corsOptions));
-
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -105,6 +95,16 @@ if (process.env.NODE_ENV === "production") {
     cors()
   );
 }
+
+const corsOptions = {
+  origin: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type" /*, "Authorization"*/],
+};
+
+app.use(cors(corsOptions));
 
 app.use(notFound);
 app.use(errorHandler);
