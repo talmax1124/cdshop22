@@ -94,6 +94,25 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+// const corsOptions = {
+//   origin: process.env.CLIENT_URL,
+//   optionsSuccessStatus: 200,
+
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+// };
+
+// app.use(cors(corsOptions));
 
 app.use(notFound);
 app.use(errorHandler);
