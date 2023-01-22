@@ -99,18 +99,6 @@ export const saveShippingAddress = (data) => async (dispatch) => {
     // composing lien_items array
 
     line_items: cartLineItems,
-    // line_items: [
-    //   {
-    //     quantity: 1,
-    //     total_price: "12.00",
-    //     currency: "USD",
-    //     weight: "1.0",
-    //     weight_unit: "lb",
-    //     title: "Creative Duo LLC",
-    //       manufacture_country: "US",
-    //       sku: "1234567890",
-    //     },
-    // ],
 
     parcel: {
       length: "10",

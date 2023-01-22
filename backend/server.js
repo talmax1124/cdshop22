@@ -52,13 +52,27 @@ app.use(
   })
 );
 
+// use the cors package to enable CORS with various options
+
+let corsClientEnv = process.env.CLIENT_URL;
+
+// Allow headers for CORS
+
+const corsOptions = {
+  origin: corsClientEnv,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type" /*, "Authorization"*/],
+};
+
+app.use(cors(corsOptions));
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", cors());
-app.use("/api", cors());
-app.use("/api/", cors());
+app.get("/", (req, res) => res.send("API is running..."), cors());
 
 app.use("/api/products", productRoutes, cors());
 app.use("/api/articles", articleRoutes, cors());
@@ -105,4 +119,3 @@ app.listen(
 );
 
 ///Testing
-
