@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import colors from "colors";
 import morgan from "morgan";
 import secure from "ssl-express-www";
-import session from "express-session";
+import session from "cookie-session";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
