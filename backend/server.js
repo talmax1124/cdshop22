@@ -62,8 +62,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res) => res.send("API is running..."), cors());
-
 app.use("/api/products", productRoutes, cors());
 app.use("/api/articles", articleRoutes, cors());
 app.use("/api/users", userRoutes);
@@ -97,9 +95,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const corsOptions = {
-  origin: true,
+  origin: process.env.CLIENT_URL,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: ["Content-Type" /*, "Authorization"*/],
 };
