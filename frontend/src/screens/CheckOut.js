@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart } from "../actions/cartActions";
-import { saveShippingCost } from "../actions/cartActions";
+import { saveShippingCost, saveShippingTitle } from "../actions/cartActions";
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,6 +23,7 @@ const CheckOut = ({ match, location, history }) => {
   const { cartItems } = cart;
 
   const [shippingPrice, setShippingPrice] = useState(0);
+  const [shippingTitle, setShippingTitle] = useState("");
 
   useEffect(() => {
     if (productId) {
@@ -40,8 +41,10 @@ const CheckOut = ({ match, location, history }) => {
   const rateSelectHandelr = (rate) => {
     console.log("rate", rate);
     setShippingPrice(rate.amount);
+    setShippingTitle(rate.title);
     // dispatch(saveShippingAddress({ rate }));
     dispatch(saveShippingCost(rate.amount));
+    dispatch(saveShippingTitle(rate.title));
   };
   return (
     <>
@@ -106,7 +109,7 @@ const CheckOut = ({ match, location, history }) => {
             </>
           )}
         </Col>
-        <Col md={5} className="rounded-md mt-2">
+        <Col md={5} className="rounded-md mt-2 p-2">
           <h2 className="font-bold text-2xl">
             Cart (Qty: {cartItems.reduce((acc, item) => acc + item.qty, 0)}
             ):
@@ -136,28 +139,29 @@ const CheckOut = ({ match, location, history }) => {
               </ListGroup.Item>
             </>
           ))}
-          <Row className=" mb-3">
-            <hr
-              style={{ border: "1px solid black", width: "100%" }}
-              className="mt-3"
-            />
-            <p className="mt-2 text-[1.3em] font-medium">
-              Cart Value: $
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
-            </p>
-          </Row>
-          <Row className="mb-2 mt-[-1em]">
-            <p className="mt-2 text-[1.3em] font-medium">
-              Shipping Price: ${shippingPrice}
-            </p>
-          </Row>
+
+          <hr
+            style={{ border: "1px solid black", width: "100%" }}
+            className="mt-3"
+          />
+          <p className="mt-2 text-[1.3em] font-medium">
+            Cart Value: $
+            {cartItems
+              .reduce((acc, item) => acc + item.qty * item.price, 0)
+              .toFixed(2)}
+          </p>
+
+          <p className="mt-2 text-[1.3em] font-medium mb-3">
+            Shipping Price: ${shippingPrice}
+            <br />
+            Shipping Title: {shippingTitle}
+          </p>
 
           <Link>
             <PayButton
               cartItems={cart.cartItems}
               shippingPrice={shippingPrice}
+              shippingTitle={shippingTitle}
             />
           </Link>
         </Col>

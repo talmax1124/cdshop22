@@ -78,7 +78,7 @@ const StripeSuccess = ({ match, history }) => {
   //   dispatch(payOrder(orderId, paymentResult));
   // };
 
-  const placeOrderHandler = (totalAmount, Address, amount_shipping) => {
+  const placeOrderHandler = (totalAmount, Address) => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -88,6 +88,7 @@ const StripeSuccess = ({ match, history }) => {
         totalPrice: totalAmount / 100,
         shippingAddress: Address,
         shippingCost: cart.shippingCost,
+        shippingTitle: cart.shippingTitle,
         orderNotes: cart.ordeNotes,
         digitalLink: cart.digitalLink,
       })

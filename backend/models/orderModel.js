@@ -65,6 +65,10 @@ const orderSchema = mongoose.Schema(
     shippingCost: {
       type: Number,
     },
+    shippingTitle: {
+      type: String,
+    },
+
     // shipmentNumber: {
     //   type: String,
     // },

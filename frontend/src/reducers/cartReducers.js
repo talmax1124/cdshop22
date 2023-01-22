@@ -5,6 +5,7 @@ import {
   CART_SAVE_SHIPPING_COST,
   CART_SAVE_ORDERNOTES,
   CART_CLEAR_ITEMS,
+  CART_SAVE_SHIPPING_TITLE,
 } from "../constants/cartConstants";
 
 export const cartReducer = (
@@ -14,6 +15,7 @@ export const cartReducer = (
     orderNotes: "",
     cdnURL: "",
     shippingCost: "",
+    shippingTitle: "",
     shippingRates: [],
   },
   action
@@ -59,6 +61,11 @@ export const cartReducer = (
       return {
         ...state,
         shippingCost: action.payload.shippingCost,
+      };
+    case CART_SAVE_SHIPPING_TITLE:
+      return {
+        ...state,
+        shippingTitle: action.payload.shippingTitle,
       };
     case CART_CLEAR_ITEMS:
       return {

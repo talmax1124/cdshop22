@@ -100,6 +100,10 @@ const shippingCostFromStorage = localStorage.getItem("cost")
   ? localStorage.getItem("cost")
   : 0;
 
+const shippingTitleFromStorage = localStorage.getItem("title")
+  ? localStorage.getItem("title")
+  : "";
+
 const shippingRatesFromStorage = localStorage.getItem("shippingRates")
   ? JSON.parse(localStorage.getItem("shippingRates"))
   : {};
@@ -114,6 +118,7 @@ const initialState = {
     shippingAddress: shippingAddressFromStorage,
     shippingRates: shippingRatesFromStorage,
     shippingCost: shippingCostFromStorage,
+    shippingTitle: shippingTitleFromStorage,
     orderNotes: orderNotesFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },

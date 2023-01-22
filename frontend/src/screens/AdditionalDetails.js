@@ -44,6 +44,7 @@ const AdditionalDetails = ({ match, location, history }) => {
 
   // laoindg sate
   const [loading, setLoading] = useState(false);
+  //eslint-disable-next-line
   const [showButton, setShowButton] = useState(false);
 
   const editor = useRef(null);
@@ -63,11 +64,31 @@ const AdditionalDetails = ({ match, location, history }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     // GET SHIPPING RATES HERE
+    let totalWeight = 0;
+    let largestItem = 0;
+
+    let cartLineItems = [];
+    cartItems.forEach((item) => {
+      let lineItem = {
+        quantity: item.qty,
+        total_price: item.price.toString(),
+        currency: "USD",
+        weight: "1.0",
+        weight_unit: "lb",
+        title: item.name,
+        manufacture_country: "US",
+        sku: item.product.toString(),
+      };
+      totalWeight += item.weight;
+      if (item.length > largestItem) {
+        largestItem = item.length;
+      }
+      cartLineItems.push(lineItem);
+    });
 
     const payload = {
-      // "address_from": "fdabf0abb93c4460b60aa596116872a7",
-      // OR
       address_from: {
         name: "Carlos Diaz",
         company: "Creative Duo LLC",
@@ -94,25 +115,16 @@ const AdditionalDetails = ({ match, location, history }) => {
         country: "US",
       },
 
-      line_items: [
-        {
-          quantity: 1,
-          total_price: "12.00",
-          currency: "USD",
-          weight: "1.0",
-          weight_unit: "lb",
-          title: "Creative Duo LLC",
-          manufacture_country: "US",
-          sku: "1234567890",
-        },
-      ],
+      line_items: cartLineItems,
+
+      // For the weight of the parcel, we can use the total weight of the cart items by looping through all of the items and adding up the weight of each item. For the dimensions of the parcel, we can use the dimensions of the largest item in the cart.
 
       parcel: {
         length: "10",
-        width: "15",
+        width: "10",
         height: "10",
         distance_unit: "in",
-        weight: "1",
+        weight: totalWeight,
         mass_unit: "lb",
       },
     };
@@ -137,6 +149,8 @@ const AdditionalDetails = ({ match, location, history }) => {
 
       setLoading(false);
       setShowButton(true);
+
+      toast.success("Redirecting to Shipping Rates...");
 
       dispatch(
         saveShippingAddress({
@@ -174,6 +188,8 @@ const AdditionalDetails = ({ match, location, history }) => {
       setLoading(false);
       setShowButton(true);
 
+      toast.success("Redirecting to Shipping Rates...");
+
       dispatch(
         saveShippingAddress({
           line1,
@@ -187,7 +203,6 @@ const AdditionalDetails = ({ match, location, history }) => {
         })
       );
       dispatch(saveOrderNotes(orderNotes));
-      toast.success("Shipping Address and or Order Notes Saved!");
       history.push("/checkout");
     } else {
       console.log("error");
@@ -338,7 +353,7 @@ const AdditionalDetails = ({ match, location, history }) => {
                           className="bg-slate-600 hover:bg-slate-700 w-full"
                         >
                           {loading
-                            ? "Saving..."
+                            ? "Saving and redirecting to shipping selection screen..."
                             : "Save Address & Notes & Continue"}
                         </Button>
                       )}

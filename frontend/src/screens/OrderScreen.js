@@ -257,6 +257,10 @@ const OrderScreen = ({ match, history }) => {
                 <strong className="text-[1.2em]"> Shipping Cost: </strong>
                 <strong>{order.shippingCost}</strong>
               </p>
+              <p>
+                <strong className="text-[1.2em]"> Shipping Cost: </strong>
+                <strong>{order.shippingTitle}</strong>
+              </p>
 
               {order.isCancelled && (
                 <Message variant="danger" className="mt-2 mb-2">

@@ -6,13 +6,19 @@ const ShippingRate = ({ rate, onSelect }) => {
     <>
       <ToastContainer />
       <div
-        className="flex justify-between px-2 py-3 bg-slate-200 rounded-md mb-2 hover:cursor-pointer hover:bg-slate-300 active:bg-slate-600"
+        className="flex justify-between px-2 py-3 bg-slate-200 rounded-md mb-2 hover:cursor-pointer hover:bg-slate-300 active:bg-slate-600 items-center"
         onClick={(e) => {
           onSelect(rate);
           toast.success("Shipping rate selected");
         }}
       >
-        <div className="shipping-title font-bold text-3xl">{rate.title}</div>
+        <div>
+          <span className="shipping-title font-bold text-3xl">
+            {rate.title}
+          </span>
+          <br />
+          <span>{rate.description}</span>
+        </div>
         <div className="shippping-price font-medium text-2xl">
           ${rate.amount}
         </div>

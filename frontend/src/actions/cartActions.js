@@ -5,6 +5,7 @@ import {
   CART_SAVE_ORDERNOTES,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_SHIPPING_COST,
+  CART_SAVE_SHIPPING_TITLE,
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -37,27 +38,36 @@ export const saveShippingCost = (cost) => async (dispatch) => {
   localStorage.setItem("cost", cost);
 };
 
+export const saveShippingTitle = (title) => async (dispatch) => {
+  dispatch({
+    type: CART_SAVE_SHIPPING_TITLE,
+    payload: {
+      title: title,
+    },
+  });
+
+  localStorage.setItem("title", title);
+};
+
 export const saveShippingAddress = (data) => async (dispatch) => {
   //saveShippingAddress({ line1, line2, postal_code, city, state, country })
-
 
   // compose line_items array
 
   let cartLineItems = [];
-  data.cartItems.forEach(item=>{
-
-    let lineItem =  {
+  data.cartItems.forEach((item) => {
+    let lineItem = {
       quantity: item.qty,
       total_price: item.price.toString(),
       currency: "USD",
       weight: "1.0",
       weight_unit: "lb",
       title: item.name,
-        manufacture_country: "US",
-        sku: item.product.toString(),
-      }
-      cartLineItems.push(lineItem);
-  })
+      manufacture_country: "US",
+      sku: item.product.toString(),
+    };
+    cartLineItems.push(lineItem);
+  });
 
   const payload = {
     address_from: {
@@ -88,7 +98,6 @@ export const saveShippingAddress = (data) => async (dispatch) => {
 
     // composing lien_items array
 
-  
     line_items: cartLineItems,
     // line_items: [
     //   {

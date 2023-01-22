@@ -60,14 +60,13 @@ router.post("/create-checkout-session", async (req, res) => {
     quantity: 1,
   });
 
-  // Get the shipping price from the rates component and push it as a lineItem
   const shipping_price = req.body.shippingPrice;
-  // const shipping_name = req.body.shippingName;
+  const shipping_name = req.body.shippingTitle;
   line_items.push({
     price_data: {
       currency: "usd",
       product_data: {
-        name: shipping_price > 0 ? "Shipping" : "Free Shipping",
+        name: shipping_price > 0 ? shipping_name : "Free Shipping",
         images: [
           "https://media.istockphoto.com/id/1302438914/vector/fast-delivery-truck-icon-fast-shipping-design-for-website-and-mobile-apps-vector-illustration.jpg?s=612x612&w=0&k=20&c=1aEygfLbr7XCq2Lr61qrrFS2SjY6cVccOySPu_N7gww=",
         ],
