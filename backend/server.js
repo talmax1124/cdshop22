@@ -54,12 +54,12 @@ app.use(
 
 // use the cors package to enable CORS with various options
 
-let corsClientEnv = process.env.CLIENT_URL;
+// let corsClientEnv = process.env.CLIENT_URL;
 
 // Allow headers for CORS
 
 const corsOptions = {
-  origin: corsClientEnv,
+  origin: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
