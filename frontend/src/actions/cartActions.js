@@ -53,6 +53,8 @@ export const saveShippingAddress = (data) => async (dispatch) => {
   //saveShippingAddress({ line1, line2, postal_code, city, state, country })
 
   // compose line_items array
+  let totalWeight = 0;
+  let largestItem = 0;
 
   let cartLineItems = [];
   data.cartItems.forEach((item) => {
@@ -66,6 +68,10 @@ export const saveShippingAddress = (data) => async (dispatch) => {
       manufacture_country: "US",
       sku: item.product.toString(),
     };
+    totalWeight += item.weight;
+    if (item.length > largestItem) {
+      largestItem = item.length;
+    }
     cartLineItems.push(lineItem);
   });
 
@@ -101,11 +107,11 @@ export const saveShippingAddress = (data) => async (dispatch) => {
     line_items: cartLineItems,
 
     parcel: {
-      length: "10",
-      width: "15",
-      height: "10",
+      length: "6.5",
+      width: "4.5",
+      height: "4",
       distance_unit: "in",
-      weight: "1",
+      weight: totalWeight.toString(),
       mass_unit: "lb",
     },
   };

@@ -8,7 +8,7 @@ import session from "cookie-session";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
-import cors from "cors";
+// import cors from "cors";
 
 import productRoutes from "./routes/productRoutes.js";
 import articleRoutes from "./routes/articleRoutes.js";
@@ -34,11 +34,11 @@ connectDB();
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"), cors());
+  app.use(morgan("dev"));
 }
 
 if (process.env.NODE_ENV === "production") {
-  app.use(secure, cors());
+  app.use(secure);
 }
 
 app.use(express.json());
@@ -58,15 +58,24 @@ app.use(
 
 // Allow headers for CORS
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/products", productRoutes, cors());
-app.use("/api/articles", articleRoutes, cors());
+app.use("/api/products", productRoutes);
+app.use("/api/articles", articleRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes, cors());
-app.use("/api/rates", rateRoutes, cors());
+app.use("/api/orders", orderRoutes);
+app.use("/api/rates", rateRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/stripe", stripe);
 app.use("/api/uploadprofilepicture", uploadRoutesProfilePicture);
@@ -89,30 +98,11 @@ if (process.env.NODE_ENV === "production") {
     "/",
     (req, res) => {
       res.send("API is running....");
+      console.log("API is running....");
     },
-    cors()
+
   );
 }
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-// const corsOptions = {
-//   origin: process.env.CLIENT_URL,
-//   optionsSuccessStatus: 200,
-
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-// };
-
-// app.use(cors(corsOptions));
 
 app.use(notFound);
 app.use(errorHandler);
@@ -125,5 +115,3 @@ app.listen(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
 );
-
-///Testing

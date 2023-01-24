@@ -120,11 +120,11 @@ const AdditionalDetails = ({ match, location, history }) => {
       // For the weight of the parcel, we can use the total weight of the cart items by looping through all of the items and adding up the weight of each item. For the dimensions of the parcel, we can use the dimensions of the largest item in the cart.
 
       parcel: {
-        length: "10",
-        width: "10",
-        height: "10",
+        length: "7",
+        width: "5",
+        height: "5",
         distance_unit: "in",
-        weight: totalWeight,
+        weight: totalWeight.toString(),
         mass_unit: "lb",
       },
     };
