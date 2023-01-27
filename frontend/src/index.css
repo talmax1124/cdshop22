@@ -261,6 +261,46 @@ main {
   color: white;
 }
 
+.product-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+}
+
+.product-info h1 {
+  font-size: clamp(2.2em, 60%, 4em);
+  color: black;
+  font-weight: bold;
+  margin-top: 0.2em;
+}
+
+.product-info h4 {
+  font-weight: bold;
+  margin: 0.2em 0 0.3em 0;
+  font-size: 2em;
+}
+
+.product-info .stock-button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 0.25em;
+  margin-bottom: 0.4em;
+}
+
+.product-info .stock-button span {
+  padding: 0.15em 1em 0.15em 1em;
+  color: black;
+}
+
 @media (max-width: 900px) {
   .yt {
     height: 70vh;
@@ -305,13 +345,13 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .rev-item .card-img-top {
-  width: 60%;
+  width: 45%;
 }
 
 .rev-item .left-rev-item {
@@ -319,7 +359,7 @@ main {
 }
 
 .rev-item .right-rev-item {
-  width: 55%;
+  width: 60%;
 }
 
 .search-small {

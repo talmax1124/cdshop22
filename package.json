@@ -18,6 +18,7 @@
   "author": "Brad Traversy",
   "license": "MIT",
   "dependencies": {
+    "@auth0/auth0-react": "^2.0.0",
     "@easypost/api": "^5.8.0",
     "@egjs/flicking-plugins": "^4.5.0",
     "@egjs/react-flicking": "^4.10.5",

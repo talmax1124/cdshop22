@@ -6,7 +6,6 @@ import {
   Col,
   Image,
   ListGroup,
-  Card,
   Button,
   Form,
   Modal,
@@ -169,12 +168,35 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <React.Fragment>
-      <Link to="/products">
-        <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
-          <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
-          Go Back
-        </Button>
-      </Link>
+      <div className="flex justify-between">
+        <Link to="/products">
+          <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
+            <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
+            Go Back
+          </Button>
+        </Link>
+
+        {userInfo && userInfo.isAdmin && (
+          <>
+            <div>
+              <Link to={`/admin/product/${product._id}/edit`}>
+                <Button className="text-black bg-green-100 hover:bg-red-500   rounded-lg mb-3 mt-2 no-underline hover:no-underline mr-2">
+                  <i className="fas fa-pencil mr-1 text-[1.4em]"></i>
+                  Edit
+                </Button>
+              </Link>
+              <Button
+                className="text-black bg-red-100 hover:bg-red-500   rounded-lg mb-3 mt-2 no-underline hover:no-underline"
+                onClick={() => deleteHandler(product._id)}
+              >
+                <i className="fas fa-trash mr-1 text-[1.4em]"></i>
+                Delete
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -200,56 +222,117 @@ const ProductScreen = ({ history, match }) => {
                 />
               )}
             </Col>
-            {/* <Col md={6}>
-              <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-                <a href={product.image}>
-                  <img
-                    alt={product.name}
-                    src={product.image}
-                    fluid
-                    width="100%"
-                  />
-                </a>
-              </LightGallery>
-              <Image src={product.image} alt={product.name} fluid />
-            </Col> */}
-            <Col md={3}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h3 className="font-medium font-sans text-[1.3em]">
-                    {product.name}
-                  </h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Rating
-                    value={product.rating}
-                    text={
-                      product.numReviews > 1
-                        ? `${product.numReviews} review(s)`
-                        : `${product.numReviews} review`
-                    }
-                  />
-                </ListGroup.Item>
-
-                {/* {product.onSalePrice > 0.25 ? (
-                  <>
-                    <ListGroup.Item>
-                      <div className="flex items-center ">
-                        <span className="text-[1.5em]font-medium uppercase">
-                          Price:
-                        </span>{" "}
-                        <span className="flex"></span>
-                      </div>
-                    </ListGroup.Item>
-                  </>
+            <Col md={5} className="product-info">
+              <div className="flex justify-between items-center mt-3 mb-3">
+                {product.countInStock > 0 ? (
+                  <div className="flex justify-center items-center p-2 bg-teal-300 rounded  stock-button">
+                    <span className="font-medium">In stock</span>
+                  </div>
                 ) : (
-                  <p className="font-bold text-[2em] mt-3">${product.price}</p>
-                )} */}
+                  <div className="flex justify-center items-center p-2 bg-red-300 rounded  stock-button">
+                    <span className="font-medium text-xs ">Out of Stock</span>
+                  </div>
+                )}
+                <Rating
+                  value={product.rating}
+                  text={
+                    product.numReviews > 1
+                      ? `${product.numReviews} review(s)`
+                      : `${product.numReviews} review`
+                  }
+                />
+              </div>
+              <h1>{product.name}</h1>
+              {product.price > 0 && (
+                <>
+                  {product.onSalePrice > 0 ? (
+                    <>
+                      <div className="flex">
+                        <h4 className="font-bold text-[1.2em] mt-3 mr-3">
+                          ${product.price}
+                        </h4>
+                        <p className="font-bold mt-3 text-[1.2em] line-through text-red-500 opacity-[50%]">
+                          ${product.onSalePrice}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h4 className="font-bold text-[1.2em] mt-3 mr-3">
+                        ${product.price}
+                      </h4>
+                    </>
+                  )}
+                </>
+              )}
+              {product.countInStock > 0 && (
+                <Row className="flex items-center mt-3 mb-3">
+                  Qty
+                  <Form.Control
+                    as="select"
+                    value={qty}
+                    onChange={(e) => setQty(e.target.value)}
+                    className="ml-2 w-1/2"
+                  >
+                    {[...Array(product.countInStock).keys()].map((x) => (
+                      <option key={x + 1} value={x + 1}>
+                        {x + 1}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Row>
+              )}
+              <Button
+                onClick={addToCartHandler}
+                className="bg-black w-full hover:bg-slate-700"
+                type="button"
+                disabled={product.countInStock === 0}
+              >
+                Add To Cart
+              </Button>
+            </Col>
+          </Row>
 
-                {/* <ListGroup.Item>
-                  <span className="font-medium uppercase">Date Created:</span>{" "}
-                  {moment(product.createdAt).format("L")}
-                </ListGroup.Item> */}
+          <div class="flow-root mt-3 mb-3">
+            <div class="-my-8 divide-y divide-gray-100 mt-2 mb-2">
+              <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer">
+                  <h2 class="text-lg font-medium text-gray-900">
+                    Product Information & Details
+                  </h2>
+
+                  <span class="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                </summary>
 
                 <ListGroup.Item>
                   <span className="font-medium uppercase">Brand:</span>{" "}
@@ -264,252 +347,233 @@ const ProductScreen = ({ history, match }) => {
                   <span className="font-medium uppercase">Product Type:</span>{" "}
                   <span className="font-light">{product.type}</span>
                 </ListGroup.Item>
-              </ListGroup>
-            </Col>
-            <Col md={3}>
-              <Card>
-                <ListGroup variant="flush">
-                  {product.price > 0 && (
-                    <ListGroup.Item>
-                      <span className="font-medium uppercase">Price:</span>{" "}
-                      {product.onSalePrice > 0 ? (
-                        <>
-                          <div className="flex">
-                            <p className="font-bold text-[1.2em] mt-3 mr-3">
-                              ${product.price}
-                            </p>
-                            <p className="font-bold mt-3 text-[1.2em] line-through text-red-500 opacity-[50%]">
-                              ${product.onSalePrice}
-                            </p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <p className="font-bold text-[1.2em] mt-3 mr-3">
-                            ${product.price}
-                          </p>
-                        </>
-                      )}
-                    </ListGroup.Item>
-                  )}
 
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Status:</Col>
-                      <Col>
-                        {product.countInStock > 0 ? (
-                          <div className="flex justify-center items-center p-2 bg-teal-300 rounded">
-                            <span className="font-medium">In stock</span>
-                          </div>
-                        ) : (
-                          <div className="flex justify-center items-center p-2 bg-red-300 rounded">
-                            <span className="font-medium text-xs">
-                              Out of Stock
-                            </span>
-                          </div>
-                        )}
+                <ListGroup
+                  style={{
+                    marginTop: "10px",
+                    marginBottom: "10px",
+
+                    justifyContent: "center",
+                    textAlign: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <ListGroup.Item style={{ minWidth: "100%" }}>
+                    <Row
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <h3 className="font-medium mb-3 text-[1.15em]">
+                        Description
+                      </h3>
+                    </Row>
+                    <Row
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Col md={6}>
+                        <ProductDescription Product={product} />
                       </Col>
                     </Row>
                   </ListGroup.Item>
-
-                  {product.countInStock > 0 && (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col>
-                          <Form.Control
-                            as="select"
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  )}
-
-                  <ListGroup.Item>
-                    <Button
-                      onClick={addToCartHandler}
-                      className="bg-black w-full hover:bg-slate-700"
-                      type="button"
-                      disabled={product.countInStock === 0}
-                    >
-                      Add To Cart
-                    </Button>
-                  </ListGroup.Item>
-
-                  {userInfo && userInfo.isAdmin && (
-                    <ListGroup.Item>
-                      <Link to={`/admin/product/${product._id}/edit`}>
-                        <Button className="bg-black w-full hover:bg-slate-700">
-                          Edit Product
-                        </Button>
-                      </Link>
-                    </ListGroup.Item>
-                  )}
-
-                  {userInfo && userInfo.isAdmin && (
-                    <ListGroup.Item>
-                      <Button
-                        variant="danger"
-                        className="bg-red-900 w-full hover:bg-red-700"
-                        onClick={() => deleteHandler(product._id)}
-                      >
-                        <i className="fas fa-trash"></i> Delete Product
-                      </Button>
-                    </ListGroup.Item>
-                  )}
                 </ListGroup>
-              </Card>
-            </Col>
-          </Row>
-          <ListGroup
-            style={{
-              marginTop: "10px",
-              marginBottom: "10px",
+              </details>
 
-              justifyContent: "center",
-              textAlign: "center",
-              alignItems: "center",
-            }}
+              <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer">
+                  <h2 class="text-lg font-medium text-gray-900">
+                    Shipping & Returns
+                  </h2>
+
+                  <span class="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+
+                <p class="mt-4 leading-relaxed text-gray-700">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab
+                  hic veritatis molestias culpa in, recusandae laboriosam neque
+                  aliquid libero nesciunt voluptate dicta quo officiis explicabo
+                  consequuntur distinctio corporis earum similique!
+                </p>
+              </details>
+
+              <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer">
+                  <h2 class="text-lg font-medium text-gray-900">
+                    Additional Details
+                  </h2>
+
+                  <span class="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+
+                <p class="mt-4 leading-relaxed text-gray-700">
+                  {product.productImportantInformation && (
+                    <>
+                      <h6 className="mb-3 font-medium mt-2">
+                        Product Important Information:
+                      </h6>
+                      <ProductInformation Product={product} />
+                    </>
+                  )}
+                  {product.productVideo && (
+                    <>
+                      <Button
+                        variant="primary"
+                        onClick={handleShow}
+                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                      >
+                        Open Product Video
+                      </Button>
+
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        keyboard={false}
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Product Video</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <iframe
+                            width="100%"
+                            height="250px"
+                            src={product.productVideo}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="primary"
+                            className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  )}
+
+                  {product.productTutorial && (
+                    <>
+                      <Button
+                        variant="primary"
+                        onClick={handleShow}
+                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                      >
+                        Open Product Tutorial
+                      </Button>
+
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        keyboard={false}
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Product Tutorial</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <iframe
+                            width="100%"
+                            height="250px"
+                            src={product.productTutorial}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="primary"
+                            className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  )}
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <Row
+            className="
+          mt-3 bg-slate-50 rounded-md p-3"
           >
-            <ListGroup.Item style={{ minWidth: "100%" }}>
-              <Row
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  alignItems: "center",
-                }}
-              >
-                <h3 className="font-medium mb-3 text-[1.15em]">Description</h3>
-              </Row>
-              <Row
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Col md={6}>
-                  <ProductDescription Product={product} />
-                </Col>
-              </Row>
-            </ListGroup.Item>
-          </ListGroup>
-
-          <Row>
-            <Col>
-              <h1 className="mb-3 font-medium">
-                More information on: {product.name}
-              </h1>
-
-              {product.productImportantInformation && (
-                <>
-                  <h6 className="mb-3 font-medium mt-2">
-                    Product Important Information:
-                  </h6>
-                  <ProductInformation Product={product} />
-                </>
-              )}
-              {product.productVideo && (
-                <>
-                  <Button
-                    variant="primary"
-                    onClick={handleShow}
-                    className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                  >
-                    Open Product Video
-                  </Button>
-
-                  <Modal
-                    show={show}
-                    onHide={handleClose}
-                    keyboard={false}
-                    centered
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title>Product Video</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <iframe
-                        width="100%"
-                        height="250px"
-                        src={product.productVideo}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="primary"
-                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                        onClick={handleClose}
-                      >
-                        Close
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </>
-              )}
-
-              {product.productTutorial && (
-                <>
-                  <Button
-                    variant="primary"
-                    onClick={handleShow}
-                    className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                  >
-                    Open Product Tutorial
-                  </Button>
-
-                  <Modal
-                    show={show}
-                    onHide={handleClose}
-                    keyboard={false}
-                    centered
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title>Product Tutorial</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <iframe
-                        width="100%"
-                        height="250px"
-                        src={product.productTutorial}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="primary"
-                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                        onClick={handleClose}
-                      >
-                        Close
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </>
-              )}
-            </Col>
-          </Row>
-          <hr></hr>
-          <Row>
             <Col md={6}>
               <h2 className="font-medium font-sans text-[2em] mt-2">Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
@@ -573,7 +637,7 @@ const ProductScreen = ({ history, match }) => {
                     <>
                       <div
                         key={review._id}
-                        className="w-full revcard bg-slate-100 p-4 rounded rev-item"
+                        className="w-full revcard bg-slate-200 p-4 rounded rev-item"
                       >
                         {review.profileImage && (
                           <div className="left-rev-item">
@@ -610,60 +674,6 @@ const ProductScreen = ({ history, match }) => {
                   ))}
                 </div>
               </div>
-              {/* <ListGroup variant="flush">
-                    <ListGroup.Item>
-                      <h2>Write a Customer Review</h2>
-                      {successProductReview && (
-                        <Message variant="success">
-                          Review submitted successfully
-                        </Message>
-                      )}
-                      {loadingProductReview && <Loader />}
-                      {errorProductReview && (
-                        <Message variant="danger">{errorProductReview}</Message>
-                      )}
-                      {userInfo ? (
-                        <Form onSubmit={submitHandler}>
-                          <Form.Group controlId="rating">
-                            <Form.Label>Rating</Form.Label>
-                            <Form.Control
-                              as="select"
-                              value={rating}
-                              onChange={(e) => setRating(e.target.value)}
-                            >
-                              <option value="">Select...</option>
-                              <option value="1">1 - Poor</option>
-                              <option value="2">2 - Fair</option>
-                              <option value="3">3 - Good</option>
-                              <option value="4">4 - Very Good</option>
-                              <option value="5">5 - Excellent</option>
-                            </Form.Control>
-                          </Form.Group>
-                          <Form.Group controlId="comment">
-                            <Form.Label>Comment</Form.Label>
-                            <Form.Control
-                              as="textarea"
-                              row="3"
-                              value={comment}
-                              onChange={(e) => setComment(e.target.value)}
-                            ></Form.Control>
-                          </Form.Group>
-                          <Button
-                            disabled={loadingProductReview}
-                            type="submit"
-                            variant="primary"
-                          >
-                            Submit
-                          </Button>
-                        </Form>
-                      ) : (
-                        <Message>
-                          Please <Link to="/login">sign in</Link> to write a
-                          review{" "}
-                        </Message>
-                      )}
-                    </ListGroup.Item>
-                  </ListGroup> */}
             </Col>
           </Row>
         </>

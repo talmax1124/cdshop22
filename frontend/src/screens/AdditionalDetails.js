@@ -313,7 +313,7 @@ const AdditionalDetails = ({ match, location, history }) => {
                           Zip Code
                         </Form.Label>
                         <Form.Control
-                          type="number"
+                          type="text"
                           placeholder="Enter Zip Code"
                           value={postal_code}
                           required
@@ -346,17 +346,16 @@ const AdditionalDetails = ({ match, location, history }) => {
                           />
                         </Form.Group>
                       </Form.Group>
-                      {postal_code && (
-                        <Button
-                          type="submit"
-                          variant="primary"
-                          className="bg-slate-600 hover:bg-slate-700 w-full"
-                        >
-                          {loading
-                            ? "Saving and redirecting to shipping selection screen..."
-                            : "Save Address & Notes & Continue"}
-                        </Button>
-                      )}
+
+                      <Button
+                        type="submit"
+                        variant="primary"
+                        className="bg-slate-600 hover:bg-slate-700 w-full"
+                      >
+                        {loading
+                          ? "Saving and redirecting to shipping selection screen..."
+                          : "Save Address, Notes, & Continue"}
+                      </Button>
                     </Form>
                   </ListGroup.Item>
                 </ListGroup>

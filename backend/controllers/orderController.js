@@ -32,7 +32,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
       digitalLink,
       shippingCost,
       shippingTitle,
-      orderNotes,
     });
 
     const createdOrder = await order.save();
