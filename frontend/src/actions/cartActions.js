@@ -6,6 +6,7 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_SHIPPING_COST,
   CART_SAVE_SHIPPING_TITLE,
+  CART_REMOVE_SHIPPING_RATES,
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -50,6 +51,7 @@ export const saveShippingTitle = (title) => async (dispatch) => {
 };
 
 export const saveShippingAddress = (data) => async (dispatch) => {
+  localStorage.removeItem("shippingRates");
   //saveShippingAddress({ line1, line2, postal_code, city, state, country })
 
   // compose line_items array
@@ -167,6 +169,13 @@ export const saveShippingAddress = (data) => async (dispatch) => {
   localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
 
+export const removeShipingRates =(data)=>(dispatch)=>{
+
+  dispatch({
+    type: CART_REMOVE_SHIPPING_RATES,
+  })
+  localStorage.removeItem("shipingRates");
+}
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ITEM,

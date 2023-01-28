@@ -124,6 +124,7 @@ const createProduct = asyncHandler(async (req, res) => {
     type: "Physical",
     productWeightLbs: 0,
     productWeightOz: 0,
+    productOptions: ["Sample option"],
     // colors: ["Sample color"],
   });
 
@@ -135,6 +136,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
+  console.log("product options >>", req.body.productOptions);
   const {
     name,
     price,
@@ -157,6 +159,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     onSalePrice,
     specialPriceDiscountText,
     productImportantInformation,
+    productOptions,
   } = req.body;
 
   const product = await Product.findById(req.params.id);
@@ -183,6 +186,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.onSalePrice = onSalePrice;
     product.specialPriceDiscountText = specialPriceDiscountText;
     product.productImportantInformation = productImportantInformation;
+    product.productOptions = productOptions;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);

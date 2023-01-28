@@ -8,9 +8,10 @@ import { addToCart } from "../actions/cartActions";
 import { saveShippingCost, saveShippingTitle } from "../actions/cartActions";
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import Loader from "../components/Loader";
 
 import PayButton from "../components/pay";
-import ShippingRate from "../components/ShippingRate";
+import ShippingRate, { ShippingRateSkeleton } from "../components/ShippingRate";
 
 const CheckOut = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -102,6 +103,17 @@ const CheckOut = ({ match, location, history }) => {
                             />
                           );
                         })}
+                      {cart.shippingRates &&
+                        cart.shippingRates.length === 0 && (
+                          <>
+                            {/* <Loader /> */}
+                            <ShippingRateSkeleton />
+                            <ShippingRateSkeleton />
+                            <ShippingRateSkeleton />
+                            <ShippingRateSkeleton />
+                            <ShippingRateSkeleton />
+                          </>
+                        )}
                     </ul>
                   </ListGroup.Item>
                 </ListGroup>

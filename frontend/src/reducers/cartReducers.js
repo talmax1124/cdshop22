@@ -6,6 +6,7 @@ import {
   CART_SAVE_ORDERNOTES,
   CART_CLEAR_ITEMS,
   CART_SAVE_SHIPPING_TITLE,
+  CART_REMOVE_SHIPPING_RATES
 } from "../constants/cartConstants";
 
 export const cartReducer = (
@@ -45,10 +46,17 @@ export const cartReducer = (
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
 
+
     case CART_SAVE_ORDERNOTES:
       return {
         ...state,
         orderNotes: action.payload,
+      };
+
+    case CART_REMOVE_SHIPPING_RATES:
+      return {
+        ...state,
+        shippingRates:[]
       };
     case CART_SAVE_SHIPPING_ADDRESS:
       return {

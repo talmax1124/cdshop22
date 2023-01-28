@@ -17,7 +17,7 @@ import { saveShippingAddress } from "../actions/cartActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import JoditEditor from "jodit-react";
-import { saveOrderNotes } from "../actions/cartActions";
+import { saveOrderNotes, removeShipingRates } from "../actions/cartActions";
 
 // import ShippingRates from "../components/ShippingRates";
 
@@ -64,6 +64,10 @@ const AdditionalDetails = ({ match, location, history }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // remove shpping rates from global state
+
+    dispatch(removeShipingRates());
 
     // GET SHIPPING RATES HERE
     let totalWeight = 0;
@@ -149,6 +153,9 @@ const AdditionalDetails = ({ match, location, history }) => {
 
       setLoading(false);
       setShowButton(true);
+
+      // remove existing shipping rates
+      localStorage.removeItem("shippingRates");
 
       toast.success("Redirecting to Shipping Rates...");
 

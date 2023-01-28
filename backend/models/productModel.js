@@ -99,6 +99,9 @@ const productSchema = mongoose.Schema(
     productTutorial: {
       type: String,
     },
+    productOptions: {
+      type: [String],
+    },
     productImportantInformation: {
       type: String,
     },

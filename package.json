@@ -35,7 +35,6 @@
     "colors": "^1.4.0",
     "cookie-session": "^2.0.0",
     "cookies": "^0.8.0",
-    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "easypost": "^0.1.1",
     "easyship": "^1.0.0",

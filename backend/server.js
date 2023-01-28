@@ -8,8 +8,6 @@ import session from "cookie-session";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
-// import cors from "cors";
-
 import productRoutes from "./routes/productRoutes.js";
 import articleRoutes from "./routes/articleRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -17,7 +15,6 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import rateRoutes from "./routes/rateRoutes.js";
 
-// Upload Route for Profile Picture
 import uploadRoutesProfilePicture from "./routes/uploadRoutesProfilePicture.js";
 
 //  API
@@ -52,12 +49,6 @@ app.use(
   })
 );
 
-// use the cors package to enable CORS with various options
-
-// let corsClientEnv = process.env.CLIENT_URL;
-
-// Allow headers for CORS
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -88,20 +79,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
   app.get("*", (req, res) =>
-    res.sendFile(
-      path.resolve(__dirname, "frontend", "build", "index.html"),
-      cors()
-    )
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
   );
 } else {
-  app.get(
-    "/",
-    (req, res) => {
-      res.send("API is running....");
-      console.log("API is running....");
-    },
-
-  );
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+    console.log("API is running....");
+  });
 }
 
 app.use(notFound);

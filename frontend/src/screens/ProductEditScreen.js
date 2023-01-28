@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
+import ProductOptions from "../components/ProductOptions";
 import { listProductDetails, updateProduct } from "../actions/productActions";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import JoditEditor from "jodit-react";
@@ -42,6 +43,8 @@ const ProductEditScreen = ({ match, history }) => {
   const [productWeightOz, setProductWeightOz] = useState(0);
   const [type, setType] = useState("");
   const [uploading, setUploading] = useState(false);
+
+  const [productOptions, setProductOptions] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -86,6 +89,7 @@ const ProductEditScreen = ({ match, history }) => {
         setDigitalLink(product.digitalLink);
         setOnSalePrice(product.onSalePrice);
         setOnSaleBadge(product.onSaleBadge);
+        setProductOptions(product.productOptions);
       }
     }
   }, [dispatch, history, productId, product, successUpdate]);
@@ -208,6 +212,7 @@ const ProductEditScreen = ({ match, history }) => {
           onSalePrice,
           onSaleBadge,
           productImportantInformation,
+          productOptions,
         })
       );
     }
@@ -521,6 +526,12 @@ const ProductEditScreen = ({ match, history }) => {
                     value={productWeightOz}
                     onChange={(e) => setProductWeightOz(e.target.value)}
                   ></Form.Control>
+                </Form.Group>
+
+                {/* Make a table that will add a table row for product options once a button is clicked that will add it to the array */}
+
+                <Form.Group controlId="productOptions">
+                  <ProductOptions options={productOptions} onOptions={(options)=>setProductOptions(options)} />
                 </Form.Group>
 
                 <Button
