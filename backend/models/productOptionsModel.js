@@ -2,28 +2,18 @@
 
 import mongoose from "mongoose";
 
-const productOptionsSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
+const CategoryOptionSchema = mongoose.Schema({
+  name: { type: String, required: true },
+});
+
+const IndependentOptionSchema = mongoose.Schema({
+  name: { type: String, required: true },
+  options: [CategoryOptionSchema],
 });
 
 const productOptionsModel = mongoose.model(
-  "productOptions",
-  productOptionsSchema
+  "ProductOptions",
+  IndependentOptionSchema
 );
 
-module.exports = productOptionsModel;
+export default productOptionsModel;

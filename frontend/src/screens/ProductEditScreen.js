@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Image } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -38,6 +38,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [shippingReturnPolicy, setShippingReturnPolicy] = useState("");
   const [shortdescription, setShortdescription] = useState("");
   const [productWeightLbs, setProductWeightLbs] = useState(0);
   const [productWeightOz, setProductWeightOz] = useState(0);
@@ -76,6 +77,7 @@ const ProductEditScreen = ({ match, history }) => {
         setCategory(product.category);
         setCountInStock(product.countInStock);
         setDescription(product.description);
+        setShippingReturnPolicy(product.shippingReturnPolicy);
         setProductWeightLbs(product.productWeightLbs);
         setProductWeightOz(product.productWeightOz);
         setShortdescription(product.shortdescription);
@@ -198,6 +200,7 @@ const ProductEditScreen = ({ match, history }) => {
           brand,
           category,
           description,
+          shippingReturnPolicy,
           productWeightLbs,
           productWeightOz,
           shortdescription,
@@ -224,20 +227,8 @@ const ProductEditScreen = ({ match, history }) => {
         Go Back
       </Link>
 
-      <div className="flex product-edit-container">
-        <div className="product-preview bg-slate-100">
-          <h1 className="text-3xl font-medium mb-3 mt-3 p-2">Preview</h1>
-
-          <Image src={image} width="100%" className="p-2" fluid />
-          <div className="Product-Card-Body">
-            <p className="font-bold text-[1.7em] font-sans uppercase mb-[.5em] text-black">
-              {name}
-            </p>
-
-            <p className="font-bold text-2xl mt-3">${price}</p>
-          </div>
-        </div>
-        <div className="product-info">
+      <div>
+        <div className="">
           <FormContainer>
             <h1 className="font-medium mb-2 text-2xl">Edit Product</h1>
 
@@ -309,6 +300,23 @@ const ProductEditScreen = ({ match, history }) => {
                   </Form.Group>
                 )}
 
+                <Form.Group controlId="countInStock">
+                  <Form.Label>Count In Stock</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter countInStock"
+                    value={countInStock}
+                    onChange={(e) => setCountInStock(e.target.value)}
+                  ></Form.Control>
+                  {countInStock < 0 && (
+                    <i style={{ float: "right", margin: "10px", color: "red" }}>
+                      Please enter a valid Stock Count
+                    </i>
+                  )}
+                </Form.Group>
+
+                <h3 className="font-medium text-2xl mt-3 mb-3"> Images </h3>
+
                 <Form.Group controlId="image">
                   <Form.Label>Image</Form.Label>
                   <Form.Control
@@ -373,6 +381,8 @@ const ProductEditScreen = ({ match, history }) => {
                   {uploading && <Loader />}
                 </Form.Group>
 
+                <h3 className="font-medium text-2xl mt-3 mb-3"> Metadata </h3>
+
                 <Form.Group controlId="brand">
                   <Form.Label>Brand</Form.Label>
                   <Form.Control
@@ -387,29 +397,17 @@ const ProductEditScreen = ({ match, history }) => {
                   </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="shortdescription">
-                  <Form.Label>Short Description</Form.Label>
+                <Form.Group controlId="type">
+                  <Form.Label>Product Type</Form.Label>
                   <Form.Control
-                    type="name"
-                    placeholder="Enter Short Descriptor"
-                    value={shortdescription}
-                    onChange={(e) => setShortdescription(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
-
-                <Form.Group controlId="countInStock">
-                  <Form.Label>Count In Stock</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Enter countInStock"
-                    value={countInStock}
-                    onChange={(e) => setCountInStock(e.target.value)}
-                  ></Form.Control>
-                  {countInStock < 0 && (
-                    <i style={{ float: "right", margin: "10px", color: "red" }}>
-                      Please enter a valid Stock Count
-                    </i>
-                  )}
+                    as="select"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                  >
+                    <option value="...">Select...</option>
+                    <option value="Physical">Physical</option>
+                    <option value="Digital">Digital</option>
+                  </Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId="category">
@@ -427,6 +425,16 @@ const ProductEditScreen = ({ match, history }) => {
                   </Form.Control>
                 </Form.Group>
 
+                <Form.Group controlId="shortdescription">
+                  <Form.Label>Short Description</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter Short Descriptor"
+                    value={shortdescription}
+                    onChange={(e) => setShortdescription(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId="description">
                   <Form.Label>Description</Form.Label>
                   <JoditEditor
@@ -437,13 +445,36 @@ const ProductEditScreen = ({ match, history }) => {
                     tabIndex={1}
                     onBlur={(e) => setDescription(e)}
                   />
-                  {/* <Form.Control
-                as="textarea"
-                placeholder="Enter description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></Form.Control> */}
                 </Form.Group>
+
+                <Form.Group controlId="shippingReturnPolicy">
+                  <Form.Label>Product Information</Form.Label>
+                  <JoditEditor
+                    id="shippingReturnPolicy"
+                    ref={editor}
+                    value={shippingReturnPolicy}
+                    config={config}
+                    tabIndex={1}
+                    onBlur={(e) => setShippingReturnPolicy(e)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="productImportantInformation">
+                  <Form.Label>Product Information</Form.Label>
+                  <JoditEditor
+                    id="productImportantInformation"
+                    ref={editor}
+                    value={productImportantInformation}
+                    config={config}
+                    tabIndex={1}
+                    onBlur={(e) => setProductImportantInformation(e)}
+                  />
+                </Form.Group>
+
+                <h3 className="font-medium text-2xl mt-3 mb-3">
+                  {" "}
+                  Tutorials / Digital{" "}
+                </h3>
 
                 <Form.Group controlId="digitalLink">
                   <Form.Label>Digital Linker </Form.Label>
@@ -474,37 +505,6 @@ const ProductEditScreen = ({ match, history }) => {
                   ></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="productImportantInformation">
-                  <Form.Label>Product Information</Form.Label>
-                  <JoditEditor
-                    id="productImportantInformation"
-                    ref={editor}
-                    value={productImportantInformation}
-                    config={config}
-                    tabIndex={1}
-                    onBlur={(e) => setProductImportantInformation(e)}
-                  />
-                  {/* <Form.Control
-                type="text"
-                placeholder="Enter Product Info"
-                value={productImportantInformation}
-                onChange={(e) => setProductImportantInformation(e.target.value)}
-              ></Form.Control> */}
-                </Form.Group>
-
-                <Form.Group controlId="type">
-                  <Form.Label>Product Type</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
-                  >
-                    <option value="...">Select...</option>
-                    <option value="Physical">Physical</option>
-                    <option value="Digital">Digital</option>
-                  </Form.Control>
-                </Form.Group>
-
                 <h1 className="font-bold text-[1.7em] font-sans uppercase mb-[.5em] text-black">
                   Shipping Information
                 </h1>
@@ -528,10 +528,16 @@ const ProductEditScreen = ({ match, history }) => {
                   ></Form.Control>
                 </Form.Group>
 
-                {/* Make a table that will add a table row for product options once a button is clicked that will add it to the array */}
+                <h3 className="font-medium text-2xl mt-3 mb-3">
+                  {" "}
+                  Product Options{" "}
+                </h3>
 
                 <Form.Group controlId="productOptions">
-                  <ProductOptions options={productOptions} onOptions={(options)=>setProductOptions(options)} />
+                  <ProductOptions
+                    options={productOptions}
+                    onOptions={(options) => setProductOptions(options)}
+                  />
                 </Form.Group>
 
                 <Button

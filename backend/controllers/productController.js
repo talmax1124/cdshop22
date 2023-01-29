@@ -121,6 +121,7 @@ const createProduct = asyncHandler(async (req, res) => {
     numReviews: 0,
     description: "Sample description",
     shortdescription: "Sample description",
+    shippingReturnPolicy: "Sample description",
     type: "Physical",
     productWeightLbs: 0,
     productWeightOz: 0,
@@ -141,6 +142,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     name,
     price,
     description,
+    shippingReturnPolicy,
     shortdescription,
     productWeightLbs,
     productWeightOz,
@@ -169,6 +171,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.price = price;
     product.digitalLink = digitalLink;
     product.description = description;
+    product.shippingReturnPolicy = shippingReturnPolicy;
     product.shortdescription = shortdescription;
     product.productWeightLbs = productWeightLbs;
     product.productWeightOz = productWeightOz;

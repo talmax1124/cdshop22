@@ -55,6 +55,10 @@ const productSchema = mongoose.Schema(
     description: {
       type: String,
     },
+    shippingReturnPolicy: {
+      type: String,
+    },
+
     shortdescription: {
       type: String,
     },

@@ -17,6 +17,7 @@ import Meta from "../components/Meta";
 // import moment from "moment";
 import ProductDescription from "../components/ProductDescription";
 import ProductInformation from "../components/ProductInformation";
+import ShippingReturnPolicy from "../components/ShippingReturnPolicy";
 
 import ProductImageCarousel from "../components/ProductImageCarousel";
 
@@ -441,13 +442,38 @@ const ProductScreen = ({ history, match }) => {
                     </svg>
                   </span>
                 </summary>
-
-                <p class="mt-4 leading-relaxed text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab
-                  hic veritatis molestias culpa in, recusandae laboriosam neque
-                  aliquid libero nesciunt voluptate dicta quo officiis explicabo
-                  consequuntur distinctio corporis earum similique!
-                </p>
+                {!product.shippingReturnPolicy ? (
+                  <h1 className="text-1xl mt-3 font-medium">
+                    No Information On This At The Moment
+                  </h1>
+                ) : (
+                  <ListGroup.Item style={{ minWidth: "100%" }}>
+                    <Row
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <h3 className="font-medium mb-3 text-[1.15em]">
+                        Shipping & Returns
+                      </h3>
+                    </Row>
+                    <Row
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Col md={6}>
+                        <ShippingReturnPolicy Product={product} />
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
               </details>
 
               <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
@@ -489,99 +515,110 @@ const ProductScreen = ({ history, match }) => {
                   </span>
                 </summary>
 
-                <p class="mt-4 leading-relaxed text-gray-700">
-                  {product.productImportantInformation && (
-                    <>
-                      <h6 className="mb-3 font-medium mt-2">
-                        Product Important Information:
-                      </h6>
-                      <ProductInformation Product={product} />
-                    </>
-                  )}
-                  {product.productVideo && (
-                    <>
-                      <Button
-                        variant="primary"
-                        onClick={handleShow}
-                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                      >
-                        Open Product Video
-                      </Button>
+                {!product.productImportantInformation ? (
+                  <h1 className="text-1xl mt-3 font-medium">
+                    No Important Product Information Available At The Moment
+                  </h1>
+                ) : (
+                  <>
+                    <h6 className="mb-3 font-medium mt-2">
+                      Product Important Information:
+                    </h6>
+                    <ProductInformation Product={product} />
+                  </>
+                )}
 
-                      <Modal
-                        show={show}
-                        onHide={handleClose}
-                        keyboard={false}
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>Product Video</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <iframe
-                            width="100%"
-                            height="250px"
-                            src={product.productVideo}
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          ></iframe>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button
-                            variant="primary"
-                            className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                            onClick={handleClose}
-                          >
-                            Close
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </>
-                  )}
+                {!product.productVideo ? (
+                  <h1 className="text-1xl mt-3 mb-3 font-medium">
+                    No Product Video Available At The Moment
+                  </h1>
+                ) : (
+                  <>
+                    <Button
+                      variant="primary"
+                      onClick={handleShow}
+                      className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                    >
+                      Open Product Video
+                    </Button>
 
-                  {product.productTutorial && (
-                    <>
-                      <Button
-                        variant="primary"
-                        onClick={handleShow}
-                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                      >
-                        Open Product Tutorial
-                      </Button>
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      keyboard={false}
+                      centered
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title>Product Video</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <iframe
+                          width="100%"
+                          height="250px"
+                          src={product.productVideo}
+                          title="YouTube video player"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="primary"
+                          className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                          onClick={handleClose}
+                        >
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
+                )}
 
-                      <Modal
-                        show={show}
-                        onHide={handleClose}
-                        keyboard={false}
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>Product Tutorial</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <iframe
-                            width="100%"
-                            height="250px"
-                            src={product.productTutorial}
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          ></iframe>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button
-                            variant="primary"
-                            className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                            onClick={handleClose}
-                          >
-                            Close
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </>
-                  )}
-                </p>
+                {!product.productTutorial ? (
+                  <h1 className="text-1xl mt-3 mb-3 font-medium">
+                    No Important Product Tutorial Available At The Moment
+                  </h1>
+                ) : (
+                  <>
+                    <Button
+                      variant="primary"
+                      onClick={handleShow}
+                      className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                    >
+                      Open Product Tutorial
+                    </Button>
+
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      keyboard={false}
+                      centered
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title>Product Tutorial</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <iframe
+                          width="100%"
+                          height="250px"
+                          src={product.productTutorial}
+                          title="YouTube video player"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="primary"
+                          className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                          onClick={handleClose}
+                        >
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
+                )}
               </details>
             </div>
           </div>
