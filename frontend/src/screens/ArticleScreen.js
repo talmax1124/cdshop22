@@ -41,7 +41,7 @@ const ArticleScreen = ({ history, match }) => {
   function goBackToHomeAfterDelete() {
     history.push("/");
     LoadOnce();
-    alert("Product Has Been Deleted.");
+    alert("Article Has Been Deleted.");
   }
 
   const userLogin = useSelector((state) => state.userLogin);

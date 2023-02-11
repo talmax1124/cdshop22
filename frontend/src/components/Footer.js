@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 // import { Container, Row, Col } from "react-bootstrap";
 
 const Footer = () => {
+  let year = new Date();
+  year = year.getFullYear();
+
   return (
     <footer className="text-white bg-gray-900 lg:grid lg:grid-cols-5">
       <aside className="hidden lg:relative lg:col-span-2 lg:block">
@@ -117,6 +120,13 @@ const Footer = () => {
                 <Link to="/whatwecandoforyou" className="hover:text-slate-100">
                   Solutions For You
                 </Link>
+                <a
+                  className="hover:text-slate-100"
+                  href="https://linktr.ee/creativeduo2020"
+                >
+                  {" "}
+                  Linktree{" "}
+                </a>
               </nav>
             </div>
           </div>
@@ -139,7 +149,7 @@ const Footer = () => {
               </Link>
             </div>
 
-            <p className="mt-4 sm:mt-0">&copy; 2022 Creative Duo LLC.</p>
+            <p className="mt-4 sm:mt-0">&copy; {year} Creative Duo LLC.</p>
           </div>
         </div>
       </div>
