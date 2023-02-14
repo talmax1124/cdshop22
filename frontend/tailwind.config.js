@@ -3,5 +3,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: ["preline/plugin"],
+  plugins: ["preline/plugin", "tailwindcss", "autoprefixer", "daisyui"],
 };

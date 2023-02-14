@@ -115,7 +115,7 @@ const ProfileScreen = ({ location, history }) => {
           md={3}
           className="bg-slate-900 flex justify-center items-center text-white flex-col cta-prof rounded-md"
         >
-          {user.profileImage && (
+          {user.profileImage ? (
             <>
               {/* <div className="dividerrrprofile"></div> */}
               <center>
@@ -127,11 +127,13 @@ const ProfileScreen = ({ location, history }) => {
                 />
               </center>
             </>
+          ) : (
+            <h1 class="text-white">No Image</h1>
           )}
           <br></br>
           <br />
           <h1 className="text-white font-bold text-2xl text-center">
-            Hello, {userInfo.name}
+            Hello, {userInfo.name || "user"}
           </h1>
           <h1 className="text-slate-200 font-bold text-1xl text-center mt-2">
             {greeting}!
