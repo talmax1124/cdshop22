@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@headlessui/react": "^1.7.10",
     "@heroicons/react": "^1.0.6",
+    "@popperjs/core": "^2.11.6",
     "@reach/portal": "^0.17.0",
     "@stripe/react-stripe-js": "^1.16.1",
     "@stripe/stripe-js": "^1.46.0",
