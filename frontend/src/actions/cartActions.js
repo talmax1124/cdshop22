@@ -64,13 +64,13 @@ export const saveShippingAddress = (data) => async (dispatch) => {
       quantity: item.qty,
       total_price: item.price.toString(),
       currency: "USD",
-      weight: "1.0",
+      weight: "0.5",
       weight_unit: "lb",
       title: item.name,
       manufacture_country: "US",
       sku: item.product.toString(),
     };
-    totalWeight += item.weight;
+    totalWeight += item.weight * item.qty;
     if (item.length > largestItem) {
       largestItem = item.length;
     }
@@ -128,13 +128,12 @@ export const saveShippingAddress = (data) => async (dispatch) => {
       body: JSON.stringify(payload),
     });
 
-    console.log(process.env.CLIENT_URL);
-
     const json = await response.json();
 
     console.log("data", json);
 
-    data["shippingRates"] = [...json.results];
+    data["shipping Rates"] = [...json.results];
+
     localStorage.setItem("shippingRates", JSON.stringify(data.shippingRates));
   }
 
@@ -157,7 +156,8 @@ export const saveShippingAddress = (data) => async (dispatch) => {
 
     console.log("data", json);
 
-    data["shippingRates"] = [...json.results];
+    data["shipping Rates"] = [...json.results];
+
     localStorage.setItem("shippingRates", JSON.stringify(data.shippingRates));
   }
 
@@ -169,13 +169,12 @@ export const saveShippingAddress = (data) => async (dispatch) => {
   localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
 
-export const removeShipingRates =(data)=>(dispatch)=>{
-
+export const removeShipingRates = (data) => (dispatch) => {
   dispatch({
     type: CART_REMOVE_SHIPPING_RATES,
-  })
+  });
   localStorage.removeItem("shipingRates");
-}
+};
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ITEM,

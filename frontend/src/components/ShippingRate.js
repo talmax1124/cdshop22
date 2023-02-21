@@ -15,6 +15,7 @@ export const ShippingRateSkeleton = () => {
     </>
   );
 };
+
 const ShippingRate = ({ rate, onSelect }) => {
   return (
     <>

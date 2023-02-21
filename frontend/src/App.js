@@ -110,11 +110,8 @@ const App = () => {
           <Route path="/returnpolicy" component={returnpolicy} />
           <Route path="/privacypolicy" component={privacypolicy} />
           <Route path="/termsandconditions" component={termsandconditions} />
-          <Route
-            path="/products/category/:category"
-            component={ShopByCategoryScreen}
-          />
-          <Route path="/products/brands/:brand" component={ShopByBrandScreen} />
+          <Route path="/category/:category" component={ShopByCategoryScreen} />
+          <Route path="/brands/:brand" component={ShopByBrandScreen} />
           <Route path="/support" component={Support} />
           <Route
             path="/forgot-password"

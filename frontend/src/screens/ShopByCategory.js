@@ -29,34 +29,37 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-      <h1>{`Category : ${category}`}</h1>
+
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <h1 class="font-bold text-3xl">{`Category : ${category}`}</h1>
           {products ? (
             <>
-              <Link to="/">
-                <Button className="btn btn-dark">
-                  <i className="fas fa-arrow-left"></i> Go Back
+              <Link to="/products">
+                <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
+                  <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
+                  Go Back
                 </Button>
-                <br />
               </Link>
               <br />
-              <Row>
+              <Row class="mb-3 pb-3">
                 <br />
-                <Col md={3}>
+                <Col md={3} class="mb-3 mt-3">
                   <h6>Sort By:</h6>
                   <Sort products={products} />
                 </Col>
               </Row>
               <Row>
+                <div className="h-[3vh]"></div>
+              </Row>
+              <Row class="mt-3 mb-3 pt-4">
                 {products.map((product) => (
                   <>
                     <Product product={product} />
-                    <h1>p</h1>
                   </>
                 ))}
               </Row>

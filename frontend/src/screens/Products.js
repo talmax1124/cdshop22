@@ -9,7 +9,7 @@ import Paginate from "../components/Paginate";
 import Meta from "../components/Meta";
 import { listProducts } from "../actions/productActions";
 // import LatestProducts from "../components/LatestProducts";
-// import ShopByCategory from "../components/ShopByCategory";
+import ShopByCat from "../components/ShopByCategory";
 // import ShopByBrand from "../components/ShopByBrand";
 import Sort from "../components/Sort";
 import { Container } from "react-bootstrap";
@@ -30,7 +30,6 @@ const Products = ({ match, history, location }) => {
   return (
     <>
       <Meta />
-      {/* <ShopByCategory /> */}
       <span id="prod"></span>
       <main className="py-3">
         <Container>
@@ -46,6 +45,7 @@ const Products = ({ match, history, location }) => {
             <Message variant="danger">{error}</Message>
           ) : (
             <>
+              <ShopByCat />
               <Row>
                 <Col md={3} className="mb-2">
                   <h6>Sort By:</h6>

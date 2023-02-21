@@ -71,7 +71,7 @@ const AdditionalDetails = ({ match, location, history }) => {
 
     // GET SHIPPING RATES HERE
     let totalWeight = 0;
-    let largestItem = 0;
+    // let largestItem = 0;
 
     let cartLineItems = [];
     cartItems.forEach((item) => {
@@ -79,16 +79,13 @@ const AdditionalDetails = ({ match, location, history }) => {
         quantity: item.qty,
         total_price: item.price.toString(),
         currency: "USD",
-        weight: "1.0",
+        weight: "0.5",
         weight_unit: "lb",
         title: item.name,
         manufacture_country: "US",
         sku: item.product.toString(),
       };
-      totalWeight += item.weight;
-      if (item.length > largestItem) {
-        largestItem = item.length;
-      }
+      totalWeight += item.weight * item.qty;
       cartLineItems.push(lineItem);
     });
 
@@ -132,6 +129,7 @@ const AdditionalDetails = ({ match, location, history }) => {
     };
 
     if (process.env.NODE_ENV === "production") {
+      toast.success("Redirecting to Shipping Rates...");
       const response = await fetch(
         `https://creativeduo.net/api/rates/liverates`,
         {
@@ -144,12 +142,11 @@ const AdditionalDetails = ({ match, location, history }) => {
         }
       );
 
-      toast.success("Redirecting to Shipping Rates...");
-
       const json = await response.json();
-
       console.log("data", json);
-      const shippinRates = [...json.results];
+
+      // Get an array of shipping rates
+      let shippinRates = [...json.results];
 
       setLoading(false);
       setShowButton(true);
@@ -172,6 +169,7 @@ const AdditionalDetails = ({ match, location, history }) => {
       dispatch(saveOrderNotes(orderNotes));
       history.push("/checkout");
     } else if (process.env.NODE_ENV === "development") {
+      toast.success("Redirecting to Shipping Selection");
       const response = await fetch(
         `http://localhost:7500/api/rates/liverates`,
         {
@@ -187,9 +185,12 @@ const AdditionalDetails = ({ match, location, history }) => {
       toast.success("Redirecting to Shipping Rates...");
 
       const json = await response.json();
-
       console.log("data", json);
-      const shippinRates = [...json.results];
+
+      // Get an array of shipping rates
+      let shippinRates = [...json.results];
+
+      // Use the shippinRates and loop over them to get the price and find if it equals to .31. If it equals to .31 then remove it from the array
 
       setLoading(false);
       setShowButton(true);
@@ -213,64 +214,59 @@ const AdditionalDetails = ({ match, location, history }) => {
     }
   };
 
-  // function waitthreee() {
-  //   setTimeout(() => {
-  //     history.push("/checkout");
-  //   }, 3000);
-  // }
-
   return (
     <>
       <ToastContainer />
       <Row>
         <Col md={7}>
-          <ol class="flex items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border  rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4">
+          <ol className="flex items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border  rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4">
             <Link to="/cart" className="hover:no-underline">
-              <li class="flex items-center text-blue-400 ">
-                <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
+              <li className="flex items-center text-blue-400 ">
+                <span className="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
                   1
                 </span>
                 Cart
                 <svg
                   aria-hidden="true"
-                  class="w-4 h-4 ml-2 sm:ml-4"
+                  className="w-4 h-4 ml-2 sm:ml-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLineCap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M13 5l7 7-7 7M5 5l7 7-7 7"
                   ></path>
                 </svg>
               </li>
             </Link>
-            <li class="flex items-center text-blue-600 ">
-              <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+            <li className="flex items-center text-blue-600 ">
+              <span className="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
                 2
               </span>
-              Shipping <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+              Shipping{" "}
+              <span className="hidden sm:inline-flex sm:ml-2">Info</span>
               <svg
                 aria-hidden="true"
-                class="w-4 h-4 ml-2 sm:ml-4"
+                className="w-4 h-4 ml-2 sm:ml-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLineCap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M13 5l7 7-7 7M5 5l7 7-7 7"
                 ></path>
               </svg>
             </li>
-            <li class="flex items-center">
-              <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+            <li className="flex items-center">
+              <span className="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
                 3
               </span>
               Review & Pay
@@ -392,7 +388,7 @@ const AdditionalDetails = ({ match, location, history }) => {
                             >
                               <svg
                                 aria-hidden="true"
-                                class="w-8 h-8 mr-2 text-gray-200 animate-spin fill-white"
+                                className="w-8 h-8 mr-2 text-gray-200 animate-spin fill-white"
                                 viewBox="0 0 100 101"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -406,7 +402,7 @@ const AdditionalDetails = ({ match, location, history }) => {
                                   fill="currentFill"
                                 />
                               </svg>
-                              <span class="text-white">Loading...</span>
+                              <span className="text-white">Loading...</span>
                             </div>
                           </>
                         ) : (

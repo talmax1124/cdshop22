@@ -35,10 +35,6 @@ const CheckOut = ({ match, location, history }) => {
     // dispatch(saveordernotes(ordernotes));
   }, [dispatch, productId, qty, cart.shippingRates]);
 
-  // const submitToNext = (e) => {
-  //   history.push("/checkout");
-  // };
-
   const rateSelectHandelr = (rate) => {
     console.log("rate", rate);
     setShippingPrice(rate.amount);
@@ -47,6 +43,7 @@ const CheckOut = ({ match, location, history }) => {
     dispatch(saveShippingCost(rate.amount));
     dispatch(saveShippingTitle(rate.title));
   };
+
   return (
     <>
       {/* <ToastContainer /> */}

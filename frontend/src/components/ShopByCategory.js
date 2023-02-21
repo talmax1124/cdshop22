@@ -1,9 +1,12 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Row, Col } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 
-const ShopByCategory = ({ products }) => {
+const ShopByCat = ({ products }) => {
   //GET CATEGORIES
+  if (!products) {
+    return <div></div>;
+  }
   var categ = products
     .map((product) => {
       return { count: 1, product: product.category };
@@ -19,25 +22,17 @@ const ShopByCategory = ({ products }) => {
   return (
     <div>
       <h1>Categories</h1>
-      <Row>
+      {/* <Row>
         {keys.map((cat, k) => (
-          <Col className="shop-by-category" key={k} sm={12} md={2}>
-            <p>
-              <Link
-                className="btn btn-primary btn-lg"
-                to={`/products/category/${cat}`}
-                style={{
-                  textTransform: "none",
-                  color: "black",
-                  backgroundColor: "rgb(240, 240, 240)",
-                }}
-              >
-                {cat}
-              </Link>
-            </p>
+          <Col key={k} md={3} className="mb-2">
+            <Link to={`/products/category/${cat}`}>
+              <div className="flex flex-col items-center justify-center">
+                <h6>{cat}</h6>
+              </div>
+            </Link>
           </Col>
         ))}
-      </Row>
+      </Row> */}
 
       {/* <AppBar color="inherit" position="static">
         <Tabs
@@ -58,4 +53,4 @@ const ShopByCategory = ({ products }) => {
   );
 };
 
-export default ShopByCategory;
+export default ShopByCat;

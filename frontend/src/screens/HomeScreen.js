@@ -19,7 +19,6 @@ import WhatWeDoCarousel from "../components/WhatWeDoCarousel";
 // import ShopByCategory from "../components/ShopByCategory";
 // import ShopByBrand from "../components/ShopByBrand";
 // import Sort from "../components/Sort";
-import { Container } from "react-bootstrap";
 
 const HomeScreen = ({ match, history, location }) => {
   const keyword = match.params.keyword;
@@ -49,30 +48,18 @@ const HomeScreen = ({ match, history, location }) => {
       <span id="prod"></span>
       <WhatWeDoCarousel />
       <main className="py-3">
-        <Container>
-          {!keyword && pageNumber === 1 ? (
-            <>
-              <span>
-                <p className="text-[2.3em] font-bold font-sans mt-4 text-black uppercase">
-                  Top Rated Products
-                </p>
-                <p className="font-medium text-[1.4em] mt-[-0.4em] mb-3">
-                  this week
-                </p>
-              </span>
-
-              <ProductCarousel />
-            </>
-          ) : (
-            <Link
-              to="/"
-              className="btn bg-black w-full text-white hover:bg-gray-700"
-            >
-              Go Back
-            </Link>
-          )}
-          {/* <ShopByCategory products={products} /> */}
-        </Container>
+        {!keyword && pageNumber === 1 ? (
+          <>
+            <ProductCarousel />
+          </>
+        ) : (
+          <Link
+            to="/"
+            className="btn bg-black w-full text-white hover:bg-gray-700"
+          >
+            Go Back
+          </Link>
+        )}
         {!keyword && pageNumber === 1 ? (
           <>
             <Map />

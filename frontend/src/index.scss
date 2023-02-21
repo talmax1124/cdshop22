@@ -324,9 +324,9 @@ main {
   display: block;
 }
 
-.search-input {
-  width: 100%;
-}
+// .search-input {
+//   width: 100%;
+// }
 
 @media (max-width: 999px) {
   .search-big {
@@ -335,6 +335,16 @@ main {
 
   .search-input {
     margin-top: 1em;
+    width: 100%;
+  }
+
+  .formsubmit {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
   }
 
   .search-btn {

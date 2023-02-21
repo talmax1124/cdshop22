@@ -6,12 +6,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
-import { Dialog, Transition, Menu } from "@headlessui/react";
+import { Transition, Menu } from "@headlessui/react";
 
 const Header = () => {
   const dispatch = useDispatch();
-
-  const [searchOpen, setSearchOpen] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -23,12 +21,24 @@ const Header = () => {
     dispatch(logout());
   };
 
-  function openModalo() {
-    setSearchOpen(true);
-  }
-  function closeModalo() {
-    setSearchOpen(false);
-  }
+  // Make the use of the opensearch function to make it show and unshow the search bar
+
+  const [open, setOpen] = useState(false);
+
+  const openSearch = () => {
+    setOpen(true);
+  };
+
+  // Close the search bar using the button or clicking enter
+  const closeSearch = () => {
+    setOpen(false);
+  };
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === ["Enter", "Return"]) {
+      closeSearch();
+    }
+  });
 
   return (
     <>
@@ -45,57 +55,6 @@ const Header = () => {
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Transition appear show={searchOpen} as={Fragment}>
-                <Dialog
-                  as="div"
-                  className="relative z-10"
-                  onClose={closeModalo}
-                >
-                  <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <div className="fixed inset-0 bg-black bg-opacity-25" />
-                  </Transition.Child>
-
-                  <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
-                      <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0 scale-95"
-                        enterTo="opacity-100 scale-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100 scale-100"
-                        leaveTo="opacity-0 scale-95"
-                      >
-                        <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-3 text-left align-middle shadow-xl transition-all">
-                          <Dialog.Title
-                            as="h3"
-                            className="text-lg font-medium leading-6 mb-3 text-gray-900"
-                          >
-                            Search
-                          </Dialog.Title>
-
-                          <Route
-                            render={({ history }) => (
-                              <SearchBox
-                                className="w-[100%] mt-3 text-[1.9em]"
-                                history={history}
-                              />
-                            )}
-                          />
-                        </Dialog.Panel>
-                      </Transition.Child>
-                    </div>
-                  </div>
-                </Dialog>
-              </Transition>
               <div className="search-small">
                 <Route
                   render={({ history }) => (
@@ -110,7 +69,7 @@ const Header = () => {
                 <LinkContainer to="/products">
                   <Nav.Link>Shop</Nav.Link>
                 </LinkContainer>
-                <Nav.Link onClick={openModalo} className="search-big">
+                <Nav.Link onClick={openSearch} className="search-big">
                   Search
                 </Nav.Link>
                 <LinkContainer to="/cart">
@@ -300,6 +259,25 @@ const Header = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        {/* Add the div to show and close to use the open */}
+        {open ? (
+          <div class="p-3 bg-gray-800 flex justify-center items-center flex-col">
+            {" "}
+            <Route
+              render={({ history }) => (
+                <SearchBox className="mt-3 text-[1.9em]" history={history} />
+              )}
+            />
+            <button
+              onClick={closeSearch}
+              class="bg-emerald-500 px-4 py-2 rounded-md mt-3 font-medium text-black font-2xl hover:bg-emerald-400 mb-3"
+            >
+              Close Search Bar
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </header>
     </>
   );

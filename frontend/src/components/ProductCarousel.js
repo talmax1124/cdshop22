@@ -22,28 +22,36 @@ const ProductCarousel = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <div className="flex justify-between top-products">
-        {products.map((product) => (
-          <div
-            key={product._id}
-            className="bg-slate-100 mr-2 ml-2 p-3 top-card rounded-md"
-          >
-            <Link to={`/product/${product._id}`}>
-              <Image src={product.image} alt={product.name} fluid />
-              <p>
-                <h2 className="font-bold mt-3 mb-">{product.name}</h2>
+      <div className="p-5">
+        <span>
+          <p className="text-[2.3em] font-bold font-sans mt-4 text-black uppercase">
+            Top Rated Products
+          </p>
+          <p className="font-medium text-[1.4em] mt-[-0.4em] mb-3">this week</p>
+        </span>
+        <div className="flex justify-between top-products ">
+          {products.map((product) => (
+            <div
+              key={product._id}
+              className="bg-slate-100 mr-2 ml-2 p-3 top-card rounded-md"
+            >
+              <Link to={`/product/${product._id}`}>
+                <Image src={product.image} alt={product.name} fluid />
+                <p>
+                  <h2 className="font-bold mt-3 mb-">{product.name}</h2>
 
-                <h2 className="font-medium mt-1">$ {product.price}</h2>
-              </p>
-            </Link>
-          </div>
-        ))}
+                  <h2 className="font-medium mt-1">$ {product.price}</h2>
+                </p>
+              </Link>
+            </div>
+          ))}
+        </div>
+        <Link to="/products">
+          <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
+            View All Products
+          </Button>
+        </Link>
       </div>
-      <Link to="/products">
-        <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
-          View All Products
-        </Button>
-      </Link>
     </>
   );
 };
