@@ -12,10 +12,7 @@ const Meta = ({ title, description, keywords, thumbnail }) => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta
-        name="twitter:image"
-        content="https://i.ibb.co/0jM83MR/Asset-5.png"
-      />
+      <meta name="twitter:image" content={thumbnail} />
 
       <meta property="og:url" content="https://creativeduo.net" />
       <meta property="og:locale" content="en_US" />
@@ -23,7 +20,7 @@ const Meta = ({ title, description, keywords, thumbnail }) => {
       <meta property="og:site_name" content="Creative Duo LLC" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      
+
       {/* Get product image and display it as the thumbnail preview when sending the link to a person via messages  */}
 
       <meta property="og:image" content={thumbnail} />
