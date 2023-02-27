@@ -23,17 +23,12 @@ const Meta = ({ title, description, keywords, thumbnail }) => {
       <meta property="og:site_name" content="Creative Duo LLC" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-
-      <meta
-        property="og:image"
-        content="https://i.ibb.co/0jM83MR/Asset-5.png"
-      ></meta>
+      
       {/* Get product image and display it as the thumbnail preview when sending the link to a person via messages  */}
 
+      <meta property="og:image" content={thumbnail} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-
-      <meta property="og:image" content={thumbnail} />
     </Helmet>
   );
 };

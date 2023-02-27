@@ -169,6 +169,7 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <>
+      <Meta title={product.name} thumbnail={product.image} />
       <React.Fragment>
         <div className="flex justify-between">
           <Link to="/products">
@@ -205,7 +206,6 @@ const ProductScreen = ({ history, match }) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <>
-            <Meta title={product.name} thumbnail={product.image} />
             <Row>
               <Col md={6}>
                 {product.additionalimageone ||
