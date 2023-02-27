@@ -36,7 +36,7 @@ const HomeScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <h1 class="font-bold text-3xl">{`Category : ${category}`}</h1>
+          <h1 className="font-bold text-3xl">{`Category : ${category}`}</h1>
           {products ? (
             <>
               <Link to="/products">
@@ -46,9 +46,9 @@ const HomeScreen = ({ match }) => {
                 </Button>
               </Link>
               <br />
-              <Row class="mb-3 pb-3">
+              <Row className="mb-3 pb-3">
                 <br />
-                <Col md={3} class="mb-3 mt-3">
+                <Col md={3} className="mb-3 mt-3">
                   <h6>Sort By:</h6>
                   <Sort products={products} />
                 </Col>
@@ -56,7 +56,7 @@ const HomeScreen = ({ match }) => {
               <Row>
                 <div className="h-[3vh]"></div>
               </Row>
-              <Row class="mt-3 mb-3 pt-4">
+              <Row className="mt-3 mb-3 pt-4">
                 {products.map((product) => (
                   <>
                     <Product product={product} />

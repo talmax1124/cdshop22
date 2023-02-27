@@ -128,7 +128,7 @@ const ProfileScreen = ({ location, history }) => {
               </center>
             </>
           ) : (
-            <h1 class="text-white">No Image</h1>
+            <h1 className="text-white">No Image</h1>
           )}
           <br></br>
           <br />

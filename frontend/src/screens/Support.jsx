@@ -8,7 +8,7 @@ const Support = () => {
   return (
     <>
       <div className="container">
-        <h1 class=" text-black text-[3em] font-medium tracking-tight leading-none mb-1 ">
+        <h1 className=" text-black text-[3em] font-medium tracking-tight leading-none mb-1 ">
           Customer Support
         </h1>
         <hr className="mb-3" />
@@ -21,7 +21,9 @@ const Support = () => {
               Other Methods of Contact:
             </p>
             <a href="tel: 4077566386">
-              <p className="font-light text-1xl">Office Number: (407) 756-6386</p>
+              <p className="font-light text-1xl">
+                Office Number: (407) 756-6386
+              </p>
             </a>
             <a href="mailto: creativeduo2020@gmail.com">
               <p className="font-light text-1xl">

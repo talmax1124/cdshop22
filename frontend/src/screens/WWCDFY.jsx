@@ -94,10 +94,10 @@ const WWCDFY = () => {
 		prevNextButtons: false,
 		pageDots: false, */}
       <div
-        class="carousel rounded-md"
+        className="carousel rounded-md"
         data-flickity='{ "freeScroll": true, "wrapAround": true, "cellAlign": "left", "imagesLoaded": true, "pageDots": false }'
       >
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/6HzWjPZ/Creative-Duo-Website-2.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -109,7 +109,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/qMP5ZgP/Creative-Duo-Website-3.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -121,7 +121,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/j6sqMBr/Creative-Duo-Website-4.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -133,7 +133,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/Vxvz6Gx/Creative-Duo-Website-9.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -145,7 +145,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/7R6zzTr/Creative-Duo-Website-8.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -157,7 +157,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/2S8xyG6/Creative-Duo-Website-7.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -169,7 +169,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/cCKyKjk/Creative-Duo-Website-6.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -181,7 +181,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/Wzt0f4c/Creative-Duo-Website-5.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -193,7 +193,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/MDdWFMB/Creative-Duo-Website-10.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -205,7 +205,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/XC8D180/Creative-Duo-Website-11.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -217,7 +217,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/VtRJ3M7/Creative-Duo-Website-12.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -229,7 +229,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/VJSsRHt/Creative-Duo-Website-13.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -241,7 +241,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/CbR1tss/Creative-Duo-Website-14.jpg%5B/img%5D%5B/url%5D"
             alt=""
@@ -253,7 +253,7 @@ const WWCDFY = () => {
           </div>
         </div>
 
-        <div class="carousel-celll flex bg-slate-200">
+        <div className="carousel-celll flex bg-slate-200">
           <img
             src="https://i.ibb.co/g9XFyPF/Creative-Duo-Website.jpg%5B/img%5D%5B/url%5D"
             alt=""

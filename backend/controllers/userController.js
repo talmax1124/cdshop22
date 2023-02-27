@@ -188,21 +188,21 @@ const verificationLink = asyncHandler(async (req, res) => {
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="container">
-      <div class="header">
+  <div className="wrapper">
+    <div className="container">
+      <div className="header">
       Creative Duo
       </div>
-      <div class="main-content">
+      <div className="main-content">
         <img src="https://i.ibb.co/1J6y513/undraw-festivities-tvvj-transparent.png" alt="undraw-festivities-tvvj-transparent" border="0">
         <h2>You're nearly there!</h2>
-        <p class="text-main">We just need to verify your email address to complete setting up your account.</p>
-        <a href="${process.env.CLIENT_URL}/verify/${tokengenerate}" class="button">Verify Email</a>
-        <p class="sub-text">Or paste this link into your browser:</p>
-        <p class="long-link">${process.env.CLIENT_URL}/verify/${tokengenerate}</p>
+        <p className="text-main">We just need to verify your email address to complete setting up your account.</p>
+        <a href="${process.env.CLIENT_URL}/verify/${tokengenerate}" className="button">Verify Email</a>
+        <p className="sub-text">Or paste this link into your browser:</p>
+        <p className="long-link">${process.env.CLIENT_URL}/verify/${tokengenerate}</p>
       </div>
     </div>
-    <div class="footer">
+    <div className="footer">
       <p>If you have not signed up at Creative Duo, please ignore this email.</p>
       <p>Sent by Creative Duo &#8226; <a href="https://creativeduo.net">creativeduo.net</a> </p>
     </div>

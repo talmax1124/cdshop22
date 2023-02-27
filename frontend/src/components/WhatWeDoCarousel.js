@@ -14,6 +14,7 @@ const WhatWeDoCarousel = () => {
         <p className="text-[3em] font-extrabold font-sans mt-4 mb-3  uppercase">
           What We <span className="text-green-400">Do</span>
         </p>
+
         <Flicking
           align="prev"
           circular={true}

@@ -168,105 +168,106 @@ const ProductScreen = ({ history, match }) => {
   // What fragments do: A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
 
   return (
-    <React.Fragment>
-      <div className="flex justify-between">
-        <Link to="/products">
-          <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
-            <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
-            Go Back
-          </Button>
-        </Link>
+    <>
+      <React.Fragment>
+        <div className="flex justify-between">
+          <Link to="/products">
+            <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
+              <i className="fas fa-arrow-left mr-1 text-[1.4em]"></i>
+              Go Back
+            </Button>
+          </Link>
 
-        {userInfo && userInfo.isAdmin && (
-          <>
-            <div>
-              <Link to={`/admin/product/${product._id}/edit`}>
-                <Button className="text-black bg-green-100 hover:bg-red-500   rounded-lg mb-3 mt-2 no-underline hover:no-underline mr-2">
-                  <i className="fas fa-pencil mr-1 text-[1.4em]"></i>
-                  Edit
+          {userInfo && userInfo.isAdmin && (
+            <>
+              <div>
+                <Link to={`/admin/product/${product._id}/edit`}>
+                  <Button className="text-black bg-green-100 hover:bg-red-500   rounded-lg mb-3 mt-2 no-underline hover:no-underline mr-2">
+                    <i className="fas fa-pencil mr-1 text-[1.4em]"></i>
+                    Edit
+                  </Button>
+                </Link>
+                <Button
+                  className="text-black bg-red-100 hover:bg-red-500   rounded-lg mb-3 mt-2 no-underline hover:no-underline"
+                  onClick={() => deleteHandler(product._id)}
+                >
+                  <i className="fas fa-trash mr-1 text-[1.4em]"></i>
+                  Delete
                 </Button>
-              </Link>
-              <Button
-                className="text-black bg-red-100 hover:bg-red-500   rounded-lg mb-3 mt-2 no-underline hover:no-underline"
-                onClick={() => deleteHandler(product._id)}
-              >
-                <i className="fas fa-trash mr-1 text-[1.4em]"></i>
-                Delete
-              </Button>
-            </div>
-          </>
-        )}
-      </div>
-
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <>
-          <Meta title={product.name} />
-          <Row>
-            <Col md={6}>
-              {product.additionalimageone ||
-              product.additionalimagetwo ||
-              product.additionalimagethree ? (
-                <ProductImageCarousel match={match} variant="dark" />
-              ) : (
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fluid
-                  style={{
-                    width: "100%",
-                    objectFit: "contain",
-                  }}
-                />
-              )}
-            </Col>
-            <Col md={5} className="product-info">
-              <div className="flex justify-between items-center mt-3 mb-3">
-                {product.countInStock > 0 ? (
-                  <div className="flex justify-center items-center p-2 bg-teal-300 rounded  stock-button">
-                    <span className="font-medium">In stock</span>
-                  </div>
-                ) : (
-                  <div className="flex justify-center items-center p-2 bg-red-300 rounded  stock-button">
-                    <span className="font-medium text-xs ">Out of Stock</span>
-                  </div>
-                )}
-                <Rating
-                  value={product.rating}
-                  text={
-                    product.numReviews > 1
-                      ? `${product.numReviews} review(s)`
-                      : `${product.numReviews} review`
-                  }
-                />
               </div>
-              <h1>{product.name}</h1>
-              {product.price > 0 && (
-                <>
-                  {product.onSalePrice > 0 ? (
-                    <>
-                      <div className="flex">
+            </>
+          )}
+        </div>
+
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <>
+            <Meta title={product.name} thumbnail={product.image} />
+            <Row>
+              <Col md={6}>
+                {product.additionalimageone ||
+                product.additionalimagetwo ||
+                product.additionalimagethree ? (
+                  <ProductImageCarousel match={match} variant="dark" />
+                ) : (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fluid
+                    style={{
+                      width: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                )}
+              </Col>
+              <Col md={5} className="product-info">
+                <div className="flex justify-between items-center mt-3 mb-3">
+                  {product.countInStock > 0 ? (
+                    <div className="flex justify-center items-center p-2 bg-teal-300 rounded  stock-button">
+                      <span className="font-medium">In stock</span>
+                    </div>
+                  ) : (
+                    <div className="flex justify-center items-center p-2 bg-red-300 rounded  stock-button">
+                      <span className="font-medium text-xs ">Out of Stock</span>
+                    </div>
+                  )}
+                  <Rating
+                    value={product.rating}
+                    text={
+                      product.numReviews > 1
+                        ? `${product.numReviews} review(s)`
+                        : `${product.numReviews} review`
+                    }
+                  />
+                </div>
+                <h1>{product.name}</h1>
+                {product.price > 0 && (
+                  <>
+                    {product.onSalePrice > 0 ? (
+                      <>
+                        <div className="flex">
+                          <h4 className="font-bold text-[1.2em] mt-3 mr-3">
+                            ${product.price}
+                          </h4>
+                          <p className="font-bold mt-3 text-[1.2em] line-through text-red-500 opacity-[50%]">
+                            ${product.onSalePrice}
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
                         <h4 className="font-bold text-[1.2em] mt-3 mr-3">
                           ${product.price}
                         </h4>
-                        <p className="font-bold mt-3 text-[1.2em] line-through text-red-500 opacity-[50%]">
-                          ${product.onSalePrice}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <h4 className="font-bold text-[1.2em] mt-3 mr-3">
-                        ${product.price}
-                      </h4>
-                    </>
-                  )}
-                </>
-              )}
-              {/* {product.productOptions && (
+                      </>
+                    )}
+                  </>
+                )}
+                {/* {product.productOptions && (
                 <>
                   <div className="flex justify-between items-center mt-3 mb-3">
                     {product.productOptions.map((option) => {
@@ -282,437 +283,444 @@ const ProductScreen = ({ history, match }) => {
                 </>
               )} */}
 
-              {product.countInStock > 0 && (
-                <Row className="flex items-center mt-3 mb-3">
-                  Qty
-                  <Form.Control
-                    as="select"
-                    value={qty}
-                    onChange={(e) => setQty(e.target.value)}
-                    className="ml-2 w-1/2"
-                  >
-                    {[...Array(product.countInStock).keys()].map((x) => (
-                      <option key={x + 1} value={x + 1}>
-                        {x + 1}
-                      </option>
-                    ))}
-                  </Form.Control>
-                </Row>
-              )}
-              <Button
-                onClick={addToCartHandler}
-                className="bg-black w-full hover:bg-slate-700"
-                type="button"
-                disabled={product.countInStock === 0}
-              >
-                Add To Cart
-              </Button>
-            </Col>
-          </Row>
-
-          <div class="flow-root mt-3 mb-3">
-            <div class="-my-8 divide-y divide-gray-100 mt-2 mb-2">
-              <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
-                <summary class="flex items-center justify-between cursor-pointer">
-                  <h2 class="text-lg font-medium text-gray-900">
-                    Product Information & Details
-                  </h2>
-
-                  <span class="relative ml-1.5 h-5 w-5 flex-shrink-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
+                {product.countInStock > 0 && (
+                  <Row className="flex items-center mt-3 mb-3">
+                    Qty
+                    <Form.Control
+                      as="select"
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                      className="ml-2 w-1/2"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </span>
-                </summary>
-
-                <ListGroup.Item>
-                  <span className="font-medium uppercase">Brand:</span>{" "}
-                  <span className="font-light">{product.brand}</span>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <span className="font-medium uppercase">Category:</span>{" "}
-                  <span className="font-light">{product.category}</span>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <span className="font-medium uppercase">Product Type:</span>{" "}
-                  <span className="font-light">{product.type}</span>
-                </ListGroup.Item>
-
-                <ListGroup
-                  style={{
-                    marginTop: "10px",
-                    marginBottom: "10px",
-
-                    justifyContent: "center",
-                    textAlign: "center",
-                    alignItems: "center",
-                  }}
+                      {[...Array(product.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Row>
+                )}
+                <Button
+                  onClick={addToCartHandler}
+                  className="bg-black w-full hover:bg-slate-700"
+                  type="button"
+                  disabled={product.countInStock === 0}
                 >
-                  <ListGroup.Item style={{ minWidth: "100%" }}>
-                    <Row
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <h3 className="font-medium mb-3 text-[1.15em]">
-                        Description
-                      </h3>
-                    </Row>
-                    <Row
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Col md={6}>
-                        <ProductDescription Product={product} />
-                      </Col>
-                    </Row>
+                  Add To Cart
+                </Button>
+              </Col>
+            </Row>
+
+            <div className="flow-root mt-3 mb-3">
+              <div className="-my-8 divide-y divide-gray-100 mt-2 mb-2">
+                <details className="group py-8 [&_summary::-webkit-details-marker]:hidden">
+                  <summary className="flex items-center justify-between cursor-pointer">
+                    <h2 className="text-lg font-medium text-gray-900">
+                      Product Information & Details
+                    </h2>
+
+                    <span className="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </span>
+                  </summary>
+
+                  <ListGroup.Item>
+                    <span className="font-medium uppercase">Brand:</span>{" "}
+                    <span className="font-light">{product.brand}</span>
                   </ListGroup.Item>
-                </ListGroup>
-              </details>
 
-              <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
-                <summary class="flex items-center justify-between cursor-pointer">
-                  <h2 class="text-lg font-medium text-gray-900">
-                    Shipping & Returns
-                  </h2>
-
-                  <span class="relative ml-1.5 h-5 w-5 flex-shrink-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </span>
-                </summary>
-                {!product.shippingReturnPolicy ? (
-                  <h1 className="text-1xl mt-3 font-medium">
-                    No Information On This At The Moment
-                  </h1>
-                ) : (
-                  <ListGroup.Item style={{ minWidth: "100%" }}>
-                    <Row
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <h3 className="font-medium mb-3 text-[1.15em]">
-                        Shipping & Returns
-                      </h3>
-                    </Row>
-                    <Row
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Col md={6}>
-                        <ShippingReturnPolicy Product={product} />
-                      </Col>
-                    </Row>
+                  <ListGroup.Item>
+                    <span className="font-medium uppercase">Category:</span>{" "}
+                    <span className="font-light">{product.category}</span>
                   </ListGroup.Item>
-                )}
-              </details>
+                  <ListGroup.Item>
+                    <span className="font-medium uppercase">Product Type:</span>{" "}
+                    <span className="font-light">{product.type}</span>
+                  </ListGroup.Item>
 
-              <details class="group py-8 [&_summary::-webkit-details-marker]:hidden">
-                <summary class="flex items-center justify-between cursor-pointer">
-                  <h2 class="text-lg font-medium text-gray-900">
-                    Additional Details
-                  </h2>
+                  <ListGroup
+                    style={{
+                      marginTop: "10px",
+                      marginBottom: "10px",
 
-                  <span class="relative ml-1.5 h-5 w-5 flex-shrink-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                      justifyContent: "center",
+                      textAlign: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <ListGroup.Item style={{ minWidth: "100%" }}>
+                      <Row
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <h3 className="font-medium mb-3 text-[1.15em]">
+                          Description
+                        </h3>
+                      </Row>
+                      <Row
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Col md={6}>
+                          <ProductDescription Product={product} />
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </details>
 
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </span>
-                </summary>
+                <details className="group py-8 [&_summary::-webkit-details-marker]:hidden">
+                  <summary className="flex items-center justify-between cursor-pointer">
+                    <h2 className="text-lg font-medium text-gray-900">
+                      Shipping & Returns
+                    </h2>
 
-                {!product.productImportantInformation ? (
-                  <h1 className="text-1xl mt-3 font-medium">
-                    No Important Product Information Available At The Moment
-                  </h1>
-                ) : (
-                  <>
-                    <h6 className="mb-3 font-medium mt-2">
-                      Product Important Information:
-                    </h6>
-                    <ProductInformation Product={product} />
-                  </>
-                )}
+                    <span className="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
 
-                {!product.productVideo ? (
-                  <h1 className="text-1xl mt-3 mb-3 font-medium">
-                    No Product Video Available At The Moment
-                  </h1>
-                ) : (
-                  <>
-                    <Button
-                      variant="primary"
-                      onClick={handleShow}
-                      className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                    >
-                      Open Product Video
-                    </Button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </span>
+                  </summary>
+                  {!product.shippingReturnPolicy ? (
+                    <h1 className="text-1xl mt-3 font-medium">
+                      No Information On This At The Moment
+                    </h1>
+                  ) : (
+                    <ListGroup.Item style={{ minWidth: "100%" }}>
+                      <Row
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <h3 className="font-medium mb-3 text-[1.15em]">
+                          Shipping & Returns
+                        </h3>
+                      </Row>
+                      <Row
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          textAlign: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Col md={6}>
+                          <ShippingReturnPolicy Product={product} />
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
+                </details>
 
-                    <Modal
-                      show={show}
-                      onHide={handleClose}
-                      keyboard={false}
-                      centered
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title>Product Video</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <iframe
-                          width="100%"
-                          height="250px"
-                          src={product.productVideo}
-                          title="YouTube video player"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button
-                          variant="primary"
-                          className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                          onClick={handleClose}
-                        >
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </>
-                )}
+                <details className="group py-8 [&_summary::-webkit-details-marker]:hidden">
+                  <summary className="flex items-center justify-between cursor-pointer">
+                    <h2 className="text-lg font-medium text-gray-900">
+                      Additional Details
+                    </h2>
 
-                {!product.productTutorial ? (
-                  <h1 className="text-1xl mt-3 mb-3 font-medium">
-                    No Important Product Tutorial Available At The Moment
-                  </h1>
-                ) : (
-                  <>
-                    <Button
-                      variant="primary"
-                      onClick={handleShow}
-                      className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                    >
-                      Open Product Tutorial
-                    </Button>
+                    <span className="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
 
-                    <Modal
-                      show={show}
-                      onHide={handleClose}
-                      keyboard={false}
-                      centered
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title>Product Tutorial</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <iframe
-                          width="100%"
-                          height="250px"
-                          src={product.productTutorial}
-                          title="YouTube video player"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button
-                          variant="primary"
-                          className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
-                          onClick={handleClose}
-                        >
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </>
-                )}
-              </details>
-            </div>
-          </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </span>
+                  </summary>
 
-          <Row
-            className="
-          mt-3 bg-slate-50 rounded-md p-3"
-          >
-            <Col md={6}>
-              <h2 className="font-medium font-sans text-[2em] mt-2">Reviews</h2>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
-              <div className="flex mt-3 reviews">
-                <div className="left-rev">
-                  <h2 className="font-semibold mb-3">Write a Product Review</h2>
-                  {loadingProductReview && <Loader />}
-                  {loadingProductReviewDelete && <Loader />}
-                  {errorProductReview && (
+                  {!product.productImportantInformation ? (
+                    <h1 className="text-1xl mt-3 font-medium">
+                      No Important Product Information Available At The Moment
+                    </h1>
+                  ) : (
                     <>
-                      <Message variant="danger">{errorProductReview}</Message>
-                      <Message variant="danger">
-                        {errorProductReviewDelete}
-                      </Message>
+                      <h6 className="mb-3 font-medium mt-2">
+                        Product Important Information:
+                      </h6>
+                      <ProductInformation Product={product} />
                     </>
                   )}
 
-                  {userInfo ? (
-                    <Form onSubmit={submitHandler}>
-                      <Form.Group controlId="rating">
-                        <Form.Control
-                          as="select"
-                          value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
-                          <option value="">Select...</option>
-                          <option value="1">1 - ⭐️ Poorly </option>
-                          <option value="2">2 - ⭐️⭐️ Fair </option>
-                          <option value="3">3 - ⭐️⭐️⭐️ Good </option>
-                          <option value="4">4 - ⭐️⭐️⭐️⭐️ Very Good </option>
-                          <option value="5">
-                            5 - ⭐️⭐️⭐️⭐️⭐️ Excellent{" "}
-                          </option>
-                        </Form.Control>
-                      </Form.Group>
-                      <Form.Group controlId="comment">
-                        <Form.Label>Comment</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          row="3"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-                      <Button
-                        disabled={loadingProductReview}
-                        type="submit"
-                        className="bg-black w-full hover:bg-slate-700"
-                      >
-                        Submit Your Review
-                      </Button>
-                    </Form>
+                  {!product.productVideo ? (
+                    <h1 className="text-1xl mt-3 mb-3 font-medium">
+                      No Product Video Available At The Moment
+                    </h1>
                   ) : (
-                    <Message>
-                      Please <Link to="/login">sign in</Link> to write a review{" "}
-                    </Message>
-                  )}
-                </div>
-                <div className="right-rev">
-                  {product.reviews.map((review) => (
                     <>
-                      <div
-                        key={review._id}
-                        className="w-full revcard bg-slate-200 p-4 rounded rev-item"
+                      <Button
+                        variant="primary"
+                        onClick={handleShow}
+                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
                       >
-                        {review.profileImage && (
-                          <div className="left-rev-item">
-                            <img
-                              src={review.profileImage}
-                              className="card-img-top"
-                              alt="..."
-                            />
-                          </div>
-                        )}
-                        <div className="right-rev-item">
-                          <strong className="font-bold mb-1 text-[1.1em]">
-                            {review.name}
-                          </strong>
-                          <Rating value={review.rating} className="mb-1" />
-                          <p className="mb-1">
-                            {review.createdAt.substring(0, 10)}
-                          </p>
-                          <p className="mt-2 mb-1 font-medium text-[1.15em]">
-                            {review.comment}
-                          </p>
-                          {/* {userInfo.isAdmin === true(
+                        Open Product Video
+                      </Button>
+
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        keyboard={false}
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Product Video</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <iframe
+                            width="100%"
+                            height="250px"
+                            src={product.productVideo}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="primary"
+                            className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  )}
+
+                  {!product.productTutorial ? (
+                    <h1 className="text-1xl mt-3 mb-3 font-medium">
+                      No Important Product Tutorial Available At The Moment
+                    </h1>
+                  ) : (
+                    <>
+                      <Button
+                        variant="primary"
+                        onClick={handleShow}
+                        className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                      >
+                        Open Product Tutorial
+                      </Button>
+
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        keyboard={false}
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Product Tutorial</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <iframe
+                            width="100%"
+                            height="250px"
+                            src={product.productTutorial}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="primary"
+                            className="btn btn-block bg-black hover:bg-gray-800 mt-2 mb-2"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  )}
+                </details>
+              </div>
+            </div>
+
+            <Row
+              className="
+          mt-3 bg-slate-50 rounded-md p-3"
+            >
+              <Col md={6}>
+                <h2 className="font-medium font-sans text-[2em] mt-2">
+                  Reviews
+                </h2>
+                {product.reviews.length === 0 && <Message>No Reviews</Message>}
+                <div className="flex mt-3 reviews">
+                  <div className="left-rev">
+                    <h2 className="font-semibold mb-3">
+                      Write a Product Review
+                    </h2>
+                    {loadingProductReview && <Loader />}
+                    {loadingProductReviewDelete && <Loader />}
+                    {errorProductReview && (
+                      <>
+                        <Message variant="danger">{errorProductReview}</Message>
+                        <Message variant="danger">
+                          {errorProductReviewDelete}
+                        </Message>
+                      </>
+                    )}
+
+                    {userInfo ? (
+                      <Form onSubmit={submitHandler}>
+                        <Form.Group controlId="rating">
+                          <Form.Control
+                            as="select"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                          >
+                            <option value="">Select...</option>
+                            <option value="1">1 - ⭐️ Poorly </option>
+                            <option value="2">2 - ⭐️⭐️ Fair </option>
+                            <option value="3">3 - ⭐️⭐️⭐️ Good </option>
+                            <option value="4">
+                              4 - ⭐️⭐️⭐️⭐️ Very Good{" "}
+                            </option>
+                            <option value="5">
+                              5 - ⭐️⭐️⭐️⭐️⭐️ Excellent{" "}
+                            </option>
+                          </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="comment">
+                          <Form.Label>Comment</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            row="3"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                        <Button
+                          disabled={loadingProductReview}
+                          type="submit"
+                          className="bg-black w-full hover:bg-slate-700"
+                        >
+                          Submit Your Review
+                        </Button>
+                      </Form>
+                    ) : (
+                      <Message>
+                        Please <Link to="/login">sign in</Link> to write a
+                        review{" "}
+                      </Message>
+                    )}
+                  </div>
+                  <div className="right-rev">
+                    {product.reviews.map((review) => (
+                      <>
+                        <div
+                          key={review._id}
+                          className="w-full revcard bg-slate-200 p-4 rounded rev-item"
+                        >
+                          {review.profileImage && (
+                            <div className="left-rev-item">
+                              <img
+                                src={review.profileImage}
+                                className="card-img-top"
+                                alt="..."
+                              />
+                            </div>
+                          )}
+                          <div className="right-rev-item">
+                            <strong className="font-bold mb-1 text-[1.1em]">
+                              {review.name}
+                            </strong>
+                            <Rating value={review.rating} className="mb-1" />
+                            <p className="mb-1">
+                              {review.createdAt.substring(0, 10)}
+                            </p>
+                            <p className="mt-2 mb-1 font-medium text-[1.15em]">
+                              {review.comment}
+                            </p>
+                            {/* {userInfo.isAdmin === true(
                             <Button
                               className="btn w-full bg-red-800 btn-block"
                               onClick={deleteReviewHandler(review._id)}
@@ -721,17 +729,18 @@ const ProductScreen = ({ history, match }) => {
                               <i className="fas fa-trash"></i> Delete Comment
                             </Button>
                           )} */}
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  ))}
+                      </>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
-        </>
-      )}
-    </React.Fragment>
+              </Col>
+            </Row>
+          </>
+        )}
+      </React.Fragment>
+    </>
   );
 };
 

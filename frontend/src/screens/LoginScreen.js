@@ -95,7 +95,7 @@ const LoginScreen = ({ location, history }) => {
             </Button>
           </Form>
 
-          <div class="flex justify-center items-center mt-4">
+          <div className="flex justify-center items-center mt-4">
             <button
               onClick={signInWithGoogleHandler}
               className=" bg-slate-200 rounded-full w-1/2 flex justify-center items-center p-1 hover:bg-slate-300"
