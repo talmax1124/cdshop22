@@ -15,6 +15,7 @@ import Hero from "../components/Hero";
 import Map from "../components/Map";
 // import About from "../components/About";
 import WhatWeDoCarousel from "../components/WhatWeDoCarousel";
+import BeforeAfter from "../components/BeforeAfter";
 // import LatestProducts from "../components/LatestProducts";
 // import ShopByCategory from "../components/ShopByCategory";
 // import ShopByBrand from "../components/ShopByBrand";
@@ -62,6 +63,7 @@ const HomeScreen = ({ match, history, location }) => {
         )}
         {!keyword && pageNumber === 1 ? (
           <>
+            <BeforeAfter />
             <Map />
             {/* <About /> */}
             <Testimonials />

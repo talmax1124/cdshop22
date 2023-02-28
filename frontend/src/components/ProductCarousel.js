@@ -37,11 +37,11 @@ const ProductCarousel = () => {
             >
               <Link to={`/product/${product._id}`}>
                 <Image src={product.image} alt={product.name} fluid />
-                <p>
+                <span>
                   <h2 className="font-bold mt-3 mb-">{product.name}</h2>
 
                   <h2 className="font-medium mt-1">$ {product.price}</h2>
-                </p>
+                </span>
               </Link>
             </div>
           ))}
