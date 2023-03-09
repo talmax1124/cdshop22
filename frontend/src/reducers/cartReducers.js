@@ -6,7 +6,7 @@ import {
   CART_SAVE_ORDERNOTES,
   CART_CLEAR_ITEMS,
   CART_SAVE_SHIPPING_TITLE,
-  CART_REMOVE_SHIPPING_RATES
+  CART_REMOVE_SHIPPING_RATES,
 } from "../constants/cartConstants";
 
 export const cartReducer = (
@@ -46,7 +46,6 @@ export const cartReducer = (
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
 
-
     case CART_SAVE_ORDERNOTES:
       return {
         ...state,
@@ -56,13 +55,17 @@ export const cartReducer = (
     case CART_REMOVE_SHIPPING_RATES:
       return {
         ...state,
-        shippingRates:[]
+        shippingRates: [],
       };
     case CART_SAVE_SHIPPING_ADDRESS:
+      const shippingRates =
+        action.payload && action.payload.shippingRates
+          ? [...action.payload.shippingRates]
+          : [];
       return {
         ...state,
         shippingAddress: action.payload,
-        shippingRates: [...action.payload.shippingRates],
+        shippingRates,
       };
 
     case CART_SAVE_SHIPPING_COST:

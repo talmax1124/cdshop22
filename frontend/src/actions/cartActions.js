@@ -60,11 +60,13 @@ export const saveShippingAddress = (data) => async (dispatch) => {
 
   let cartLineItems = [];
   data.cartItems.forEach((item) => {
+    // Get the weight of each item and add it to the weight object
+
     let lineItem = {
       quantity: item.qty,
       total_price: item.price.toString(),
       currency: "USD",
-      weight: "0.5",
+      weight: "0.25",
       weight_unit: "lb",
       title: item.name,
       manufacture_country: "US",

@@ -122,9 +122,10 @@ const CheckOut = ({ match, location, history }) => {
                     {/* Remove the form and add the options below */}
                     <ul className="shippingRates">
                       {cart.shippingRates &&
-                        cart.shippingRates.map((rate) => {
+                        cart.shippingRates.map((rate, index) => {
                           return (
                             <ShippingRate
+                              key={index}
                               rate={rate}
                               onSelect={rateSelectHandelr}
                             />

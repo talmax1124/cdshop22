@@ -6,7 +6,14 @@ import Loader from "./Loader";
 import Message from "./Message";
 import { listTopProducts } from "../actions/productActions";
 
-const ProductCarousel = () => {
+const ProductCarousel = ({ match, history }) => {
+  // Push 1 item to cartConstant
+
+  const addToCartHandler = () => {
+    // history.push(`/cart/${match.params.id}?qty=1`);
+    console.log("Add to cart");
+  };
+
   const dispatch = useDispatch();
 
   const productTopRated = useSelector((state) => state.productTopRated);
@@ -29,27 +36,39 @@ const ProductCarousel = () => {
           </p>
           <p className="font-medium text-[1.4em] mt-[-0.4em] mb-3">this week</p>
         </span>
-        <div className="flex justify-between top-products ">
+        <div className="flex justify-between top-products mb-2 ">
           {products.map((product) => (
-            <div
-              key={product._id}
-              className="bg-slate-100 mr-2 ml-2 p-3 top-card rounded-md"
-            >
-              <Link to={`/product/${product._id}`}>
-                <Image src={product.image} alt={product.name} fluid />
-                <span>
-                  <h2 className="font-bold mt-3 mb-">{product.name}</h2>
+            <>
+              <div
+                key={product._id}
+                className="bg-slate-100 mr-2 ml-2 top-card rounded-md"
+              >
+                <div className="p-3">
+                  <Link to={`/product/${product._id}`}>
+                    <Image src={product.image} alt={product.name} fluid />
+                    <span>
+                      <h2 className="font-bold mt-3 mb-">{product.name}</h2>
 
-                  <h2 className="font-medium mt-1">$ {product.price}</h2>
-                </span>
-              </Link>
-            </div>
+                      <h2 className="font-medium mt-1">$ {product.price}</h2>
+                    </span>
+                  </Link>
+                </div>
+                {/* Add to cart the product */}
+                <Button
+                  onClick={addToCartHandler}
+                  disabled={product.countInStock === 0}
+                  style={{ borderRadius: "0 0 1em 1em" }}
+                  className="w-full bg-slate-200 text-black font-medium hover:bg-slate-300 hover:text-black"
+                >
+                  Add To Cart
+                </Button>
+              </div>
+            </>
           ))}
         </div>
+
         <Link to="/products">
-          <Button className="text-black bg-slate-50   rounded-lg mb-3 mt-2 no-underline hover:no-underline">
-            View All Products
-          </Button>
+          <Button className="bg-black">View All Products</Button>
         </Link>
       </div>
     </>

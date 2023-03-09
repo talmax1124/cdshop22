@@ -79,7 +79,7 @@ const AdditionalDetails = ({ match, location, history }) => {
         quantity: item.qty,
         total_price: item.price.toString(),
         currency: "USD",
-        weight: "0.5",
+        weight: "0.25",
         weight_unit: "lb",
         title: item.name,
         manufacture_country: "US",
@@ -146,7 +146,7 @@ const AdditionalDetails = ({ match, location, history }) => {
       console.log("data", json);
 
       // Get an array of shipping rates
-      let shippinRates = [...json.results];
+      let shippingRates = [...json.results];
 
       setLoading(false);
       setShowButton(true);
@@ -162,7 +162,7 @@ const AdditionalDetails = ({ match, location, history }) => {
           city,
           state,
           country,
-          shippinRates,
+          shippingRates,
           cartItems,
         })
       );
@@ -188,7 +188,7 @@ const AdditionalDetails = ({ match, location, history }) => {
       console.log("data", json);
 
       // Get an array of shipping rates
-      let shippinRates = [...json.results];
+      let shippingRates = [...json.results];
 
       // Use the shippinRates and loop over them to get the price and find if it equals to .31. If it equals to .31 then remove it from the array
 
@@ -203,7 +203,7 @@ const AdditionalDetails = ({ match, location, history }) => {
           city,
           state,
           country,
-          shippinRates,
+          shippingRates,
           cartItems,
         })
       );
