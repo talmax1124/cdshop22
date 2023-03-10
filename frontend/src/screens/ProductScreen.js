@@ -27,18 +27,8 @@ import {
   // deleteProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
-// import { HeartOutlined } from "@ant-design/icons/HeartOutlined";
+
 import { deleteProduct } from "../actions/productActions";
-
-// import LightGallery from "lightgallery/react";
-
-// // import styles
-// import "lightgallery/css/lightgallery.css";
-// import "lightgallery/css/lg-zoom.css";
-// import "lightgallery/css/lg-thumbnail.css";
-
-// import lgThumbnail from "lightgallery/plugins/thumbnail";
-// import lgZoom from "lightgallery/plugins/zoom";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);

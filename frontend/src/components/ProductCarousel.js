@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Image, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,14 +6,9 @@ import Loader from "./Loader";
 import Message from "./Message";
 import { listTopProducts } from "../actions/productActions";
 
+import { useHistory } from "react-router-dom";
+
 const ProductCarousel = ({ match, history }) => {
-  // Push 1 item to cartConstant
-
-  const addToCartHandler = () => {
-    // history.push(`/cart/${match.params.id}?qty=1`);
-    console.log("Add to cart");
-  };
-
   const dispatch = useDispatch();
 
   const productTopRated = useSelector((state) => state.productTopRated);
@@ -22,6 +17,16 @@ const ProductCarousel = ({ match, history }) => {
   useEffect(() => {
     dispatch(listTopProducts());
   }, [dispatch]);
+
+  // eslint-disable-next-line no-unused-vars
+  const [qty, setQty] = useState(1);
+
+  const { push } = useHistory();
+
+  const addToCartHandler = (e, id) => {
+    e.preventDefault();
+    push(`/cart/${id}?qty=${qty}`);
+  };
 
   return loading ? (
     <Loader />
@@ -55,9 +60,10 @@ const ProductCarousel = ({ match, history }) => {
                 </div>
                 {/* Add to cart the product */}
                 <Button
-                  onClick={addToCartHandler}
+                  onClick={(e) => addToCartHandler(e, product._id)}
                   disabled={product.countInStock === 0}
                   style={{ borderRadius: "0 0 1em 1em" }}
+                  value={1}
                   className="w-full bg-slate-200 text-black font-medium hover:bg-slate-300 hover:text-black"
                 >
                   Add To Cart
