@@ -7,6 +7,7 @@ import Message from "./Message";
 import { listTopProducts } from "../actions/productActions";
 
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProductCarousel = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const ProductCarousel = ({ match, history }) => {
   const addToCartHandler = (e, id) => {
     e.preventDefault();
     push(`/cart/${id}?qty=${qty}`);
+    toast("Product added to cart");
   };
 
   return loading ? (
@@ -74,7 +76,7 @@ const ProductCarousel = ({ match, history }) => {
         </div>
 
         <Link to="/products">
-          <Button className="bg-black">View All Products</Button>
+          <Button className="bg-black rounded-md">View All Products</Button>
         </Link>
       </div>
     </>
