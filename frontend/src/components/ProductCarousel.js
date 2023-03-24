@@ -76,7 +76,7 @@ const ProductCarousel = ({ match, history }) => {
         </div>
 
         <Link to="/products">
-          <Button className="bg-black rounded-md">View All Products</Button>
+          <Button className="bg-black rounded-md mt-2">View All Products</Button>
         </Link>
       </div>
     </>
