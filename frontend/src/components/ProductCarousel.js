@@ -45,38 +45,57 @@ const ProductCarousel = ({ match, history }) => {
         </span>
         <div className="flex justify-between top-products mb-2 ">
           {products.map((product) => (
-            <>
+            <React.Fragment key={product._id}>
               <div
-                key={product._id}
                 className="bg-slate-100 mr-2 ml-2 top-card rounded-md"
+                key={product._id}
               >
-                <div className="p-3">
-                  <Link to={`/product/${product._id}`}>
-                    <Image src={product.image} alt={product.name} fluid />
-                    <span>
-                      <h2 className="font-bold mt-3 mb-">{product.name}</h2>
-
-                      <h2 className="font-medium mt-1">$ {product.price}</h2>
+                <div className="p-3" key={`${product._id}-content`}>
+                  <Link
+                    to={`/product/${product._id}`}
+                    key={`${product._id}-link`}
+                  >
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fluid
+                      key={`${product._id}-image`}
+                    />
+                    <span key={`${product._id}-span`}>
+                      <h2
+                        className="font-bold mt-3 mb-"
+                        key={`${product._id}-name`}
+                      >
+                        {product.name}
+                      </h2>
+                      <h2
+                        className="font-medium mt-1"
+                        key={`${product._id}-price`}
+                      >
+                        $ {product.price}
+                      </h2>
                     </span>
                   </Link>
                 </div>
-                {/* Add to cart the product */}
                 <Button
                   onClick={(e) => addToCartHandler(e, product._id)}
                   disabled={product.countInStock === 0}
                   style={{ borderRadius: "0 0 1em 1em" }}
                   value={1}
                   className="w-full bg-slate-200 text-black font-medium hover:bg-slate-300 hover:text-black"
+                  key={`${product._id}-button`}
                 >
                   Add To Cart
                 </Button>
               </div>
-            </>
+            </React.Fragment>
           ))}
         </div>
 
         <Link to="/products">
-          <Button className="bg-black rounded-md mt-2">View All Products</Button>
+          <Button className="bg-black rounded-md mt-2">
+            View All Products
+          </Button>
         </Link>
       </div>
     </>
