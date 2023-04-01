@@ -12,7 +12,8 @@ import { listProducts } from "../actions/productActions";
 import ShopByCat from "../components/ShopByCategory";
 // import ShopByBrand from "../components/ShopByBrand";
 import Sort from "../components/Sort";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Products = ({ match, history, location }) => {
   const keyword = match.params.keyword;
@@ -45,6 +46,55 @@ const Products = ({ match, history, location }) => {
             <Message variant="danger">{error}</Message>
           ) : (
             <>
+              {/* Show this only if page 1 or in /products page */}
+
+              {page === 1 && !keyword && (
+                <div className="mt-4 mb-4 ">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 cat-cards-cont">
+                    <div class="text-white bg-gray-800 p-8 rounded-lg shadow-lg cat-cards-1">
+                      <h1 class="font-medium mb-1">Laser</h1>
+                      <p class="text-base">
+                        Accessories for your xTool & Monport Machine
+                      </p>
+                      <Link to="/category/Laser">
+                        <Button className="btn bg-blue-600 hover:bg-blue-500">
+                          Browse This Category
+                        </Button>
+                      </Link>
+                    </div>
+                    <div class="text-white bg-gray-800 p-8 rounded-lg shadow-lg cat-cards-2">
+                      <h1 class="font-medium mb-1">Smart</h1>
+                      <p class="text-base">
+                        Products for Business & Social
+                      </p>
+                      <Link to="/category/Smart">
+                        <Button className="btn bg-blue-600 hover:bg-blue-500">
+                          Browse This Category
+                        </Button>
+                      </Link>
+                    </div>
+                    <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg cat-cards-3">
+                      <h1 class="font-medium mb-1">3D</h1>
+                      <p class="text-base">Modeled & Printed with precision</p>
+                      <Link to="/category/3D">
+                        <Button className="btn bg-blue-600 hover:bg-blue-500">
+                          Browse This Category
+                        </Button>
+                      </Link>
+                    </div>
+                    <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg cat-cards-4">
+                      <h1 class="font-medium mb-1">Other</h1>
+                      <p class="text-base">
+                        Amazing things that can be customized
+                      </p>
+                      <Link to="/category/Other">
+                        <Button className="btn bg-blue-600 hover:bg-blue-500">Browse This Category</Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <ShopByCat />
               <Row>
                 <Col md={3} className="mb-2">

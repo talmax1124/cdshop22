@@ -418,9 +418,9 @@ const ProductEditScreen = ({ match, history }) => {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="...">Select...</option>
-                    <option value="3D Printed">3D Printed</option>
+                    <option value="3D">3D</option>
                     <option value="Smart">Smart</option>
-                    <option value="Business">Business</option>
+                    <option value="Laser">Laser</option>
                     <option value="Other">Other</option>
                   </Form.Control>
                 </Form.Group>
