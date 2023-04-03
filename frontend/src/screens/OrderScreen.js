@@ -71,6 +71,9 @@ const OrderScreen = ({ match, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  let tax = 0;
+  let discount = 0;
+
   if (!loading) {
     //   Calculate prices
     const addDecimals = (num) => {
@@ -84,6 +87,12 @@ const OrderScreen = ({ match, history }) => {
         0
       )
     );
+
+    const tax_percent = 7;
+    let subtotal = order.itemsPrice;
+    tax = Math.round(subtotal * (tax_percent / 100));
+
+    discount = order.totalPrice - order.itemsPrice - order.shippingCost - tax;
   }
 
   useEffect(() => {
@@ -171,6 +180,8 @@ const OrderScreen = ({ match, history }) => {
   function LoadOnce() {
     window.location.reload();
   }
+
+  // Check for the remaining amount that is left after shipping & tax
 
   // const statusHandler = () => {
   //   dispatch(orderStatus(order));
@@ -430,6 +441,19 @@ const OrderScreen = ({ match, history }) => {
                   <Col className="font-medium">Items Total:</Col>
                   <Col>${order.itemsPrice}</Col>
                 </Row>
+                <Row>
+                  <Col className="font-medium">Shipping Cost:</Col>
+                  <Col>${order.shippingCost}</Col>
+                </Row>
+                <Row>
+                  <Col className="font-medium">Tax:</Col>
+                  <Col>${tax}</Col>
+                </Row>
+                <Row>
+                  <Col className="font-medium">Discount:</Col>
+                  <Col>{discount} off</Col>
+                </Row>
+                <hr />
                 <Row>
                   <Col className="font-medium">Order Total:</Col>
                   <Col>${order.totalPrice}</Col>
