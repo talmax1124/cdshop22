@@ -53,6 +53,7 @@ import Sales from "./screens/Sales";
 import CheckOut from "./screens/CheckOut";
 
 import { Container } from "react-bootstrap";
+import Domain from "./screens/Domain";
 
 const App = () => {
   return (
@@ -70,6 +71,7 @@ const App = () => {
           exact
         />
         <Container>
+          <Route path="/domain" component={Domain} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/order/:id" component={OrderScreen} />
           <Route path="/additionaldetails" component={AdditionalDetails} />

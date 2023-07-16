@@ -24,7 +24,7 @@ const Footer = () => {
               <span className="text-xs tracking-widest uppercase">Call</span>
 
               <a
-                className="block text-2xl sm:text-3xl  hover:text-slate-100"
+                className="block text-2xl sm:text-3xl hover:text-slate-100"
                 href="tel:4077566386"
               >
                 <span>(407) 756-6DUO</span>
@@ -127,6 +127,9 @@ const Footer = () => {
                   {" "}
                   Linktree{" "}
                 </a>
+                <Link to="/domain" className="hover:text-slate-100">
+                  Domain Name Purchase / Renewal
+                </Link>
               </nav>
             </div>
           </div>
